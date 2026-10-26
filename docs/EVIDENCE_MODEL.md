@@ -2,7 +2,7 @@
 
 Evidence sets the limit on what the ledger may claim. It does not rate how impressive a tool appears.
 
-Every public catalog entry is currently E0. Each has a public repository link and source-review status. The release excludes private trials and internal scan reports, so those records cannot raise a tool's public evidence level. The checks shown in the interface validate the ledger application. They do not validate the 71 third-party tools.
+Every catalog entry in this edition is currently E0. Each has a public repository link and source-review status. The release excludes private trials and internal scan reports, so those records cannot raise a tool's public evidence level. The checks shown in the interface validate the ledger application. They do not validate the third-party tools.
 
 | Level | Meaning | Minimum retained proof |
 |---|---|---|

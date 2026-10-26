@@ -38,7 +38,7 @@
     E5: "Maintain monitoring and revalidate after material changes."
   };
   const releaseChecks = [
-    { state: "executed", title: "Catalog integrity", note: "Checks 71 source-reviewed tools, 12 capability families, valid relations, and exact JavaScript/JSON agreement.", result: "Automated · current release", proof: "scripts/verify.mjs", href: "scripts/verify.mjs" },
+    { state: "executed", title: "Catalog integrity", note: `Checks ${catalog.tools.length} source-reviewed tools, ${catalog.capabilityGroups.length} capability families, valid relations, and exact JavaScript/JSON agreement.`, result: "Automated · current build", proof: "scripts/verify.mjs", href: "scripts/verify.mjs" },
     { state: "executed", title: "Negative mutation", note: "Corrupts the evidence scale and removes one public source; the validator must reject both.", result: "Automated · expected failures detected", proof: "scripts/mutation-test.mjs", href: "scripts/mutation-test.mjs" },
     { state: "executed", title: "Browser workflow", note: "Exercises search, filters, sorting, comparison, details, themes, keyboard focus, responsive layout, and reduced motion.", result: "Desktop and mobile", proof: "scripts/browser-qa.mjs", href: "scripts/browser-qa.mjs" },
     { state: "executed", title: "Privacy and package", note: "Scans public files, builds an allowlisted deterministic ZIP, and hashes every delivered source file.", result: "Automated · public files only", proof: "scripts/privacy-scan.mjs", href: "scripts/privacy-scan.mjs" },
@@ -104,6 +104,41 @@
       <div><strong>${catalog.tools.length}</strong><span>options</span></div>
       <div><strong>${catalog.capabilityGroups.length}</strong><span>job families</span></div>
       <div><strong>E0</strong><span>public ceiling</span></div>`;
+  }
+
+  function renderPortfolioPulse() {
+    const familyCount = catalog.capabilityGroups.length;
+    const thinCount = catalog.capabilityGroups.filter((group) => group.toolIds.length <= 2).length;
+    const e0Count = catalog.tools.filter((tool) => tool.evidenceLevel === "E0").length;
+    const pilotCount = catalog.tools.filter((tool) => tool.decision === "PILOT").length;
+    const elevatedCount = catalog.tools.filter((tool) => ["HIGH", "CRITICAL"].includes(tool.riskLevel)).length;
+    const thinShare = Math.round(thinCount / familyCount * 100);
+    const e0Share = Math.round(e0Count / catalog.tools.length * 100);
+    $("#portfolioPulse").innerHTML = `
+      <div class="pulse-track"><span><strong>Coverage</strong><small>${thinCount} of ${familyCount} families thin</small></span><span class="pulse-bar" aria-hidden="true"><i style="width:${thinShare}%"></i></span></div>
+      <div class="pulse-track"><span><strong>Proof</strong><small>${e0Count} of ${catalog.tools.length} at E0</small></span><span class="pulse-bar proof" aria-hidden="true"><i style="width:${e0Share}%"></i></span></div>
+      <div class="pulse-action"><strong>${pilotCount} PILOT decisions</strong><small>${elevatedCount} elevated-risk records · <a href="#capability-map">inspect the map</a></small></div>`;
+  }
+
+  function renderCapabilityMap() {
+    const families = catalog.capabilityGroups.map((group) => {
+      const members = group.toolIds.map((id) => byId.get(id)).filter(Boolean);
+      const lead = byId.get(group.leadToolId);
+      const elevated = members.filter((tool) => ["HIGH", "CRITICAL"].includes(tool.riskLevel)).length;
+      return { group, members, lead, elevated };
+    });
+    const thin = families.filter(({ members }) => members.length <= 2).length;
+    const sourceOnly = catalog.tools.filter((tool) => tool.evidenceLevel === "E0").length;
+    $("#mapSummary").innerHTML = `<strong>${families.length} families · ${catalog.tools.length} options</strong><span>${thin} families have two or fewer options; ${sourceOnly} options remain at E0.</span>`;
+    $("#capabilityMapRows").innerHTML = families.map(({ group, members, lead, elevated }) => {
+      const next = first(lead.reentryTriggers, nextProof(lead));
+      const concentration = elevated === 0 ? "None elevated" : `${elevated} of ${members.length} elevated`;
+      return `<li class="map-row">
+        <div class="map-family"><button type="button" class="map-family-link" data-map-group="${escapeHtml(group.id)}">${escapeHtml(group.label)}<span aria-hidden="true">↗</span></button><p>${members.length} ${members.length === 1 ? "option" : "options"}${members.length <= 2 ? " · thin coverage" : ""}</p></div>
+        <div class="map-lead"><strong>${escapeHtml(lead.name)}</strong><div class="map-states"><span class="map-decision" data-decision="${escapeHtml(lead.decision)}">${escapeHtml(lead.decision)}</span><span class="map-evidence" data-level="${escapeHtml(lead.evidenceLevel)}">${escapeHtml(lead.evidenceLevel)} · ${escapeHtml(evidencePlain[lead.evidenceLevel] || "Proof recorded")}</span></div></div>
+        <div class="map-risk"><strong class="map-risk-count" data-risk="${elevated ? "elevated" : "none"}">${escapeHtml(concentration)}</strong><p><span>Next:</span> ${escapeHtml(next)}</p></div>
+      </li>`;
+    }).join("");
   }
 
   function selectGroup(groupId, options = {}) {
@@ -452,6 +487,7 @@
   function bindEvents() {
     $("#jobSearchForm").addEventListener("submit", handleSearch);
     $("#taskGrid").addEventListener("click", (event) => { const button = event.target.closest("[data-group]"); if (button) selectGroup(button.dataset.group); });
+    $("#capabilityMapRows").addEventListener("click", (event) => { const button = event.target.closest("[data-map-group]"); if (button) selectGroup(button.dataset.mapGroup); });
     document.addEventListener("click", (event) => {
       const open = event.target.closest("[data-open-tool]"); if (open) openTool(open.dataset.openTool);
       const compare = event.target.closest("[data-compare-tool]"); if (compare) toggleCompare(compare.dataset.compareTool);
@@ -479,6 +515,8 @@
 
   renderTasks();
   renderFacts();
+  renderPortfolioPulse();
+  renderCapabilityMap();
   renderEvidence();
   renderMethod();
   renderProjectTrials();

@@ -18,6 +18,7 @@
         </a>
         <nav aria-label="Primary navigation">
           <a href="#start">Find a tool</a>
+          <a href="#capability-map">Capability map</a>
           <a href="#project-evidence">Release checks</a>
           <a href="#all-tools">Browse all</a>
           <a href="#method">How evidence works</a>
@@ -36,6 +37,7 @@
             <p class="orientation">A research catalog for real project decisions</p>
             <h1 id="pageTitle">What do you need to get done?</h1>
             <p class="lead">Describe the job in everyday words. The ledger will show a starting point, alternatives, risks, and the proof behind each option.</p>
+            <div class="portfolio-pulse" id="portfolioPulse" role="group" aria-label="Research portfolio at a glance"></div>
 
             <form class="job-search" id="jobSearchForm" role="search">
               <label for="jobSearch">Describe the job</label>
@@ -87,6 +89,22 @@
         </div>
         <div class="recommendation-grid" id="recommendationGrid" aria-live="polite"></div>
         <button class="text-button" id="showMore" type="button" hidden>Show every matching tool</button>
+      </section>
+
+      <section class="capability-map" id="capability-map" aria-labelledby="capabilityMapTitle">
+        <div class="page-shell">
+          <div class="map-heading">
+            <div>
+              <p class="context-label">Portfolio view</p>
+              <h2 id="capabilityMapTitle">Coverage, proof, and the next research move</h2>
+              <p>Each row names a leading option for orientation. A decision is a proposed next action; E0 means public source review only. Elevated risk counts HIGH and CRITICAL records in that family.</p>
+            </div>
+            <p class="map-summary" id="mapSummary" aria-live="polite"></p>
+          </div>
+          <div class="map-columns" aria-hidden="true"><span>Capability / coverage</span><span>Leading option / decision / proof</span><span>Risk concentration / next priority</span></div>
+          <ol class="map-rows" id="capabilityMapRows"></ol>
+          <p class="map-boundary">This is a research map, not a ranking or proof that third-party tools were run. Open a family to inspect the underlying records and source links.</p>
+        </div>
       </section>
 
       <section class="project-evidence" id="project-evidence" aria-labelledby="projectEvidenceTitle">

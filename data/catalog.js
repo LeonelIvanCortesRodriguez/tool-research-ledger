@@ -2,12 +2,12 @@ window.CATALOG = {
   "schemaVersion": "2.1.0",
   "meta": {
     "title": "Tool Research Ledger",
-    "updated": "2026-10-23",
-    "batchId": "REPO-BATCH-2026-10-23-G",
-    "currentBatchKey": "2026-10-23-G",
-    "currentBatchReviewed": 1,
-    "currentBatchNote": "Public candidate normalized to an inspectable E0 evidence ceiling; private and internal trial artifacts are excluded.",
-    "scope": "A 71-option public source-review ledger. The application is reproducibly tested, while third-party tool claims remain E0 until public-safe proof is included.",
+    "updated": "2026-10-26",
+    "batchId": "REPO-BATCH-2026-10-26-H",
+    "currentBatchKey": "2026-10-26-H",
+    "currentBatchReviewed": 2,
+    "currentBatchNote": "Berth and SWE-AF added after public source review at pinned revisions; both remain E0 and unexecuted.",
+    "scope": "A public source-review ledger. Application checks are reproducible, while third-party tool claims remain E0 until public-safe proof is included.",
     "privacy": "The catalog excludes private documents, customer data, credentials, raw OCR text, transaction rows, and source page images.",
     "reports": [
       {
@@ -249,6 +249,11 @@ window.CATALOG = {
       "id": "media-library",
       "label": "Media libraries and playback",
       "short": "Media library"
+    },
+    {
+      "id": "gpu-orchestration",
+      "label": "GPU orchestration and local inference",
+      "short": "GPU operations"
     }
   ],
   "evidenceLevels": [
@@ -307,7 +312,8 @@ window.CATALOG = {
         "stirling-pdf"
       ],
       "lead": "OCRmyPDF for searchable PDFs; PaddleOCR for extraction research",
-      "useWhen": "A document workflow needs source-adjudicated extraction or controlled PDF preparation."
+      "useWhen": "A document workflow needs source-adjudicated extraction or controlled PDF preparation.",
+      "leadToolId": "ocrmypdf"
     },
     {
       "id": "audit-finance",
@@ -318,7 +324,8 @@ window.CATALOG = {
         "security-audit-skill"
       ],
       "lead": "Existing evidence gates plus selected Financial Services patterns",
-      "useWhen": "A conclusion affects money, compliance, or an external auditor."
+      "useWhen": "A conclusion affects money, compliance, or an external auditor.",
+      "leadToolId": "financial-services"
     },
     {
       "id": "design-quality",
@@ -341,7 +348,8 @@ window.CATALOG = {
         "open-design"
       ],
       "lead": "Existing design-system and visual-QA gates; local design skills remain conditional",
-      "useWhen": "A dashboard, site, or product UI needs design direction, QA, or animation."
+      "useWhen": "A dashboard, site, or product UI needs design direction, QA, or animation.",
+      "leadToolId": "impeccable"
     },
     {
       "id": "skill-governance",
@@ -359,7 +367,8 @@ window.CATALOG = {
         "ui-ux-pro-max"
       ],
       "lead": "SkillSpector as intake gate; libraries as references only",
-      "useWhen": "A new skill or agent instruction bundle is proposed."
+      "useWhen": "A new skill or agent instruction bundle is proposed.",
+      "leadToolId": "skillspector"
     },
     {
       "id": "repo-intelligence",
@@ -371,7 +380,8 @@ window.CATALOG = {
         "vane"
       ],
       "lead": "Graphify pilot for local code-only maps",
-      "useWhen": "A large unfamiliar repository makes reading and navigation expensive."
+      "useWhen": "A large unfamiliar repository makes reading and navigation expensive.",
+      "leadToolId": "graphify"
     },
     {
       "id": "development-control",
@@ -384,7 +394,8 @@ window.CATALOG = {
         "opencode"
       ],
       "lead": "Spec Kit method + existing execution gates",
-      "useWhen": "A build needs explicit requirements, acceptance tests, and clean lanes."
+      "useWhen": "A build needs explicit requirements, acceptance tests, and clean lanes.",
+      "leadToolId": "spec-kit"
     },
     {
       "id": "office-data",
@@ -400,7 +411,8 @@ window.CATALOG = {
         "pear-desktop"
       ],
       "lead": "Use the smallest specialist tool that matches the file, service, or authorized media workflow",
-      "useWhen": "A repeatable spreadsheet, conversion, transfer, Workspace, or personal-media task exists."
+      "useWhen": "A repeatable spreadsheet, conversion, transfer, Workspace, or personal-media task exists.",
+      "leadToolId": "excelize"
     },
     {
       "id": "agent-platforms",
@@ -414,10 +426,12 @@ window.CATALOG = {
         "hermes-agent",
         "agenticseek",
         "cloudflare-os",
-        "rea"
+        "rea",
+        "swe-af"
       ],
       "lead": "PinchTab is the next bounded browser candidate; no platform replacement is recommended",
-      "useWhen": "Only after a missing capability, isolation model, budget, and rollback plan are documented."
+      "useWhen": "Only after a missing capability, isolation model, budget, and rollback plan are documented.",
+      "leadToolId": "pinchtab"
     },
     {
       "id": "knowledge-research",
@@ -430,7 +444,8 @@ window.CATALOG = {
         "devdocs"
       ],
       "lead": "LLM Wiki synthetic/public pilot; DevDocs for offline reference",
-      "useWhen": "Source volume or offline reference needs exceed ordinary search."
+      "useWhen": "Source volume or offline reference needs exceed ordinary search.",
+      "leadToolId": "llm-wiki"
     },
     {
       "id": "model-learning",
@@ -442,7 +457,8 @@ window.CATALOG = {
         "llm101n"
       ],
       "lead": "llm.c as a learning reference",
-      "useWhen": "The project goal is education or low-level model experimentation, not production tooling."
+      "useWhen": "The project goal is education or low-level model experimentation, not production tooling.",
+      "leadToolId": "llm-c"
     },
     {
       "id": "career-ops",
@@ -452,7 +468,8 @@ window.CATALOG = {
         "career-ops"
       ],
       "lead": "Career Ops bounded pilot",
-      "useWhen": "A separate, privacy-controlled career project needs repeatable triage and drafting."
+      "useWhen": "A separate, privacy-controlled career project needs repeatable triage and drafting.",
+      "leadToolId": "career-ops"
     },
     {
       "id": "ai-economics",
@@ -463,7 +480,19 @@ window.CATALOG = {
         "omniroute"
       ],
       "lead": "CodeBurn read-only pilot",
-      "useWhen": "Agent spend or configuration overhead needs evidence before optimization."
+      "useWhen": "Agent spend or configuration overhead needs evidence before optimization.",
+      "leadToolId": "codeburn"
+    },
+    {
+      "id": "local-ai-operations",
+      "label": "Local AI operations",
+      "purpose": "Coordinate local inference resources and prevent GPU contention",
+      "toolIds": [
+        "berth"
+      ],
+      "leadToolId": "berth",
+      "lead": "Berth is a controlled GPU-lease pilot candidate, not an installed layer",
+      "useWhen": "Two non-sensitive local GPU workloads compete for memory and a disposable pilot can measure queue and rollback behavior."
     }
   ],
   "tools": [
@@ -4406,6 +4435,123 @@ window.CATALOG = {
         "The named scripts and findings have been manually reviewed"
       ],
       "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "berth",
+      "name": "Berth",
+      "batch": "2026-10-26-H",
+      "kind": "GPU lease and local inference coordination",
+      "repoUrl": "https://github.com/T-Crypt/berth",
+      "license": "Apache-2.0 source; name, Pilot mascot, and assets artwork excluded",
+      "version": "README and license reviewed at 97f918afa9ba437cf6efbfb7ca492ef6a5786247 on 2026-10-26",
+      "sourceRevision": "97f918afa9ba437cf6efbfb7ca492ef6a5786247",
+      "primaryCategory": "gpu-orchestration",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A local broker that makes AI engines and other GPU applications request a lease before taking GPU memory, so competing workloads wait instead of colliding.",
+      "bestFor": [
+        "Coordinating local NVIDIA inference and image workloads",
+        "Inspecting active leases, queue position, and GPU memory contention",
+        "Testing a bounded GPU resource-control pilot"
+      ],
+      "weaknesses": [
+        "Alpha release with platform-specific support boundaries",
+        "Windows and Linux AMD support are experimental; Linux NVIDIA is the supported path",
+        "Multi-GPU scheduling is incomplete"
+      ],
+      "tags": [
+        "local-ai",
+        "gpu",
+        "vram",
+        "leases",
+        "inference",
+        "queues",
+        "workcell"
+      ],
+      "projectFit": {
+        "local-ai-operations": "A",
+        "gpu-orchestration": "A",
+        "model-routing": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "C",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Draining may stop or terminate an active GPU process; test only with disposable workloads",
+        "A loopback read-only Harbor interface still needs access review before any wider exposure",
+        "The Berth name, Pilot mascot, and assets artwork are not covered by the Apache source license"
+      ],
+      "implementation": "Research candidate only. Run a disposable pilot with two non-sensitive GPU workloads; retain lease transitions, queue events, memory release, failure recovery, and rollback. Do not install it in the active Workcell during source review.",
+      "reentryTriggers": [
+        "A controlled GPU-contention test environment is available",
+        "Process drain, access boundary, and rollback are approved"
+      ],
+      "publicEvidenceNote": "Source review at the pinned revision only. This project did not execute a Berth binary, skill, or GPU workload."
+    },
+    {
+      "id": "swe-af",
+      "name": "SWE-AF",
+      "batch": "2026-10-26-H",
+      "kind": "Autonomous software-engineering orchestration",
+      "repoUrl": "https://github.com/Agent-Field/SWE-AF",
+      "license": "Apache-2.0",
+      "version": "README and repository metadata reviewed at 4d3dfe719e5ce9e2e8cd454722295bbe6512542f on 2026-10-26",
+      "sourceRevision": "4d3dfe719e5ce9e2e8cd454722295bbe6512542f",
+      "primaryCategory": "local-ai-agent",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "An AgentField-based system that expands a software goal into planning, coding, review, testing, and pull-request work across one or more repositories.",
+      "bestFor": [
+        "Studying explicit planning and dependency-based work graphs",
+        "Comparing specialized architecture, coding, review, and QA roles",
+        "Understanding governance patterns for large agent programs"
+      ],
+      "weaknesses": [
+        "Requires the AgentField control plane and model-provider access",
+        "Large builds can involve hundreds of agent invocations and substantial cost",
+        "Its authority surface is larger than this portfolio's bounded coder-auditor workflow"
+      ],
+      "tags": [
+        "agents",
+        "software-engineering",
+        "planning",
+        "review",
+        "qa",
+        "orchestration"
+      ],
+      "projectFit": {
+        "agent-platforms": "B",
+        "developer-workflow": "B",
+        "skill-governance": "C"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "A",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "CRITICAL",
+      "risks": [
+        "Broad file, shell, Git, and GitHub authority needs isolation and approval boundaries",
+        "Provider keys and repository credentials require scoped storage and transmission controls",
+        "Runtime and cost can expand with the issue graph and model-role choices"
+      ],
+      "implementation": "Keep as an architectural reference. Do not install it in the active workflow. If later authorized, evaluate on a disposable repository with a fixed call budget, synthetic inputs, no production credentials or push authority, and a defined rollback.",
+      "reentryTriggers": [
+        "A larger multi-repository program requires this orchestration scale",
+        "A disposable evaluation can enforce credentials, spending, and rollback limits"
+      ],
+      "publicEvidenceNote": "Source review at the pinned revision only. This project did not execute an AgentField or SWE-AF runtime."
     }
   ]
 };

@@ -10,6 +10,15 @@ for (const file of required) if (!fs.existsSync(path.join(root, file))) throw ne
 
 const catalog = loadCatalog(root);
 assertCatalog(catalog);
+for (const [id, decision, revision] of [
+  ["berth", "PILOT", "97f918afa9ba437cf6efbfb7ca492ef6a5786247"],
+  ["swe-af", "REFERENCE", "4d3dfe719e5ce9e2e8cd454722295bbe6512542f"]
+]) {
+  const record = catalog.tools.find(tool => tool.id === id);
+  if (!record || record.decision !== decision || record.evidenceLevel !== "E0" || record.sourceRevision !== revision) {
+    throw new Error(`${id}: pinned E0 intake record is missing or altered`);
+  }
+}
 const pathErrors = validatePublicPaths(catalog, root);
 if (pathErrors.length) throw new Error(pathErrors.join("\n"));
 const json = JSON.parse(fs.readFileSync(path.join(root, "data", "catalog.json"), "utf8"));
