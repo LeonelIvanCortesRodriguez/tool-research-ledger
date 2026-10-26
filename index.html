@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-motion="pending">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Choose open-source tools by the job, the evidence, and the next safe action. No AI vocabulary required.">
+    <title>Tool Research Ledger | Guided decision workspace</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to recommendations</a>
+
+    <header class="app-header">
+      <div class="header-inner">
+        <a class="brand" href="#start" aria-label="Tool Research Ledger home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span><strong>Tool Research Ledger</strong><small>Choose with evidence</small></span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <a href="#start">Find a tool</a>
+          <a href="#project-evidence">Release checks</a>
+          <a href="#all-tools">Browse all</a>
+          <a href="#method">How evidence works</a>
+        </nav>
+        <div class="header-actions">
+          <button class="icon-button" id="themeToggle" type="button" aria-label="Switch to dark theme">Theme</button>
+          <button class="secondary-button" id="shareTop" type="button">Share this view</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="start-section" id="start" aria-labelledby="pageTitle">
+        <div class="start-grid page-shell">
+          <div class="start-main">
+            <p class="orientation">A research catalog for real project decisions</p>
+            <h1 id="pageTitle">What do you need to get done?</h1>
+            <p class="lead">Describe the job in everyday words. The ledger will show a starting point, alternatives, risks, and the proof behind each option.</p>
+
+            <form class="job-search" id="jobSearchForm" role="search">
+              <label for="jobSearch">Describe the job</label>
+              <div class="search-row">
+                <input id="jobSearch" type="search" autocomplete="off" placeholder="Example: turn scanned PDFs into reliable data">
+                <button class="primary-button" type="submit">Find matching tools</button>
+              </div>
+              <p class="field-help">You can use a goal, file type, tool name, or concern such as privacy or offline use.</p>
+            </form>
+
+            <div class="task-picker" aria-labelledby="taskPickerTitle">
+              <div class="picker-heading"><h2 id="taskPickerTitle">Or choose a common job</h2><span>8 starting points</span></div>
+              <div class="task-grid" id="taskGrid"></div>
+            </div>
+          </div>
+
+          <aside class="how-panel" aria-labelledby="howTitle">
+            <div class="how-heading">
+              <h2 id="howTitle">How this helps</h2>
+              <span class="research-state">Catalog ready</span>
+            </div>
+            <ol>
+              <li><span>1</span><div><strong>Start with your job</strong><p>No model names or AI vocabulary needed.</p></div></li>
+              <li><span>2</span><div><strong>See the proof separately</strong><p>Fit, evidence, risk, and permission never collapse into one score.</p></div></li>
+              <li><span>3</span><div><strong>Leave with a next action</strong><p>Pilot, compare, hold, or use within a defined boundary.</p></div></li>
+            </ol>
+            <div class="catalog-facts" id="catalogFacts"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="workspace page-shell" id="workspace" aria-labelledby="workspaceTitle">
+        <div class="workspace-heading">
+          <div>
+            <p class="context-label" id="activeContext">Your starting point</p>
+            <h2 id="workspaceTitle">Choose a job above to see a short, explained list.</h2>
+            <p id="workspaceSummary">Nothing is recommended until the job is clear.</p>
+          </div>
+          <div class="workspace-actions">
+            <button class="secondary-button" id="compareSelected" type="button" disabled>Compare selected <span id="compareCount">0</span></button>
+            <button class="secondary-button" id="shareResults" type="button">Share results</button>
+          </div>
+        </div>
+
+        <div class="recommendation-state" id="recommendationState">
+          <div class="empty-illustration" aria-hidden="true"><span></span><span></span><span></span></div>
+          <h3>One choice unlocks the research.</h3>
+          <p>Pick a common job or describe your own. You will get up to three candidates with the reason, evidence limit, risk, and next safe move visible.</p>
+        </div>
+        <div class="recommendation-grid" id="recommendationGrid" aria-live="polite"></div>
+        <button class="text-button" id="showMore" type="button" hidden>Show every matching tool</button>
+      </section>
+
+      <section class="project-evidence" id="project-evidence" aria-labelledby="projectEvidenceTitle">
+        <div class="page-shell">
+          <div class="project-evidence-heading">
+            <div><h2 id="projectEvidenceTitle">How this release is verified</h2><p>These checks validate the ledger application and its public package. They do not promote evidence for any catalogued third-party tool.</p></div>
+            <a class="text-link" href="docs/METHODOLOGY.md">Read the verification method</a>
+          </div>
+          <div class="trial-legend" aria-label="Release check legend"><strong>Release evidence</strong><span data-state="executed">Automated proof</span><span data-state="reference">Documented boundary</span></div>
+          <div class="trial-table-head" aria-hidden="true"><span>Check and purpose</span><span>Observed result</span><span>Inspectable proof</span></div>
+          <div class="trial-register" id="trialRegister"></div>
+        </div>
+      </section>
+
+      <section class="evidence-section" id="method" aria-labelledby="evidenceTitle">
+        <div class="page-shell">
+          <div class="evidence-intro">
+            <div><h2 id="evidenceTitle">How much proof is behind the result?</h2><p>Evidence records what was checked. It is not a quality score. Source influence stays E0; observed use begins at E1.</p></div>
+            <button class="text-button" id="openMethod" type="button">Read the decision rules</button>
+          </div>
+          <ol class="evidence-scale" id="evidenceScale"></ol>
+        </div>
+      </section>
+
+      <section class="all-tools page-shell" id="all-tools" aria-labelledby="allToolsTitle">
+        <div class="all-tools-heading">
+          <div><h2 id="allToolsTitle">Browse the full ledger</h2><p>Use this after the guided shortlist when you need breadth or a known repository.</p></div>
+          <span id="allCount">0 tools</span>
+        </div>
+        <div class="filter-row">
+          <label><span>Search the ledger</span><input id="ledgerSearch" type="search" placeholder="Name, purpose, strength, risk..."></label>
+          <label><span>Job family</span><select id="groupFilter"><option value="all">Every job family</option></select></label>
+          <label><span>Decision</span><select id="decisionFilter"><option value="all">Every decision</option><option>IMPLEMENT</option><option>PILOT</option><option>CONDITIONAL</option><option>REFERENCE</option><option>WATCH</option><option>HOLD</option><option>REJECT</option></select></label>
+          <label><span>Evidence</span><select id="evidenceFilter"><option value="all">Every evidence level</option><option>E0</option><option>E1</option><option>E2</option><option>E3</option><option>E4</option><option>E5</option></select></label>
+          <label><span>Order</span><select id="sortFilter"><option value="name">Name A to Z</option><option value="decision">Decision readiness</option><option value="risk">Lowest risk</option><option value="evidence">Evidence level</option></select></label>
+          <button class="secondary-button" id="clearFilters" type="button">Clear filters</button>
+        </div>
+        <div class="ledger-table-wrap">
+          <table class="ledger-table">
+            <thead><tr><th scope="col">Tool</th><th scope="col">Best documented use</th><th scope="col">Evidence</th><th scope="col">Decision</th><th scope="col">Risk</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
+            <tbody id="ledgerRows"></tbody>
+          </table>
+          <div class="empty-state" id="ledgerEmpty" hidden><h3>No tools match those filters.</h3><p>Clear one filter or try a broader phrase.</p></div>
+        </div>
+        <button class="secondary-button load-more" id="loadMore" type="button" hidden>Show more tools</button>
+      </section>
+    </main>
+
+    <footer class="app-footer"><div class="page-shell"><div><strong>Tool Research Ledger</strong><span>Public repository research only</span></div><p>Private documents, OCR rows, credentials, and source page images are excluded from shared exports.</p></div></footer>
+
+    <dialog class="detail-dialog" id="detailDialog" aria-labelledby="detailTitle">
+      <div class="dialog-shell">
+        <header><div><p id="detailMeta"></p><h2 id="detailTitle">Tool details</h2></div><button class="icon-button" data-close="detailDialog" type="button">Close</button></header>
+        <div class="dialog-body" id="detailBody"></div>
+      </div>
+    </dialog>
+
+    <dialog class="compare-dialog" id="compareDialog" aria-labelledby="compareTitle">
+      <div class="dialog-shell wide">
+        <header><div><p>Side-by-side evidence review</p><h2 id="compareTitle">Compare selected tools</h2></div><button class="icon-button" data-close="compareDialog" type="button">Close</button></header>
+        <div class="dialog-body compare-body" id="compareBody"></div>
+      </div>
+    </dialog>
+
+    <dialog class="method-dialog" id="methodDialog" aria-labelledby="methodTitle">
+      <div class="dialog-shell">
+        <header><div><p>Decision method</p><h2 id="methodTitle">What each label permits</h2></div><button class="icon-button" data-close="methodDialog" type="button">Close</button></header>
+        <div class="dialog-body" id="methodBody"></div>
+      </div>
+    </dialog>
+
+    <dialog class="share-dialog" id="shareDialog" aria-labelledby="shareTitle">
+      <div class="dialog-shell compact">
+        <header><div><p>Portable research</p><h2 id="shareTitle">Share without losing context</h2></div><button class="icon-button" data-close="shareDialog" type="button">Close</button></header>
+        <div class="dialog-body">
+          <p id="shareContext">This export contains public repository research only.</p>
+          <div class="share-options">
+            <button class="option-button" id="copyLink" type="button"><strong>Copy this view</strong><span>Preserves the selected job, search, and open tool.</span></button>
+            <button class="option-button" id="downloadJson" type="button"><strong>Prepare an AI-readable packet</strong><span>Downloads JSON over localhost. Direct file mode shows a copyable packet.</span></button>
+          </div>
+          <div class="packet-fallback" id="packetFallback" hidden>
+            <label for="packetText">AI-readable JSON</label>
+            <textarea id="packetText" rows="10" readonly></textarea>
+            <button class="secondary-button" id="copyPacket" type="button">Copy packet</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="data/catalog.js"></script>
+    <script src="motion.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

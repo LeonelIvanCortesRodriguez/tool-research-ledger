@@ -1,0 +1,4411 @@
+{
+  "schemaVersion": "2.1.0",
+  "meta": {
+    "title": "Tool Research Ledger",
+    "updated": "2026-10-23",
+    "batchId": "REPO-BATCH-2026-10-23-G",
+    "currentBatchKey": "2026-10-23-G",
+    "currentBatchReviewed": 1,
+    "currentBatchNote": "Public candidate normalized to an inspectable E0 evidence ceiling; private and internal trial artifacts are excluded.",
+    "scope": "A 71-option public source-review ledger. The application is reproducibly tested, while third-party tool claims remain E0 until public-safe proof is included.",
+    "privacy": "The catalog excludes private documents, customer data, credentials, raw OCR text, transaction rows, and source page images.",
+    "reports": [
+      {
+        "label": "Evidence model",
+        "relativePath": "docs/EVIDENCE_MODEL.md",
+        "kind": "Evidence promotion contract and proof boundaries"
+      },
+      {
+        "label": "Research methodology",
+        "relativePath": "docs/METHODOLOGY.md",
+        "kind": "Catalog review, validation, and decision method"
+      },
+      {
+        "label": "Sample OCR decision",
+        "relativePath": "docs/SAMPLE_DECISION.md",
+        "kind": "Public-safe controlled-benchmark example"
+      }
+    ],
+    "publicEvidenceBoundary": "All catalog entries are E0 in this release. Internal reports, private inputs, runtime trials, and static-scan artifacts are not part of the public evidence graph."
+  },
+  "assuranceModel": {
+    "notice": "Source review, static scan, runtime trial, and adoption scope are independent. A scan is not a runtime test; installation is not proof of benefit.",
+    "scanStatuses": {
+      "NOT_RUN": "Not scanned",
+      "ATTEMPTED": "Attempted / incomplete",
+      "COMPLETE": "Complete for recorded scope"
+    },
+    "trialStatuses": {
+      "NOT_RUN": "Not trialed",
+      "RUNNING": "Trial in progress",
+      "PASS": "Bounded trial passed",
+      "PARTIAL": "Trial produced mixed results",
+      "FAIL": "Trial failed"
+    },
+    "adoptionScopes": {
+      "LOCAL_ONLY": "Keep project-local",
+      "REPEAT_PILOT": "Repeat in another project",
+      "GLOBAL_CANDIDATE": "Candidate for global install",
+      "HOLD": "Hold",
+      "REJECT": "Reject"
+    }
+  },
+  "grading": {
+    "observedGradeLabel": "Observed benchmark grade",
+    "observedGradeNotice": "A numeric score is shown only when a tool was locally executed and its output was adjudicated. Public documentation review remains E0 and receives no invented score.",
+    "weights": [
+      {
+        "metric": "Operation and posting dates",
+        "weight": 20
+      },
+      {
+        "metric": "Amounts",
+        "weight": 25
+      },
+      {
+        "metric": "Accounting signs",
+        "weight": 20
+      },
+      {
+        "metric": "Row integrity",
+        "weight": 15
+      },
+      {
+        "metric": "Descriptions and references",
+        "weight": 10
+      },
+      {
+        "metric": "Fully exact raw rows",
+        "weight": 10
+      }
+    ],
+    "fitScale": {
+      "A": "Strongest documented fit",
+      "B": "Useful fit with controls",
+      "C": "Specialist or supporting fit",
+      "D": "Poor fit",
+      "UNPROVEN": "Insufficient evidence"
+    },
+    "decisionScale": {
+      "IMPLEMENT": "Implement a bounded method or control now",
+      "PILOT": "Run a controlled, reversible evaluation",
+      "CONDITIONAL": "Use only within the named scope and controls",
+      "REFERENCE": "Mine patterns; do not install wholesale",
+      "WATCH": "Track until a defined trigger justifies testing",
+      "HOLD": "Do not use until prerequisites and authorization exist",
+      "REJECT": "Not suitable for this project now"
+    },
+    "findingScale": {
+      "CONFIRMED": "Locally reproduced and source-adjudicated",
+      "NEEDS_VALIDATION": "Documented by the repository; not locally reproduced",
+      "REJECTED": "Claim or option rejected for the current scope"
+    },
+    "intakeGate": [
+      "Record source URL, reviewed date, license, deployment shape, and data path",
+      "Statically inspect skills, scripts, dependencies, and network behavior before install",
+      "Pin a commit or version and run only in an isolated, synthetic-data smoke test",
+      "Preserve row-level or finding-level evidence for correctness claims",
+      "Require independent review for critical, financial, or security conclusions",
+      "Promote scope only after a representative corpus and explicit failure outcomes"
+    ]
+  },
+  "categories": [
+    {
+      "id": "all",
+      "label": "All capabilities",
+      "short": "All"
+    },
+    {
+      "id": "ocr-document",
+      "label": "OCR and document recovery",
+      "short": "OCR"
+    },
+    {
+      "id": "financial-audit",
+      "label": "Financial and audit workflows",
+      "short": "Finance / audit"
+    },
+    {
+      "id": "skill-governance",
+      "label": "Agent skills and governance",
+      "short": "Skill governance"
+    },
+    {
+      "id": "research-intelligence",
+      "label": "Research and reasoning intelligence",
+      "short": "Research"
+    },
+    {
+      "id": "repo-comprehension",
+      "label": "Repository comprehension",
+      "short": "Repo intelligence"
+    },
+    {
+      "id": "security-assurance",
+      "label": "Security review and assurance",
+      "short": "Security"
+    },
+    {
+      "id": "ui-visual",
+      "label": "Interface and visual communication",
+      "short": "UI / visual"
+    },
+    {
+      "id": "automation",
+      "label": "Workflow automation and orchestration",
+      "short": "Automation"
+    },
+    {
+      "id": "model-routing",
+      "label": "Model routing and resilience",
+      "short": "Model routing"
+    },
+    {
+      "id": "reverse-engineering",
+      "label": "Authorized reverse engineering",
+      "short": "Reverse engineering"
+    },
+    {
+      "id": "focus-usability",
+      "label": "Focus and response usability",
+      "short": "Focus mode"
+    },
+    {
+      "id": "generative-media",
+      "label": "Generative media",
+      "short": "Media"
+    },
+    {
+      "id": "writing-quality",
+      "label": "Writing quality and editorial control",
+      "short": "Writing"
+    },
+    {
+      "id": "file-processing",
+      "label": "Local file and PDF processing",
+      "short": "File tools"
+    },
+    {
+      "id": "file-transfer-sync",
+      "label": "File transfer and synchronization",
+      "short": "Transfer / sync"
+    },
+    {
+      "id": "developer-workflow",
+      "label": "Developer workflow and worktrees",
+      "short": "Dev workflow"
+    },
+    {
+      "id": "local-ai-agent",
+      "label": "Local AI agents and workspaces",
+      "short": "Local agents"
+    },
+    {
+      "id": "project-management",
+      "label": "Project and issue management",
+      "short": "Projects"
+    },
+    {
+      "id": "ai-observability",
+      "label": "AI cost and usage observability",
+      "short": "AI observability"
+    },
+    {
+      "id": "spec-development",
+      "label": "Specification-driven development",
+      "short": "Specs"
+    },
+    {
+      "id": "spreadsheet-engineering",
+      "label": "Spreadsheet engineering",
+      "short": "Spreadsheets"
+    },
+    {
+      "id": "workspace-automation",
+      "label": "Workspace and office automation",
+      "short": "Workspace"
+    },
+    {
+      "id": "knowledge-management",
+      "label": "Knowledge bases and synthesis",
+      "short": "Knowledge"
+    },
+    {
+      "id": "ml-education",
+      "label": "Model engineering and education",
+      "short": "ML learning"
+    },
+    {
+      "id": "career-operations",
+      "label": "Career and job-search operations",
+      "short": "Career"
+    },
+    {
+      "id": "developer-reference",
+      "label": "Developer documentation and reference",
+      "short": "Dev reference"
+    },
+    {
+      "id": "media-library",
+      "label": "Media libraries and playback",
+      "short": "Media library"
+    }
+  ],
+  "evidenceLevels": [
+    {
+      "id": "E0",
+      "label": "Source review",
+      "verb": "READ",
+      "proof": "Documentation and license",
+      "description": "Official repository documentation and license reviewed; no local execution."
+    },
+    {
+      "id": "E1",
+      "label": "Smoke test",
+      "verb": "RAN",
+      "proof": "Bounded task and output",
+      "description": "Tool runs on synthetic or non-sensitive input; correctness is not adjudicated."
+    },
+    {
+      "id": "E2",
+      "label": "Controlled benchmark",
+      "verb": "CHECKED",
+      "proof": "Baseline and adjudication",
+      "description": "Real input with source-adjudicated results and preserved findings."
+    },
+    {
+      "id": "E3",
+      "label": "Representative corpus",
+      "verb": "COVERED",
+      "proof": "Representative failure set",
+      "description": "Labeled cases span target variation and known failure modes."
+    },
+    {
+      "id": "E4",
+      "label": "Independent validation",
+      "verb": "VERIFIED",
+      "proof": "Separate reviewer",
+      "description": "A separate reviewer or production-like process confirms results."
+    },
+    {
+      "id": "E5",
+      "label": "Monitored production",
+      "verb": "MONITORED",
+      "proof": "Drift and incident controls",
+      "description": "Sustained results, drift controls, incidents, and rollback evidence."
+    }
+  ],
+  "capabilityGroups": [
+    {
+      "id": "document-intelligence",
+      "label": "Document intelligence",
+      "purpose": "Recover, inspect, and prepare PDFs or scanned records",
+      "toolIds": [
+        "ocrmypdf",
+        "paddleocr",
+        "scribeocr",
+        "stirling-pdf"
+      ],
+      "lead": "OCRmyPDF for searchable PDFs; PaddleOCR for extraction research",
+      "useWhen": "A document workflow needs source-adjudicated extraction or controlled PDF preparation."
+    },
+    {
+      "id": "audit-finance",
+      "label": "Audit and financial controls",
+      "purpose": "Preserve evidence, reconcile outputs, and require human sign-off",
+      "toolIds": [
+        "financial-services",
+        "security-audit-skill"
+      ],
+      "lead": "Existing evidence gates plus selected Financial Services patterns",
+      "useWhen": "A conclusion affects money, compliance, or an external auditor."
+    },
+    {
+      "id": "design-quality",
+      "label": "Design and interface quality",
+      "purpose": "Raise visual quality without adding overlapping design stacks",
+      "toolIds": [
+        "impeccable",
+        "ui-ux-pro-max",
+        "design-taste-frontend",
+        "emil-skills",
+        "motion",
+        "diagram-design",
+        "openpencil",
+        "gsap-skills",
+        "material-design-icons",
+        "material-ui",
+        "awesome-design-md",
+        "react-bits",
+        "hallmark",
+        "open-design"
+      ],
+      "lead": "Existing design-system and visual-QA gates; local design skills remain conditional",
+      "useWhen": "A dashboard, site, or product UI needs design direction, QA, or animation."
+    },
+    {
+      "id": "skill-governance",
+      "label": "Skill governance",
+      "purpose": "Screen, compare, and selectively adopt agent instructions",
+      "toolIds": [
+        "skillspector",
+        "anthropic-skills",
+        "agent-skills",
+        "awesome-agent-skills",
+        "karpathy-skills",
+        "gsap-skills",
+        "hallmark",
+        "open-design",
+        "ui-ux-pro-max"
+      ],
+      "lead": "SkillSpector as intake gate; libraries as references only",
+      "useWhen": "A new skill or agent instruction bundle is proposed."
+    },
+    {
+      "id": "repo-intelligence",
+      "label": "Repository intelligence",
+      "purpose": "Understand codebases and preserve traceable findings",
+      "toolIds": [
+        "graphify",
+        "understand-anything",
+        "vane"
+      ],
+      "lead": "Graphify pilot for local code-only maps",
+      "useWhen": "A large unfamiliar repository makes reading and navigation expensive."
+    },
+    {
+      "id": "development-control",
+      "label": "Development control",
+      "purpose": "Specify work, isolate changes, and keep execution bounded",
+      "toolIds": [
+        "spec-kit",
+        "worktrunk",
+        "cli-anything",
+        "opencode"
+      ],
+      "lead": "Spec Kit method + existing execution gates",
+      "useWhen": "A build needs explicit requirements, acceptance tests, and clean lanes."
+    },
+    {
+      "id": "office-data",
+      "label": "Files, data, and media",
+      "purpose": "Automate structured files and manage local media without hiding data or rights boundaries",
+      "toolIds": [
+        "excelize",
+        "google-workspace-cli",
+        "vert",
+        "localsend",
+        "syncthing",
+        "antra",
+        "pear-desktop"
+      ],
+      "lead": "Use the smallest specialist tool that matches the file, service, or authorized media workflow",
+      "useWhen": "A repeatable spreadsheet, conversion, transfer, Workspace, or personal-media task exists."
+    },
+    {
+      "id": "agent-platforms",
+      "label": "Agent platforms",
+      "purpose": "Evaluate high-agency runtimes and browser control planes separately from the working environment",
+      "toolIds": [
+        "pinchtab",
+        "open-duet",
+        "harness2",
+        "nanoclaw",
+        "hermes-agent",
+        "agenticseek",
+        "cloudflare-os",
+        "rea"
+      ],
+      "lead": "PinchTab is the next bounded browser candidate; no platform replacement is recommended",
+      "useWhen": "Only after a missing capability, isolation model, budget, and rollback plan are documented."
+    },
+    {
+      "id": "knowledge-research",
+      "label": "Knowledge and research",
+      "purpose": "Organize sources, compare models, and support cited synthesis",
+      "toolIds": [
+        "llm-wiki",
+        "llm-council",
+        "mirothinker",
+        "devdocs"
+      ],
+      "lead": "LLM Wiki synthetic/public pilot; DevDocs for offline reference",
+      "useWhen": "Source volume or offline reference needs exceed ordinary search."
+    },
+    {
+      "id": "model-learning",
+      "label": "Model engineering education",
+      "purpose": "Learn transformer internals and training systems",
+      "toolIds": [
+        "llm-c",
+        "nanogpt",
+        "llm101n"
+      ],
+      "lead": "llm.c as a learning reference",
+      "useWhen": "The project goal is education or low-level model experimentation, not production tooling."
+    },
+    {
+      "id": "career-ops",
+      "label": "Career operations",
+      "purpose": "Structure job evaluation and application materials with human control",
+      "toolIds": [
+        "career-ops"
+      ],
+      "lead": "Career Ops bounded pilot",
+      "useWhen": "A separate, privacy-controlled career project needs repeatable triage and drafting."
+    },
+    {
+      "id": "ai-economics",
+      "label": "AI usage economics",
+      "purpose": "Measure local agent token and cost patterns",
+      "toolIds": [
+        "codeburn",
+        "omniroute"
+      ],
+      "lead": "CodeBurn read-only pilot",
+      "useWhen": "Agent spend or configuration overhead needs evidence before optimization."
+    }
+  ],
+  "tools": [
+    {
+      "id": "ocrmypdf",
+      "name": "OCRmyPDF",
+      "batch": "baseline",
+      "kind": "Repository / container",
+      "repoUrl": "https://github.com/ocrmypdf/OCRmyPDF",
+      "license": "MPL-2.0",
+      "version": "17.13.0 · public source review",
+      "primaryCategory": "ocr-document",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Searchable-PDF OCR candidate with a mature archival workflow; public runtime accuracy has not been reproduced in this release.",
+      "bestFor": [
+        "Searchable PDF output",
+        "Raw accounting signs",
+        "Fast CPU preprocessing",
+        "Archival workflows"
+      ],
+      "weaknesses": [
+        "Description and structure fidelity require a controlled public benchmark",
+        "No public-safe representative corpus is included",
+        "Language and document variation remain unmeasured"
+      ],
+      "tags": [
+        "ocr",
+        "pdf",
+        "tesseract",
+        "docker",
+        "cpu",
+        "financial"
+      ],
+      "projectFit": {
+        "ocr-document": "A",
+        "financial-audit": "B",
+        "automation": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "C",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Accuracy claims require public-safe reproduction",
+        "Evidence is limited to source review"
+      ],
+      "implementation": "Pilot with synthetic or owner-approved public fixtures; preserve expected text, output, exceptions, and rollback before promotion.",
+      "reentryTriggers": [
+        "New major OCRmyPDF or Tesseract release",
+        "Representative statement corpus available"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "paddleocr",
+      "name": "PaddleOCR",
+      "batch": "baseline",
+      "kind": "Repository / local runtime",
+      "repoUrl": "https://github.com/PaddlePaddle/PaddleOCR",
+      "license": "Apache-2.0",
+      "version": "3.7.0 / PaddlePaddle 3.3.1 · public source review",
+      "primaryCategory": "ocr-document",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "OCR and layout-analysis candidate with geometry-oriented capabilities; public accuracy and normalization behavior have not been reproduced in this release.",
+      "bestFor": [
+        "Descriptions and references",
+        "Bounding-box geometry",
+        "Movement-row reconstruction",
+        "Document analysis pipelines"
+      ],
+      "weaknesses": [
+        "Critical sign and character normalization require testing",
+        "Runtime cost requires measurement",
+        "No public-safe representative corpus is included"
+      ],
+      "tags": [
+        "ocr",
+        "layout",
+        "geometry",
+        "paddle",
+        "structured",
+        "financial"
+      ],
+      "projectFit": {
+        "ocr-document": "A",
+        "financial-audit": "C",
+        "automation": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "False acceptance of normalization errors",
+        "Runtime and deployment cost remain unmeasured"
+      ],
+      "implementation": "Pilot with synthetic or owner-approved public fixtures; validate critical characters, layout geometry, runtime, and rollback before promotion.",
+      "reentryTriggers": [
+        "Sign normalization control implemented",
+        "GPU benchmark available"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "skillspector",
+      "name": "NVIDIA SkillSpector",
+      "batch": "2026-10-20",
+      "kind": "Skill security scanner",
+      "repoUrl": "https://github.com/NVIDIA/skillspector",
+      "license": "Apache-2.0",
+      "version": "2.13.0 · project-local install",
+      "primaryCategory": "skill-governance",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Static and optional LLM analysis for agent skills, with risk scores, baselines, OSV checks, and machine-readable output.",
+      "bestFor": [
+        "Pre-install skill screening",
+        "SARIF/JSON audit output",
+        "Baseline drift checks",
+        "Fail-closed input limits"
+      ],
+      "weaknesses": [
+        "Detection quality has only two referenced synthetic fixtures; this release includes no benchmark artifact",
+        "Static analysis can still miss malicious intent",
+        "LLM and live OSV modes remain intentionally disabled"
+      ],
+      "tags": [
+        "skills",
+        "security",
+        "scanner",
+        "sarif",
+        "osv",
+        "docker"
+      ],
+      "projectFit": {
+        "skill-governance": "A",
+        "security-assurance": "A",
+        "automation": "A"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "False negatives remain possible",
+        "A clean static result does not prove a skill is safe"
+      ],
+      "implementation": "Pilot NVIDIA SkillSpector as a local pre-install check with public or synthetic fixtures. Define the failure rules and review incomplete coverage before wider use.",
+      "reentryTriggers": [
+        "Representative malicious/benign fixture corpus available",
+        "Pinned release or offline policy changes"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level. Public source review supports a bounded pilot only, not implementation."
+    },
+    {
+      "id": "anthropic-skills",
+      "name": "Anthropic Skills",
+      "batch": "2026-10-20",
+      "kind": "Skill examples and specification",
+      "repoUrl": "https://github.com/anthropics/skills",
+      "license": "Mixed: Apache-2.0 examples; some source-available assets",
+      "version": "README reviewed 2026-10-20 · pinned dbd4588f9e10 scanned 2026-10-23",
+      "primaryCategory": "skill-governance",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Canonical examples, specification material, templates, and document-oriented skills for pattern mining.",
+      "bestFor": [
+        "Skill structure reference",
+        "Template comparison",
+        "Document workflow patterns",
+        "Compatibility research"
+      ],
+      "weaknesses": [
+        "Mixed licensing across contents",
+        "Examples are not automatically production-safe",
+        "Heavy overlap with other skills in this catalog"
+      ],
+      "tags": [
+        "skills",
+        "templates",
+        "documents",
+        "specification",
+        "anthropic"
+      ],
+      "projectFit": {
+        "skill-governance": "A",
+        "automation": "B",
+        "financial-audit": "C"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "License must be checked per selected directory",
+        "Wholesale install would create overlap"
+      ],
+      "implementation": "Use as a reference baseline and import only a clearly licensed, non-duplicative skill after review.",
+      "reentryTriggers": [
+        "Specific missing capability identified",
+        "Per-skill license and behavior review"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "financial-services",
+      "name": "Anthropic Financial Services",
+      "batch": "2026-10-20",
+      "kind": "Reference agents and finance skills",
+      "repoUrl": "https://github.com/anthropics/financial-services",
+      "license": "Apache-2.0",
+      "version": "README and license reviewed 2026-10-20 · pinned 574ed3624aeb scanned 2026-10-23",
+      "primaryCategory": "financial-audit",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Reference patterns for investment banking, research, private equity, wealth, and finance operations with human sign-off.",
+      "bestFor": [
+        "Spreadsheet audit patterns",
+        "GL reconciliation concepts",
+        "Finance workflow decomposition",
+        "Human-approval controls"
+      ],
+      "weaknesses": [
+        "Claude-specific components may not map directly",
+        "Not financial, legal, or accounting advice",
+        "Requires domain validation"
+      ],
+      "tags": [
+        "finance",
+        "audit",
+        "reconciliation",
+        "spreadsheets",
+        "agents"
+      ],
+      "projectFit": {
+        "financial-audit": "A",
+        "skill-governance": "B",
+        "automation": "B",
+        "research-intelligence": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Domain conclusions require qualified human approval",
+        "Connectors may introduce external data paths"
+      ],
+      "implementation": "Extract evidence, reconciliation, spreadsheet-debug, and human-sign-off patterns into existing controls; do not import connectors by default.",
+      "reentryTriggers": [
+        "Mapped control has an owner and acceptance test",
+        "Representative finance case prepared"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "agent-skills",
+      "name": "Addy Osmani Agent Skills",
+      "batch": "2026-10-20",
+      "kind": "Engineering skill library",
+      "repoUrl": "https://github.com/addyosmani/agent-skills",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20 · pinned aeac41d4d005 scanned 2026-10-23",
+      "primaryCategory": "skill-governance",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A broad engineering skill set and spec-plan-build-test-review-ship lifecycle for agent-guided development.",
+      "bestFor": [
+        "Source-driven development",
+        "Context engineering",
+        "Doubt and constraint controls",
+        "TDD workflow patterns"
+      ],
+      "weaknesses": [
+        "Substantial overlap with current gates",
+        "Per-skill portability may depend on shared references",
+        "Large intake surface"
+      ],
+      "tags": [
+        "skills",
+        "engineering",
+        "tdd",
+        "context",
+        "workflow"
+      ],
+      "projectFit": {
+        "skill-governance": "A",
+        "automation": "B",
+        "repo-comprehension": "B",
+        "ui-visual": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Duplicated or conflicting instructions",
+        "Shared reference dependency may be missed"
+      ],
+      "implementation": "Extract source-driven, constraint-driven, context-engineering, and doubt-driven checks into the comparison rubric.",
+      "reentryTriggers": [
+        "Current gate lacks a specific control",
+        "Single-skill differential pilot"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "scribeocr",
+      "name": "Scribe OCR",
+      "batch": "2026-10-20",
+      "kind": "Browser OCR review application",
+      "repoUrl": "https://github.com/scribeocr/scribeocr",
+      "license": "AGPL-3.0",
+      "version": "README and license reviewed 2026-10-20",
+      "primaryCategory": "ocr-document",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Local-browser OCR and proofreading UI that can create searchable PDFs and correct existing OCR/hOCR output.",
+      "bestFor": [
+        "Human OCR correction",
+        "Private local-browser processing",
+        "Proofreading overlays",
+        "Searchable PDF production"
+      ],
+      "weaknesses": [
+        "This repository is the UI; recognition lives in scribe.js",
+        "AGPL obligations need review",
+        "Accuracy and export fidelity untested"
+      ],
+      "tags": [
+        "ocr",
+        "browser",
+        "proofreading",
+        "privacy",
+        "pdf",
+        "hocr"
+      ],
+      "projectFit": {
+        "ocr-document": "A",
+        "financial-audit": "B",
+        "ui-visual": "B",
+        "automation": "C"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "C",
+        "automation": "C",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Copyleft integration implications",
+        "Browser-local privacy claim must be verified in network traces"
+      ],
+      "implementation": "Run the same controlled PDF in an isolated browser, capture network activity, correction effort, row accuracy, and exported PDF fidelity.",
+      "reentryTriggers": [
+        "Controlled PDF pilot completed",
+        "License integration decision documented"
+      ]
+    },
+    {
+      "id": "rea",
+      "name": "REA",
+      "batch": "2026-10-20",
+      "kind": "Reverse-engineering MCP",
+      "repoUrl": "https://github.com/morluto/rea",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20",
+      "primaryCategory": "reverse-engineering",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "HOLD",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Evidence-oriented reverse engineering for binaries, applications, websites, APKs, firmware, and runtime behavior.",
+      "bestFor": [
+        "Authorized binary analysis",
+        "Runtime behavior evidence",
+        "Multi-format inspection",
+        "MCP integration"
+      ],
+      "weaknesses": [
+        "Outside current project need",
+        "May invoke powerful third-party analysis tools",
+        "Legal and terms boundaries are target-specific"
+      ],
+      "tags": [
+        "reverse-engineering",
+        "mcp",
+        "binary",
+        "runtime",
+        "authorized-use"
+      ],
+      "projectFit": {
+        "reverse-engineering": "A",
+        "repo-comprehension": "C",
+        "security-assurance": "C"
+      },
+      "impact": {
+        "workflow": "C",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "C"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Authorization and legal scope required",
+        "Toolchain can execute or inspect untrusted artifacts"
+      ],
+      "implementation": "Do not install for the current project; require a named authorized target, isolation plan, and evidence handling policy.",
+      "reentryTriggers": [
+        "Explicit authorized reverse-engineering project",
+        "Sandbox and legal scope approved"
+      ]
+    },
+    {
+      "id": "mirothinker",
+      "name": "MiroThinker",
+      "batch": "2026-10-20",
+      "kind": "Deep-research agent framework",
+      "repoUrl": "https://github.com/MiroMindAI/MiroThinker",
+      "license": "Apache-2.0",
+      "version": "README and license reviewed 2026-10-20",
+      "primaryCategory": "research-intelligence",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "WATCH",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Open deep-research agents, models, tool integration, trace collection, and benchmark tooling.",
+      "bestFor": [
+        "Long-horizon research",
+        "Agent trace datasets",
+        "Benchmark harnesses",
+        "Open model experimentation"
+      ],
+      "weaknesses": [
+        "Compute and infrastructure heavy",
+        "Published benchmark claims not reproduced",
+        "Overlaps current model capability"
+      ],
+      "tags": [
+        "research",
+        "agents",
+        "models",
+        "benchmarks",
+        "traces"
+      ],
+      "projectFit": {
+        "research-intelligence": "A",
+        "automation": "B",
+        "repo-comprehension": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "A",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "High evaluation and operating cost",
+        "Model/tool data paths require review"
+      ],
+      "implementation": "Watch; define a fixed research task set and cost ceiling before comparing it to the current agent stack.",
+      "reentryTriggers": [
+        "Current research quality ceiling is demonstrated",
+        "Budgeted benchmark with matched tasks"
+      ]
+    },
+    {
+      "id": "understand-anything",
+      "name": "Understand Anything",
+      "batch": "2026-10-20",
+      "kind": "Repository knowledge graph",
+      "repoUrl": "https://github.com/Egonex-AI/Understand-Anything",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20",
+      "primaryCategory": "repo-comprehension",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Turns codebases and knowledge bases into an interactive graph with tours, search, impact analysis, and personas.",
+      "bestFor": [
+        "Fast codebase orientation",
+        "Architecture and flow discovery",
+        "Change-impact exploration",
+        "Persistent repository memory"
+      ],
+      "weaknesses": [
+        "Initial analysis can be token-heavy",
+        "Generated graphs can be stale or wrong",
+        "Installer pattern requires careful review"
+      ],
+      "tags": [
+        "knowledge-graph",
+        "repository",
+        "codebase",
+        "impact",
+        "onboarding"
+      ],
+      "projectFit": {
+        "repo-comprehension": "A",
+        "research-intelligence": "A",
+        "automation": "B",
+        "ui-visual": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "A",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Generated interpretation may be inaccurate",
+        "Remote install scripts should not be piped directly into a shell"
+      ],
+      "implementation": "Pilot on a non-sensitive repository using a pinned, inspected install path; measure orientation time and graph correctness.",
+      "reentryTriggers": [
+        "SkillSpector/static review complete",
+        "Non-sensitive pilot repo selected"
+      ]
+    },
+    {
+      "id": "diagram-design",
+      "name": "Diagram Design",
+      "batch": "2026-10-20",
+      "kind": "Diagram generation skill",
+      "repoUrl": "https://github.com/cathrynlavery/diagram-design",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20 · pinned 7a12007b5a42 scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Generates self-contained HTML/SVG diagrams across many diagram types with brand profiles and layout checks.",
+      "bestFor": [
+        "Executive audit diagrams",
+        "Standalone shareable visuals",
+        "Brand-aware SVG output",
+        "Overlap and clipping checks"
+      ],
+      "weaknesses": [
+        "Model-driven layout can vary",
+        "HTML/SVG can be harder to diff than text diagrams",
+        "Needs accessibility review"
+      ],
+      "tags": [
+        "diagrams",
+        "svg",
+        "html",
+        "audit",
+        "visualization",
+        "skill"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "financial-audit": "B",
+        "research-intelligence": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "C",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Generated layout still needs visual and accessibility QA"
+      ],
+      "implementation": "Pilot one auditor-facing evidence-flow diagram and compare editability, accessibility, and rendering with Mermaid or native HTML.",
+      "reentryTriggers": [
+        "A report needs a complex flow or lineage visual",
+        "Visual QA checklist prepared"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "ponytail",
+      "name": "Ponytail",
+      "batch": "2026-10-20",
+      "kind": "Code simplification skill",
+      "repoUrl": "https://github.com/DietrichGebert/ponytail",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20 · pinned 09c434ab73ca scanned 2026-10-23",
+      "primaryCategory": "automation",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "WATCH",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A skill focused on reducing code, time, cost, and tokens while retaining tests and security.",
+      "bestFor": [
+        "Simplification reviews",
+        "Technical-debt ledgers",
+        "Token-aware workflow",
+        "Small-code discipline"
+      ],
+      "weaknesses": [
+        "Benchmark claim not reproduced",
+        "Brevity can conflict with clarity or controls",
+        "Overlaps existing quality gate"
+      ],
+      "tags": [
+        "skills",
+        "simplification",
+        "debt",
+        "tokens",
+        "review"
+      ],
+      "projectFit": {
+        "automation": "B",
+        "skill-governance": "B",
+        "repo-comprehension": "C"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "C",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Optimization pressure may remove useful explicitness"
+      ],
+      "implementation": "Extract the debt-ledger and simplification-review ideas; do not add another global skill until a differential pilot shows value.",
+      "reentryTriggers": [
+        "Maintenance cost becomes a measured blocker",
+        "Matched before/after review task"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "replica-skill",
+      "name": "Replica Skill",
+      "batch": "2026-10-20",
+      "kind": "Clean-room replication skill suite",
+      "repoUrl": "https://github.com/Jakeschincariol/replica-skill",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20 · pinned 77c9436fb3d1 scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "HOLD",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A staged skill suite for analyzing, rebuilding, testing, diffing, branding, and launching clean-room product replicas.",
+      "bestFor": [
+        "Competitive flow analysis",
+        "UI parity testing",
+        "Clean-room product research",
+        "Rebranding workflow"
+      ],
+      "weaknesses": [
+        "Not needed for the current project",
+        "Terms, copyright, trademark, and data collection require case review",
+        "Large workflow surface"
+      ],
+      "tags": [
+        "replication",
+        "ui",
+        "competitive-research",
+        "clean-room",
+        "testing"
+      ],
+      "projectFit": {
+        "ui-visual": "B",
+        "research-intelligence": "C",
+        "automation": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Legal and terms boundaries depend on target",
+        "Risk of copying protected assets or behavior"
+      ],
+      "implementation": "Hold unless an explicit competitive-research project has written clean-room boundaries and legal review.",
+      "reentryTriggers": [
+        "Explicit competitive research mandate",
+        "Target-specific legal and brand boundaries approved"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "security-audit-skill",
+      "name": "Cloudflare Security Audit Skill",
+      "batch": "2026-10-20",
+      "kind": "Security audit methodology skill",
+      "repoUrl": "https://github.com/cloudflare/security-audit-skill",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20 · pinned c1c8a8c14710 scanned 2026-10-23",
+      "primaryCategory": "security-assurance",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Structured security auditing with coverage ledgers, isolated hunters, fresh validators, and independent record verification.",
+      "bestFor": [
+        "Independent finding verification",
+        "Coverage-ledger discipline",
+        "Additive audit runs",
+        "Explicit finding states"
+      ],
+      "weaknesses": [
+        "Full workflow requires parallel agents and OS isolation",
+        "Not executable under the current no-subagent constraint",
+        "Security expertise remains necessary"
+      ],
+      "tags": [
+        "security",
+        "audit",
+        "verification",
+        "sandbox",
+        "coverage"
+      ],
+      "projectFit": {
+        "security-assurance": "A",
+        "skill-governance": "A",
+        "financial-audit": "B",
+        "automation": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Unsafe without process isolation and resource limits",
+        "Parallel execution needs explicit authorization"
+      ],
+      "implementation": "Adopt its confirmed / needs-validation / rejected taxonomy and independent-verifier concept now; pilot the skill only in an authorized sandbox.",
+      "reentryTriggers": [
+        "Authorized security audit with isolation",
+        "Independent reviewer lane available"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "superdesign",
+      "name": "SuperDesign (legacy repo)",
+      "batch": "2026-10-20",
+      "kind": "Legacy design extension",
+      "repoUrl": "https://github.com/superdesigndev/superdesign",
+      "license": "AGPL-3.0 plus commercial-marked files",
+      "version": "README and license reviewed 2026-10-20 · pinned 49e2b9dd9615 scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REJECT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Former open-source design extension; the repository points users to a newer web product and separate skill repository.",
+      "bestFor": [
+        "Historical reference",
+        "Locating the successor product"
+      ],
+      "weaknesses": [
+        "Not actively maintained",
+        "Mixed AGPL/commercial file licensing",
+        "This is not the current product path"
+      ],
+      "tags": [
+        "design",
+        "legacy",
+        "unmaintained",
+        "agpl",
+        "commercial"
+      ],
+      "projectFit": {
+        "ui-visual": "D"
+      },
+      "impact": {
+        "workflow": "D",
+        "intelligence": "D",
+        "automation": "D",
+        "quality": "D"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Maintenance ended",
+        "File-level commercial license exceptions"
+      ],
+      "implementation": "Reject this repository for new adoption; evaluate the current successor skill only as a separate future entry.",
+      "reentryTriggers": [
+        "A maintained successor repository is submitted as a new option"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "interface-feel",
+      "name": "Make Interfaces Feel Better",
+      "batch": "2026-10-20",
+      "kind": "UI polish skill",
+      "repoUrl": "https://github.com/jakubkrehel/make-interfaces-feel-better",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20 · pinned 35545ea1512a scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A focused checklist for animation, typography, icons, hover states, optical alignment, radii, shadows, and hit areas.",
+      "bestFor": [
+        "Micro-interaction review",
+        "Optical alignment",
+        "Hit-area checks",
+        "Polish checklist"
+      ],
+      "weaknesses": [
+        "Narrow scope",
+        "High overlap with existing frontend skills",
+        "No project-specific outcome evidence"
+      ],
+      "tags": [
+        "ui",
+        "polish",
+        "animation",
+        "typography",
+        "accessibility"
+      ],
+      "projectFit": {
+        "ui-visual": "B",
+        "skill-governance": "C"
+      },
+      "impact": {
+        "workflow": "C",
+        "intelligence": "C",
+        "automation": "C",
+        "quality": "B"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Additional overlapping instructions can dilute the established design system"
+      ],
+      "implementation": "Use as a reference checklist only; existing frontend and visual-QA gates already cover the core value.",
+      "reentryTriggers": [
+        "A visual defect escapes current QA",
+        "Gap mapping shows a unique control"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "open-generative-ai",
+      "name": "Open Generative AI",
+      "batch": "2026-10-20",
+      "kind": "Generative media studio",
+      "repoUrl": "https://github.com/Anil-matcha/Open-Generative-AI",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20",
+      "primaryCategory": "generative-media",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REJECT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Desktop image, video, and audio generation studio using many local and remote model providers.",
+      "bestFor": [
+        "Broad model catalog",
+        "Media experimentation",
+        "Local or API-backed generation",
+        "Desktop creative workflow"
+      ],
+      "weaknesses": [
+        "No current project need",
+        "README tells users how to bypass OS reputation warnings",
+        "Provider privacy, cost, and content controls vary"
+      ],
+      "tags": [
+        "image",
+        "video",
+        "audio",
+        "models",
+        "desktop",
+        "api"
+      ],
+      "projectFit": {
+        "generative-media": "B",
+        "ui-visual": "C"
+      },
+      "impact": {
+        "workflow": "D",
+        "intelligence": "C",
+        "automation": "C",
+        "quality": "C"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Unsigned binaries and warning-bypass guidance",
+        "Third-party provider data and billing exposure"
+      ],
+      "implementation": "Reject for this project; use existing approved media tools when a defined need arises.",
+      "reentryTriggers": [
+        "Signed release and reviewed provider matrix",
+        "Concrete media use case with privacy budget"
+      ]
+    },
+    {
+      "id": "strix",
+      "name": "Strix",
+      "batch": "2026-10-20",
+      "kind": "Autonomous penetration testing",
+      "repoUrl": "https://github.com/usestrix/strix",
+      "license": "Apache-2.0",
+      "version": "README and license reviewed 2026-10-20",
+      "primaryCategory": "security-assurance",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "HOLD",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Autonomous multi-agent penetration testing with exploit validation, proof-of-concept evidence, remediation, and CI integration.",
+      "bestFor": [
+        "Authorized dynamic security testing",
+        "Exploit validation",
+        "CI security workflows",
+        "Remediation evidence"
+      ],
+      "weaknesses": [
+        "Offensive capability requires explicit authorization",
+        "Needs Docker and model credentials",
+        "High blast radius if misconfigured"
+      ],
+      "tags": [
+        "pentest",
+        "security",
+        "exploits",
+        "docker",
+        "agents",
+        "authorized-use"
+      ],
+      "projectFit": {
+        "security-assurance": "A",
+        "automation": "A"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "A"
+      },
+      "riskLevel": "CRITICAL",
+      "risks": [
+        "Can actively exploit targets",
+        "Credentials, network scope, and authorization are mandatory"
+      ],
+      "implementation": "Hold. Use only for a separately authorized pentest with isolated infrastructure, explicit target scope, credentials policy, and human supervision.",
+      "reentryTriggers": [
+        "Signed target authorization",
+        "Isolated environment and rollback plan approved"
+      ]
+    },
+    {
+      "id": "omniroute",
+      "name": "OmniRoute",
+      "batch": "2026-10-20",
+      "kind": "Local AI model gateway",
+      "repoUrl": "https://github.com/diegosouzapw/OmniRoute",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20",
+      "primaryCategory": "model-routing",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "WATCH",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "OpenAI-compatible local gateway with provider routing, fallback, compression, cost controls, encrypted keys, and telemetry.",
+      "bestFor": [
+        "Provider resilience",
+        "Cost-aware routing",
+        "OpenAI-compatible integration",
+        "Central usage controls"
+      ],
+      "weaknesses": [
+        "Centralizes sensitive prompts and credentials",
+        "Many provider terms and data paths",
+        "Large claims need reproducible testing"
+      ],
+      "tags": [
+        "gateway",
+        "routing",
+        "models",
+        "fallback",
+        "cost",
+        "telemetry"
+      ],
+      "projectFit": {
+        "model-routing": "A",
+        "automation": "A",
+        "research-intelligence": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Prompt and credential concentration",
+        "Fallback can silently change provider and policy boundary"
+      ],
+      "implementation": "Watch; any pilot must use synthetic data, explicit provider allowlists, disabled telemetry by default, and fail-closed routing.",
+      "reentryTriggers": [
+        "Provider resilience is a measured blocker",
+        "Threat model and synthetic benchmark approved"
+      ]
+    },
+    {
+      "id": "focus-mode",
+      "name": "I Have ADHD",
+      "batch": "2026-10-20",
+      "kind": "Response-style skill",
+      "repoUrl": "https://github.com/ayghri/i-have-adhd",
+      "license": "MIT",
+      "version": "README and license reviewed 2026-10-20 · pinned 1ecea1993b7f scanned 2026-10-23",
+      "primaryCategory": "focus-usability",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A response protocol emphasizing action first, numbered steps, explicit state, limited lists, and a concrete next action.",
+      "bestFor": [
+        "Optional concise mode",
+        "Action-first communication",
+        "Reduced cognitive load",
+        "State visibility"
+      ],
+      "weaknesses": [
+        "Must not infer a user diagnosis",
+        "Can underserve complex audit explanations",
+        "Mostly overlaps current writing rules"
+      ],
+      "tags": [
+        "focus",
+        "usability",
+        "communication",
+        "concise",
+        "accessibility"
+      ],
+      "projectFit": {
+        "focus-usability": "A",
+        "skill-governance": "C",
+        "automation": "C"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "C",
+        "automation": "C",
+        "quality": "B"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Applying a diagnosis-specific label without user choice would be inappropriate",
+        "Rigid brevity can hide nuance"
+      ],
+      "implementation": "Extract an optional neutral 'Focus mode' preference: action first, short state, bounded choices, and one next action.",
+      "reentryTriggers": [
+        "User requests shorter action-oriented output",
+        "Usability test shows faster comprehension"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "agenticseek",
+      "name": "agenticSeek",
+      "batch": "2026-10-20-B",
+      "kind": "Local autonomous agent platform",
+      "repoUrl": "https://github.com/Fosowl/agenticSeek",
+      "license": "GPL-3.0",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "local-ai-agent",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "HOLD",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A local-first multi-agent assistant that can browse, plan, write code, and interact with a configured work directory.",
+      "bestFor": [
+        "Local-model autonomy",
+        "Private browsing research",
+        "Multi-agent task planning",
+        "Voice-assisted workflows"
+      ],
+      "weaknesses": [
+        "Large Docker, browser, model, and filesystem surface",
+        "Strong local hardware requirement",
+        "Duplicates the current agent workspace"
+      ],
+      "tags": [
+        "local-ai",
+        "agents",
+        "browser",
+        "docker",
+        "ollama",
+        "code-execution"
+      ],
+      "projectFit": {
+        "local-ai-agent": "B",
+        "research-intelligence": "B",
+        "automation": "A",
+        "security-assurance": "D"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "C"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Autonomous browser and code execution",
+        "Configured work directory becomes agent-accessible",
+        "Optional profile import can expose browser state"
+      ],
+      "implementation": "Do not add it to this project. Reconsider only for an offline autonomy experiment in a disposable VM with a synthetic work directory and no browser profile.",
+      "reentryTriggers": [
+        "Current agent workflow cannot meet a measured offline need",
+        "Disposable VM and least-privilege test plan approved"
+      ]
+    },
+    {
+      "id": "vane",
+      "name": "Vane",
+      "batch": "2026-10-20-B",
+      "kind": "Self-hosted AI answer engine",
+      "repoUrl": "https://github.com/ItzCrazyKns/Vane",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "research-intelligence",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A self-hosted answer engine using SearxNG, local or cloud models, cited sources, search modes, and optional document uploads.",
+      "bestFor": [
+        "Cited web research",
+        "Local-model search",
+        "Domain-limited discovery",
+        "Reusable local search history"
+      ],
+      "weaknesses": [
+        "README quick start uses mutable latest container tags",
+        "Internet retrieval remains an external data path",
+        "File uploads and provider keys expand privacy scope"
+      ],
+      "tags": [
+        "search",
+        "searxng",
+        "citations",
+        "docker",
+        "ollama",
+        "rag"
+      ],
+      "projectFit": {
+        "research-intelligence": "A",
+        "local-ai-agent": "B",
+        "automation": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "A",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Mutable container tag",
+        "Search and model providers see queries under their own policies",
+        "Uploaded documents enter a new application store"
+      ],
+      "implementation": "Pilot only on public questions with a pinned image digest, local model, no file uploads, and citation spot checks against primary sources.",
+      "reentryTriggers": [
+        "Research throughput is a measured bottleneck",
+        "Pinned deployment and citation-accuracy test are prepared"
+      ]
+    },
+    {
+      "id": "harper",
+      "name": "Harper",
+      "batch": "2026-10-20-B",
+      "kind": "Offline grammar and style checker",
+      "repoUrl": "https://github.com/Automattic/harper",
+      "license": "Apache-2.0",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "writing-quality",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A fast, offline English grammar checker available through WebAssembly, a language server, and editor integrations.",
+      "bestFor": [
+        "Private English grammar checks",
+        "Fast local linting",
+        "Editor integration",
+        "Repeatable prose QA"
+      ],
+      "weaknesses": [
+        "English only",
+        "Grammar correctness does not prove factual correctness",
+        "May conflict with intentional audit terminology"
+      ],
+      "tags": [
+        "writing",
+        "grammar",
+        "offline",
+        "rust",
+        "wasm",
+        "language-server"
+      ],
+      "projectFit": {
+        "writing-quality": "A",
+        "automation": "B",
+        "financial-audit": "C"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "C",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "False-positive edits can change precise wording",
+        "No bilingual coverage"
+      ],
+      "implementation": "Run a diff-only pilot on a copied English report. Accept changes manually and verify that dates, amounts, findings, and qualifiers are unchanged.",
+      "reentryTriggers": [
+        "English report ready for a lint comparison",
+        "False-positive and terminology acceptance rules defined"
+      ]
+    },
+    {
+      "id": "opencode",
+      "name": "OpenCode",
+      "batch": "2026-10-20-B",
+      "kind": "AI coding agent",
+      "repoUrl": "https://github.com/anomalyco/opencode",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "local-ai-agent",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "An open-source coding agent delivered through terminal and beta desktop clients.",
+      "bestFor": [
+        "Coding-agent comparison",
+        "Terminal workflows",
+        "Provider flexibility",
+        "Open implementation research"
+      ],
+      "weaknesses": [
+        "Substantial overlap with the current Codex environment",
+        "Installation paths include remote scripts and package managers",
+        "Agent execution and credentials require a separate threat model"
+      ],
+      "tags": [
+        "coding-agent",
+        "terminal",
+        "desktop",
+        "models",
+        "automation"
+      ],
+      "projectFit": {
+        "local-ai-agent": "B",
+        "developer-workflow": "B",
+        "automation": "A"
+      },
+      "impact": {
+        "workflow": "C",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "C"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Code execution in repositories",
+        "Provider credentials and prompt data paths",
+        "Beta desktop surface"
+      ],
+      "implementation": "Keep as a market and architecture reference. Do not introduce a second coding agent without a defined capability gap and matched evaluation.",
+      "reentryTriggers": [
+        "Current environment lacks a required provider or workflow",
+        "Matched synthetic coding benchmark approved"
+      ]
+    },
+    {
+      "id": "anti-ai-slop-writing",
+      "name": "Anti-AI-Slop Writing",
+      "batch": "2026-10-20-B",
+      "kind": "Writing-style skill",
+      "repoUrl": "https://github.com/jalaalrd/anti-ai-slop-writing",
+      "license": "MIT declared in README; no detected LICENSE file",
+      "version": "Skill snapshot reviewed and scanned 2026-10-20 · pinned 63255f9bbb75 scanned 2026-10-23",
+      "primaryCategory": "writing-quality",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A strict prose style directive that suppresses recurring AI-writing patterns, banned vocabulary, fabricated specifics, and repetitive structure.",
+      "bestFor": [
+        "Style-pattern inventory",
+        "Accuracy reminders",
+        "Voice-calibration ideas",
+        "Editorial checklist comparison"
+      ],
+      "weaknesses": [
+        "License is declared only in README, not a detected LICENSE file",
+        "Rigid bans can make prose less natural or distort technical language",
+        "Static scan was incomplete"
+      ],
+      "tags": [
+        "writing",
+        "skill",
+        "style",
+        "anti-slop",
+        "editorial"
+      ],
+      "projectFit": {
+        "writing-quality": "B",
+        "skill-governance": "C"
+      },
+      "impact": {
+        "workflow": "C",
+        "intelligence": "C",
+        "automation": "C",
+        "quality": "B"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "License notice is less explicit than a full license file",
+        "Global activation can conflict with audit precision",
+        "Missing referenced artifact blocked a complete scan"
+      ],
+      "implementation": "Mine the honesty and specificity checks only. Do not install the skill until a complete bundle scan passes and the README-only license notice is accepted.",
+      "reentryTriggers": [
+        "Complete license file added or README notice accepted",
+        "Complete bundle scan passes",
+        "Differential writing evaluation shows unique value"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "no-ai-slop",
+      "name": "No AI Slop",
+      "batch": "2026-10-20-B",
+      "kind": "Writing review skill",
+      "repoUrl": "https://github.com/petergyang/no-ai-slop",
+      "license": "MIT",
+      "version": "Skill and eval snapshots reviewed and scanned 2026-10-20 · pinned 000650b15698 scanned 2026-10-23 · project-local install",
+      "primaryCategory": "writing-quality",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A minimum-effective-edit method that preserves the writer's voice, names concrete style defects, and self-checks against an explicit eval.",
+      "bestFor": [
+        "Diff-bounded editing",
+        "Voice preservation",
+        "Named writing findings",
+        "Post-edit self-checks"
+      ],
+      "weaknesses": [
+        "Effectiveness beyond one synthetic English passage remains untested",
+        "Overlaps Humanizer already evaluated in this catalog",
+        "English-centric style rules"
+      ],
+      "tags": [
+        "writing",
+        "skill",
+        "editing",
+        "eval",
+        "voice"
+      ],
+      "projectFit": {
+        "writing-quality": "A",
+        "skill-governance": "B",
+        "automation": "C"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "C",
+        "automation": "C",
+        "quality": "A"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "An overly aggressive edit can remove important qualifiers",
+        "A clean static scan is not proof of editorial quality"
+      ],
+      "implementation": "Keep the pinned skill project-local. Use it for bounded prose editing or detection on non-sensitive drafts, preserve the writer's meaning, and require a claim-parity check. Repeat against unassisted and Humanizer baselines before any E2 or global-adoption claim.",
+      "reentryTriggers": [
+        "Matched editing task can compare it with Humanizer",
+        "Unique improvement is demonstrated without qualifier loss"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level. Public source review supports a bounded pilot only, not implementation."
+    },
+    {
+      "id": "better-icons",
+      "name": "Better Icons",
+      "batch": "2026-10-20-B",
+      "kind": "Icon CLI, skill, and MCP server",
+      "repoUrl": "https://github.com/better-auth/better-icons",
+      "license": "MIT",
+      "version": "README and skill snapshot reviewed 2026-10-20 · pinned 033316ecb8f4 scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Searches Iconify collections, retrieves SVGs, and can write selected icons into application source files.",
+      "bestFor": [
+        "Consistent interface icons",
+        "Large icon discovery",
+        "Token-saving project sync",
+        "Framework component output"
+      ],
+      "weaknesses": [
+        "Uses the external Iconify API",
+        "MCP sync can modify project files",
+        "Global or npx install expands supply-chain exposure"
+      ],
+      "tags": [
+        "icons",
+        "mcp",
+        "cli",
+        "iconify",
+        "svg",
+        "ui"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "automation": "B",
+        "skill-governance": "C"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "C",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Network retrieval and icon-set license review",
+        "Write-capable MCP tool",
+        "Incomplete snapshot scan"
+      ],
+      "implementation": "Use only when the design system lacks an icon. Pin the package, allowlist the output path, review the SVG and collection license, and commit the asset locally.",
+      "reentryTriggers": [
+        "A specific missing icon blocks the interface",
+        "Pinned CLI and write-path sandbox are prepared"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "cli-anything",
+      "name": "CLI-Anything",
+      "batch": "2026-10-20-B",
+      "kind": "Agent-native CLI generator and registry",
+      "repoUrl": "https://github.com/HKUDS/CLI-Anything",
+      "license": "Apache-2.0",
+      "version": "README, metadata, and meta-skill reviewed 2026-10-20 · pinned 34f519533bc1 scanned 2026-10-23",
+      "primaryCategory": "automation",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Generates and distributes command-line harnesses that let agents operate desktop and professional software through structured commands.",
+      "bestFor": [
+        "Making GUI tools scriptable",
+        "JSON automation surfaces",
+        "Task-specific harnesses",
+        "Agent-accessible creative tools"
+      ],
+      "weaknesses": [
+        "Registry entries install separate third-party packages",
+        "Some harnesses expose powerful software and cloud APIs",
+        "Repository-level claims do not validate every harness"
+      ],
+      "tags": [
+        "cli",
+        "agents",
+        "registry",
+        "automation",
+        "skills",
+        "supply-chain"
+      ],
+      "projectFit": {
+        "automation": "A",
+        "developer-workflow": "B",
+        "skill-governance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "C",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Transitive package installation",
+        "Live registry drift",
+        "Harness-specific credentials and filesystem authority"
+      ],
+      "implementation": "Never install the hub wholesale for this project. Evaluate one named harness at a time, pin its source and dependencies, scan its complete skill, and test it in a disposable workspace.",
+      "reentryTriggers": [
+        "A named application lacks a safe CLI",
+        "Single-harness source, permissions, and rollback plan reviewed"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "vert",
+      "name": "VERT",
+      "batch": "2026-10-20-B",
+      "kind": "Local-first file converter",
+      "repoUrl": "https://github.com/VERT-sh/VERT",
+      "license": "AGPL-3.0",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "file-processing",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A WebAssembly file converter for images, audio, documents, and video, with an optional self-hostable video daemon.",
+      "bestFor": [
+        "Local browser conversion",
+        "Broad format support",
+        "No ordinary file-size limit",
+        "Self-hosted conversion UI"
+      ],
+      "weaknesses": [
+        "Some video operations may use server processing",
+        "Conversion fidelity is format-specific",
+        "AGPL deployment obligations need review"
+      ],
+      "tags": [
+        "conversion",
+        "wasm",
+        "ffmpeg",
+        "imagemagick",
+        "pandoc",
+        "local"
+      ],
+      "projectFit": {
+        "file-processing": "A",
+        "automation": "B",
+        "ocr-document": "C"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "D",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Server fallback can change the privacy boundary",
+        "Malformed or lossy output may go unnoticed",
+        "Copyleft deployment implications"
+      ],
+      "implementation": "Use only for non-critical conversion after confirming the operation is local. Compare hashes where lossless and visually inspect rendered output where fidelity matters.",
+      "reentryTriggers": [
+        "A supported conversion is needed",
+        "Local-only path and output validation are defined"
+      ]
+    },
+    {
+      "id": "syncthing",
+      "name": "Syncthing",
+      "batch": "2026-10-20-B",
+      "kind": "Peer-to-peer file synchronization",
+      "repoUrl": "https://github.com/syncthing/syncthing",
+      "license": "MPL-2.0",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "file-transfer-sync",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A mature continuous peer-to-peer folder synchronization system designed around data safety and authenticated devices.",
+      "bestFor": [
+        "Multi-computer research mirrors",
+        "Continuous local file sync",
+        "No central content store",
+        "Cross-platform replication"
+      ],
+      "weaknesses": [
+        "Deletes and conflicts can propagate",
+        "Not a backup by itself",
+        "Folder scope and device trust require careful configuration"
+      ],
+      "tags": [
+        "sync",
+        "p2p",
+        "files",
+        "replication",
+        "go",
+        "multi-device"
+      ],
+      "projectFit": {
+        "file-transfer-sync": "A",
+        "automation": "A",
+        "security-assurance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "D",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Accidental deletion or corruption can synchronize",
+        "Mis-scoped folders may expose private data",
+        "Discovery and relay settings change the network model"
+      ],
+      "implementation": "Use only if the ledger must remain synchronized across trusted computers. Sync a dedicated export folder, enable versioning, exclude private inputs and tool environments, and keep an independent backup.",
+      "reentryTriggers": [
+        "A real multi-PC synchronization need exists",
+        "Versioning, exclusions, and restore drill are approved"
+      ]
+    },
+    {
+      "id": "worktrunk",
+      "name": "Worktrunk",
+      "batch": "2026-10-20-B",
+      "kind": "Git worktree workflow CLI",
+      "repoUrl": "https://github.com/max-sixty/worktrunk",
+      "license": "MIT OR Apache-2.0",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "developer-workflow",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A Git worktree manager built for parallel agent workflows, with computed paths, status views, hooks, caches, and local merge operations.",
+      "bestFor": [
+        "One worktree per lane",
+        "Parallel agent isolation",
+        "Worktree status visibility",
+        "Repeatable setup hooks"
+      ],
+      "weaknesses": [
+        "Hooks and cleanup can mutate repositories",
+        "Adds another layer over Git",
+        "Windows executable naming differs"
+      ],
+      "tags": [
+        "git",
+        "worktrees",
+        "agents",
+        "rust",
+        "hooks",
+        "developer-workflow"
+      ],
+      "projectFit": {
+        "developer-workflow": "A",
+        "automation": "A",
+        "skill-governance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "D",
+        "automation": "A",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Merge and cleanup commands can change branches or remove worktrees",
+        "Hooks may install dependencies or start services"
+      ],
+      "implementation": "Pilot on a disposable repository with hooks disabled. Verify path mapping, dirty-tree handling, cleanup prompts, and the existing one-worktree-per-lane/integrator-only rules.",
+      "reentryTriggers": [
+        "Parallel worktree setup time is measured",
+        "Disposable Windows pilot and rollback steps approved"
+      ]
+    },
+    {
+      "id": "cloudflare-os",
+      "name": "Cloudflare OS",
+      "batch": "2026-10-20-B",
+      "kind": "Agent workspace and application platform",
+      "repoUrl": "https://github.com/cloudflare/cloudflare-os",
+      "license": "Apache-2.0",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "local-ai-agent",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "WATCH",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "An early-access AI productivity environment with per-workspace applications, code-running agents, and capability-based Gatekeepers.",
+      "bestFor": [
+        "Agent security architecture research",
+        "Sandboxed generated apps",
+        "Deferred approval patterns",
+        "Company-specific AI workspaces"
+      ],
+      "weaknesses": [
+        "Repository explicitly labels v2 early access with rough edges",
+        "Large platform and operational footprint",
+        "Heavy Cloudflare Workers architecture"
+      ],
+      "tags": [
+        "agents",
+        "workspace",
+        "cloudflare",
+        "sandbox",
+        "gatekeepers",
+        "early-access"
+      ],
+      "projectFit": {
+        "local-ai-agent": "B",
+        "security-assurance": "A",
+        "automation": "A",
+        "research-intelligence": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Arbitrary generated code and connectors",
+        "Early-access control gaps",
+        "Cloud or self-hosted operational complexity"
+      ],
+      "implementation": "Study the Gatekeeper and deferred-approval design; do not adopt the platform until it stabilizes and a platform-level need exists.",
+      "reentryTriggers": [
+        "Stable release and documented migration path",
+        "Existing workspace lacks a required capability-security model"
+      ]
+    },
+    {
+      "id": "stirling-pdf",
+      "name": "Stirling PDF",
+      "batch": "2026-10-20-B",
+      "kind": "Self-hosted PDF platform",
+      "repoUrl": "https://github.com/Stirling-Tools/Stirling-PDF",
+      "license": "MIT default with listed directory-specific licenses; open-core",
+      "version": "README, metadata, and license notice reviewed 2026-10-20",
+      "primaryCategory": "file-processing",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A desktop, browser, and self-hosted PDF platform with editing, conversion, OCR, redaction, signing, APIs, and workflows.",
+      "bestFor": [
+        "Local PDF utilities",
+        "Repeatable PDF workflows",
+        "Redaction and document preparation",
+        "Private self-hosted API"
+      ],
+      "weaknesses": [
+        "Broad attack surface for untrusted PDFs",
+        "Open-core terms require feature-level review",
+        "README quick start is not digest-pinned"
+      ],
+      "tags": [
+        "pdf",
+        "docker",
+        "ocr",
+        "redaction",
+        "conversion",
+        "self-hosted"
+      ],
+      "projectFit": {
+        "file-processing": "A",
+        "ocr-document": "B",
+        "automation": "A",
+        "security-assurance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "C",
+        "automation": "A",
+        "quality": "A"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Untrusted document parsing",
+        "Service exposure or upload retention",
+        "Feature-specific licensing and configuration"
+      ],
+      "implementation": "Pilot a pinned local build on synthetic PDFs with the network blocked. Verify output fidelity, metadata handling, redaction permanence, temporary-file cleanup, and API authentication before private use.",
+      "reentryTriggers": [
+        "A repeatable PDF operation is defined",
+        "Pinned build and synthetic security/fidelity test plan prepared"
+      ]
+    },
+    {
+      "id": "localsend",
+      "name": "LocalSend",
+      "batch": "2026-10-20-B",
+      "kind": "Local-network file transfer",
+      "repoUrl": "https://github.com/localsend/localsend",
+      "license": "Apache-2.0",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "file-transfer-sync",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A cross-platform local-network transfer tool using a REST protocol and HTTPS without a central server or internet requirement.",
+      "bestFor": [
+        "One-off nearby-device transfers",
+        "Cross-platform report handoff",
+        "No cloud account",
+        "CLI-assisted local sending"
+      ],
+      "weaknesses": [
+        "Not continuous synchronization or backup",
+        "Requires local-network reachability and firewall rules",
+        "Receiver identity must be verified"
+      ],
+      "tags": [
+        "file-transfer",
+        "lan",
+        "https",
+        "cross-platform",
+        "cli",
+        "offline"
+      ],
+      "projectFit": {
+        "file-transfer-sync": "A",
+        "automation": "B",
+        "security-assurance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "D",
+        "automation": "B",
+        "quality": "C"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Wrong nearby receiver selection",
+        "LAN discovery and firewall exposure",
+        "Transferred copies can drift"
+      ],
+      "implementation": "Use for deliberate one-off delivery of exported, non-secret bundles. Verify the destination device and checksum; do not treat it as the research ledger's source of truth.",
+      "reentryTriggers": [
+        "A nearby-device handoff is required",
+        "Destination verification and checksum procedure agreed"
+      ]
+    },
+    {
+      "id": "emil-skills",
+      "name": "Emil Kowalski Skills",
+      "batch": "2026-10-20-B",
+      "kind": "UI and motion skill collection",
+      "repoUrl": "https://github.com/emilkowalski/skills",
+      "license": "MIT",
+      "version": "README, metadata, and selected skill snapshot reviewed 2026-10-20 · pinned 2d228630ba14 scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A focused collection covering interface taste, animation construction and review, mobile behavior, UI stress testing, and component selection.",
+      "bestFor": [
+        "Animation review",
+        "UI stress testing",
+        "Motion vocabulary",
+        "Design-engineering judgment"
+      ],
+      "weaknesses": [
+        "Many skills overlap existing frontend gates",
+        "Static scan of the selected long skill was incomplete",
+        "Installing the full collection would expand instruction conflicts"
+      ],
+      "tags": [
+        "ui",
+        "animation",
+        "skills",
+        "design",
+        "mobile",
+        "stress-test"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "skill-governance": "B",
+        "developer-workflow": "C"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "C",
+        "quality": "A"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Conflicting design instructions",
+        "Incomplete static inspection of the selected snapshot"
+      ],
+      "implementation": "Do not install the collection. Keep using the already available emil-design-eng skill when needed and selectively review break-ui or motion skills only for a specific gap.",
+      "reentryTriggers": [
+        "A specific UI or motion gap is identified",
+        "Selected complete skill bundle passes review"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "plane",
+      "name": "Plane",
+      "batch": "2026-10-20-C",
+      "kind": "Project and issue management platform",
+      "repoUrl": "https://github.com/makeplane/plane",
+      "license": "AGPL-3.0",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "project-management",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A broad self-hostable project system for issues, cycles, roadmaps, documents, and team coordination.",
+      "bestFor": [
+        "Shared issue tracking",
+        "Roadmaps and cycles",
+        "Self-hosted collaboration"
+      ],
+      "weaknesses": [
+        "Substantial platform and database operations",
+        "AGPL deployment implications",
+        "Overkill for a static research ledger"
+      ],
+      "tags": [
+        "projects",
+        "issues",
+        "roadmaps",
+        "docker",
+        "collaboration"
+      ],
+      "projectFit": {
+        "project-management": "A",
+        "automation": "B",
+        "developer-workflow": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "C",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Operational and upgrade burden",
+        "User, email, and project data become a new protected store"
+      ],
+      "implementation": "Use only if this research becomes a multi-user operating system; keep the current static dashboard for sharing and review.",
+      "reentryTriggers": [
+        "Multiple contributors need assignments and permissions",
+        "A database-backed project system has an owner"
+      ]
+    },
+    {
+      "id": "codeburn",
+      "name": "CodeBurn",
+      "batch": "2026-10-20-C",
+      "kind": "Local AI coding cost analyzer",
+      "repoUrl": "https://github.com/getagentseal/codeburn",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "ai-observability",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Reads local coding-agent sessions to analyze tokens, cost, tools, projects, and configuration overhead.",
+      "bestFor": [
+        "Agent cost attribution",
+        "Token-spend investigation",
+        "Read-only local session analysis"
+      ],
+      "weaknesses": [
+        "Session files may contain prompts and paths",
+        "Provider pricing can drift",
+        "Guard hooks can affect live sessions"
+      ],
+      "tags": [
+        "cost",
+        "tokens",
+        "agents",
+        "observability",
+        "mcp"
+      ],
+      "projectFit": {
+        "ai-observability": "A",
+        "developer-workflow": "B",
+        "automation": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "A",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Sensitive prompt and path exposure",
+        "Cost calculations may be stale or incomplete"
+      ],
+      "implementation": "Pilot read-only on a redacted copy of non-sensitive sessions; block network access and compare totals with provider records before enabling hooks or MCP.",
+      "reentryTriggers": [
+        "Agent cost is material enough to optimize",
+        "Redacted session fixture and reconciliation baseline exist"
+      ]
+    },
+    {
+      "id": "vue-element-admin",
+      "name": "Vue Element Admin",
+      "batch": "2026-10-20-C",
+      "kind": "Legacy Vue admin template",
+      "repoUrl": "https://github.com/PanJiaChen/vue-element-admin",
+      "license": "MIT",
+      "version": "Vue 2 / Element UI / webpack 4; last upstream push observed 2024-10-24",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REJECT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A historically influential Vue 2 administration template whose stack is now legacy for new work.",
+      "bestFor": [
+        "Legacy Vue 2 maintenance",
+        "Admin information-architecture reference"
+      ],
+      "weaknesses": [
+        "Vue 2 and webpack 4 stack",
+        "Migration and dependency burden",
+        "Poor fit for the current static dashboard"
+      ],
+      "tags": [
+        "vue",
+        "admin",
+        "legacy",
+        "template"
+      ],
+      "projectFit": {
+        "ui-visual": "D",
+        "developer-workflow": "D"
+      },
+      "impact": {
+        "workflow": "D",
+        "intelligence": "D",
+        "automation": "D",
+        "quality": "C"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Legacy dependency maintenance",
+        "Copying patterns may import obsolete assumptions"
+      ],
+      "implementation": "Do not adopt for new work; consult screenshots or layout patterns only when maintaining a matching legacy stack.",
+      "reentryTriggers": [
+        "An existing Vue 2 application requires maintenance"
+      ]
+    },
+    {
+      "id": "open-design",
+      "name": "OpenDesign",
+      "batch": "2026-10-23-E",
+      "kind": "AI design workspace",
+      "repoUrl": "https://github.com/nexu-io/open-design",
+      "license": "Apache-2.0",
+      "version": "Source, license, and 169 functional skills reviewed at e03d5c23f308 on 2026-10-23 · pinned e03d5c23f308 scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A local-first collaborative design-agent workspace with a very broad bundled skill, template, provider, and media surface.",
+      "bestFor": [
+        "Design-agent architecture research",
+        "Selective named skill evaluation",
+        "Collaborative multi-format authoring when a full platform is justified"
+      ],
+      "weaknesses": [
+        "Large overlapping platform and skill collection",
+        "BYOK, proxy, provider, and credential surface",
+        "Repository-wide adoption is not meaningful; individual skills vary sharply"
+      ],
+      "tags": [
+        "design",
+        "agents",
+        "workspace",
+        "prototypes",
+        "byok"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "generative-media": "A",
+        "local-ai-agent": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "A"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Credential and provider exposure",
+        "Generated assets and workspace data need governance",
+        "Seven scoped functional skills were DO_NOT_INSTALL and 48 retained incomplete coverage"
+      ],
+      "implementation": "Do not install the platform or the full skill collection. Keep it as a catalog and architecture reference; select one named skill only when a gap exists, then use its individual pinned report, adjudicate references and findings, and run a reversible synthetic trial.",
+      "reentryTriggers": [
+        "A collaborative design platform becomes a funded project",
+        "One named functional skill fills a measured gap and its controls are approved"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "spec-kit",
+      "name": "GitHub Spec Kit",
+      "batch": "2026-10-23-D",
+      "kind": "Specification-driven development toolkit",
+      "repoUrl": "https://github.com/github/spec-kit",
+      "license": "MIT",
+      "version": "Local pilot v1.0.6 · upstream v1.2.3 reviewed 2026-10-23",
+      "primaryCategory": "spec-development",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A structured method for turning ideas, bugs, fixes, and assessments into explicit specifications, plans, tasks, and verification.",
+      "bestFor": [
+        "Spec-first implementation",
+        "Acceptance criteria",
+        "Change and bug workflows"
+      ],
+      "weaknesses": [
+        "Can duplicate existing gates",
+        "Generated process artifacts add overhead",
+        "Extensions, hooks, catalogs, and upgrades require separate review"
+      ],
+      "tags": [
+        "specs",
+        "planning",
+        "development",
+        "workflow",
+        "templates",
+        "skills"
+      ],
+      "projectFit": {
+        "spec-development": "A",
+        "developer-workflow": "A",
+        "skill-governance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "SkillSpector flagged three credential-path references and two autonomous-decision phrases in the v1.0.6 skill scope for manual review",
+        "Upstream v1.2.3 adds workflows, presets, catalogs, events, and extension behavior that the current pilot did not evaluate",
+        "Global installation or an unreviewed upgrade would expand persistence before repeatability evidence exists"
+      ],
+      "implementation": "Pilot the pinned GitHub Spec Kit workflow on a disposable feature. Review generated-file changes, rerun regressions, and keep a rollback copy before adopting it.",
+      "reentryTriggers": [
+        "A complex build lacks explicit acceptance criteria",
+        "A second project can measure repeatability and maintenance cost",
+        "A v1.2.3 fix or workflow feature provides a named benefit worth a controlled migration"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level. Public source review supports a bounded pilot only, not implementation."
+    },
+    {
+      "id": "openpencil",
+      "name": "OpenPencil",
+      "batch": "2026-10-20-C",
+      "kind": "AI-native vector design tool",
+      "repoUrl": "https://github.com/ZSeven-W/openpencil",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A vector design environment with agent and MCP access to readable and writable design files.",
+      "bestFor": [
+        "Agent-editable vector files",
+        "Design-system experiments",
+        "Visual artifact automation"
+      ],
+      "weaknesses": [
+        "Write-capable MCP surface",
+        "Provider credentials and scripts",
+        "Young format and workflow"
+      ],
+      "tags": [
+        "vector",
+        "design",
+        "mcp",
+        "agents",
+        "docker"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "generative-media": "B",
+        "automation": "A"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "A"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Agents can overwrite design artifacts",
+        "Remote installers and provider credentials expand trust"
+      ],
+      "implementation": "Pilot only on a disposable synthetic design with version control, no private assets, restricted MCP paths, and manual export comparison.",
+      "reentryTriggers": [
+        "A vector asset requires repeatable agent editing",
+        "Disposable pilot and rollback are prepared"
+      ]
+    },
+    {
+      "id": "excelize",
+      "name": "Excelize",
+      "batch": "2026-10-20-C",
+      "kind": "Go spreadsheet library",
+      "repoUrl": "https://github.com/qax-os/excelize",
+      "license": "BSD-3-Clause",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "spreadsheet-engineering",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A pure-Go library for reading and writing XLSX-family workbooks, including streaming workflows.",
+      "bestFor": [
+        "Go-native workbook services",
+        "Streaming large spreadsheets",
+        "Server-side XLSX generation"
+      ],
+      "weaknesses": [
+        "No current Go workbook pipeline",
+        "Excel rendering and recalculation still need validation",
+        "Version requirements may constrain adoption"
+      ],
+      "tags": [
+        "xlsx",
+        "go",
+        "spreadsheets",
+        "streaming"
+      ],
+      "projectFit": {
+        "spreadsheet-engineering": "A",
+        "automation": "A",
+        "financial-audit": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "D",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Formula and rendering fidelity may differ from Excel",
+        "Large workbooks can create memory or corruption risks"
+      ],
+      "implementation": "Use only in a Go service or high-volume workbook pipeline after round-trip, formula, style, and Excel-open validation.",
+      "reentryTriggers": [
+        "A Go-based spreadsheet service is selected",
+        "Representative workbook regression corpus exists"
+      ]
+    },
+    {
+      "id": "google-workspace-cli",
+      "name": "Google Workspace CLI",
+      "batch": "2026-10-20-C",
+      "kind": "Workspace API command-line client",
+      "repoUrl": "https://github.com/googleworkspace/cli",
+      "license": "Apache-2.0",
+      "version": "Active development / pre-1.0; reviewed 2026-10-20",
+      "primaryCategory": "workspace-automation",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "HOLD",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A dynamic CLI for Google Workspace services with broad API coverage and agent-oriented skills.",
+      "bestFor": [
+        "Drive and Sheets automation",
+        "Workspace administration",
+        "Structured API access"
+      ],
+      "weaknesses": [
+        "Pre-1.0 breaking changes",
+        "Requires GCP OAuth setup",
+        "Broad remote-write authority"
+      ],
+      "tags": [
+        "google",
+        "workspace",
+        "cli",
+        "oauth",
+        "api"
+      ],
+      "projectFit": {
+        "workspace-automation": "A",
+        "automation": "A",
+        "spreadsheet-engineering": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "C",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "OAuth scopes and credential storage",
+        "Accidental remote writes or deletes",
+        "Unofficial active-development support posture"
+      ],
+      "implementation": "Hold until a specific Google Workspace workflow exists; then use least-privilege OAuth, a test account, read-only commands first, and explicit write approval.",
+      "reentryTriggers": [
+        "A Workspace task cannot be handled by existing connectors",
+        "Least-privilege test account and rollback exist"
+      ]
+    },
+    {
+      "id": "nanoclaw",
+      "name": "NanoClaw",
+      "batch": "2026-10-20-C",
+      "kind": "Container-isolated messaging agent",
+      "repoUrl": "https://github.com/nanocoai/nanoclaw",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "local-ai-agent",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "HOLD",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A messaging agent runtime using containers, per-agent workspaces, memory, schedules, and channel adapters.",
+      "bestFor": [
+        "Container isolation patterns",
+        "Messaging-agent architecture",
+        "Explicit filesystem mounts"
+      ],
+      "weaknesses": [
+        "High-agency runtime",
+        "Credential gateway and channels",
+        "Heavy setup and operations"
+      ],
+      "tags": [
+        "agents",
+        "containers",
+        "messaging",
+        "credentials",
+        "scheduling"
+      ],
+      "projectFit": {
+        "local-ai-agent": "A",
+        "automation": "A",
+        "security-assurance": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Credential and messaging authority",
+        "Container mounts can expose host data",
+        "Schedules create unattended actions"
+      ],
+      "implementation": "Study isolation patterns only; do not install into this research project or connect real channels.",
+      "reentryTriggers": [
+        "A messaging-agent product is explicitly commissioned",
+        "Threat model and synthetic channel test environment exist"
+      ]
+    },
+    {
+      "id": "design-taste-frontend",
+      "name": "Taste Skill",
+      "batch": "2026-10-20-C",
+      "kind": "Frontend design skill",
+      "repoUrl": "https://github.com/Leonxlnx/taste-skill",
+      "license": "MIT",
+      "version": "Pinned source revision 6010f91a9935 · public source review",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A strong art-direction and implementation skill that requires browser work and may retrieve external imagery.",
+      "bestFor": [
+        "Distinct art direction",
+        "Design-to-code execution",
+        "Browser-based visual QA"
+      ],
+      "weaknesses": [
+        "Large token and time cost",
+        "External image retrieval",
+        "Static scan was incomplete"
+      ],
+      "tags": [
+        "design",
+        "frontend",
+        "skill",
+        "browser",
+        "images"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-workflow": "B",
+        "skill-governance": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Network retrieval and browser authority",
+        "Incomplete static coverage is not a safety clearance"
+      ],
+      "implementation": "Keep as an on-demand project-local design reference; require browser QA and do not authorize external imagery or unrestricted browsing by default.",
+      "reentryTriggers": [
+        "A visually important frontend needs art direction",
+        "Complete dependency and reference scan becomes available"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "hermes-agent",
+      "name": "Hermes Agent",
+      "batch": "2026-10-20-C",
+      "kind": "Persistent self-improving agent platform",
+      "repoUrl": "https://github.com/NousResearch/hermes-agent",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "local-ai-agent",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "HOLD",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A persistent agent system with memory, user modeling, skill creation, schedules, subagents, and multiple execution backends.",
+      "bestFor": [
+        "Agent architecture research",
+        "Persistent memory patterns",
+        "Multi-backend orchestration"
+      ],
+      "weaknesses": [
+        "Very high authority and privacy surface",
+        "Self-modifying skills and persistent memory",
+        "Large provider and channel footprint"
+      ],
+      "tags": [
+        "agents",
+        "memory",
+        "skills",
+        "scheduling",
+        "subagents"
+      ],
+      "projectFit": {
+        "local-ai-agent": "A",
+        "automation": "A",
+        "research-intelligence": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "A",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Persistent personal data and credentials",
+        "Self-improvement can change behavior over time",
+        "Unattended tools and schedules"
+      ],
+      "implementation": "Hold outside the project; evaluate only in a disposable account and synthetic environment after a dedicated agent-platform threat model.",
+      "reentryTriggers": [
+        "A persistent agent is a formal project requirement",
+        "Memory, credential, tool, and schedule controls are approved"
+      ]
+    },
+    {
+      "id": "llm-wiki",
+      "name": "LLM Wiki",
+      "batch": "2026-10-20-C",
+      "kind": "Local knowledge base and MCP",
+      "repoUrl": "https://github.com/nashsu/llm_wiki",
+      "license": "GPL-3.0",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "knowledge-management",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A persistent document knowledge base with traceability, caching, multi-format ingestion, API, and MCP access.",
+      "bestFor": [
+        "Source-linked knowledge bases",
+        "Document ingestion",
+        "Persistent research context"
+      ],
+      "weaknesses": [
+        "Private documents may reach configured models",
+        "Shell and web-search options expand authority",
+        "GPL integration implications"
+      ],
+      "tags": [
+        "knowledge",
+        "documents",
+        "mcp",
+        "graph",
+        "research"
+      ],
+      "projectFit": {
+        "knowledge-management": "A",
+        "research-intelligence": "A",
+        "repo-comprehension": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "A",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Document and metadata leakage",
+        "Generated links may be inferred rather than sourced",
+        "Optional shell can execute commands"
+      ],
+      "implementation": "Pilot with public documents only, local storage, shell disabled, network captured, and a citation-recall benchmark; keep private financial material out.",
+      "reentryTriggers": [
+        "Public-document pilot proves retrieval value",
+        "Approved model/data path and GPL decision exist"
+      ]
+    },
+    {
+      "id": "llm-council",
+      "name": "LLM Council",
+      "batch": "2026-10-20-C",
+      "kind": "Multi-model answer and ranking app",
+      "repoUrl": "https://github.com/karpathy/llm-council",
+      "license": "No detected license",
+      "version": "README and metadata reviewed 2026-10-20; author states unsupported inspiration project",
+      "primaryCategory": "research-intelligence",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A local UI that asks multiple OpenRouter models, has them rank anonymized answers, and uses a chairman model to synthesize a result.",
+      "bestFor": [
+        "Comparing model perspectives",
+        "Consensus experiment design",
+        "Visible dissent"
+      ],
+      "weaknesses": [
+        "No detected license",
+        "Explicitly unsupported vibe-coded project",
+        "High token cost and shared-provider data path"
+      ],
+      "tags": [
+        "models",
+        "council",
+        "openrouter",
+        "evaluation",
+        "consensus"
+      ],
+      "projectFit": {
+        "research-intelligence": "B",
+        "model-routing": "B",
+        "ai-observability": "C"
+      },
+      "impact": {
+        "workflow": "C",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Queries and responses sent to multiple models",
+        "Consensus can amplify shared errors",
+        "Unbounded API spend"
+      ],
+      "implementation": "Use only as an evaluation-pattern reference; do not deploy or copy code without a license and an explicit cost/privacy experiment.",
+      "reentryTriggers": [
+        "License is clarified",
+        "A bounded multi-model benchmark has budget and ground truth"
+      ]
+    },
+    {
+      "id": "llm-c",
+      "name": "llm.c",
+      "batch": "2026-10-20-C",
+      "kind": "C/CUDA language-model training reference",
+      "repoUrl": "https://github.com/karpathy/llm.c",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "ml-education",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A compact educational implementation of GPT training in C and CUDA.",
+      "bestFor": [
+        "Learning transformer training internals",
+        "CUDA optimization study",
+        "Minimal systems reference"
+      ],
+      "weaknesses": [
+        "Heavy GPU and dataset requirements",
+        "Not an application workflow tool",
+        "Research code requires expertise"
+      ],
+      "tags": [
+        "cuda",
+        "c",
+        "gpt",
+        "training",
+        "education"
+      ],
+      "projectFit": {
+        "ml-education": "A",
+        "developer-reference": "B"
+      },
+      "impact": {
+        "workflow": "D",
+        "intelligence": "B",
+        "automation": "D",
+        "quality": "C"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Large downloads and compute cost",
+        "Research assumptions may not suit production"
+      ],
+      "implementation": "Keep as an educational reference outside the dashboard workflow; run only in a dedicated ML experiment with cost controls.",
+      "reentryTriggers": [
+        "Low-level model training becomes a learning objective"
+      ]
+    },
+    {
+      "id": "nanogpt",
+      "name": "nanoGPT",
+      "batch": "2026-10-20-C",
+      "kind": "Legacy GPT training reference",
+      "repoUrl": "https://github.com/karpathy/nanoGPT",
+      "license": "MIT",
+      "version": "README reviewed 2026-10-20; upstream marks project deprecated in favor of nanochat",
+      "primaryCategory": "ml-education",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REJECT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A small GPT training repository now explicitly deprecated by its author.",
+      "bestFor": [
+        "Historical educational reference"
+      ],
+      "weaknesses": [
+        "Deprecated upstream",
+        "Superseded project",
+        "No value for the current workflow"
+      ],
+      "tags": [
+        "gpt",
+        "training",
+        "deprecated",
+        "education"
+      ],
+      "projectFit": {
+        "ml-education": "C",
+        "developer-reference": "C"
+      },
+      "impact": {
+        "workflow": "D",
+        "intelligence": "C",
+        "automation": "D",
+        "quality": "D"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Learning from stale patterns",
+        "Opportunity cost versus maintained material"
+      ],
+      "implementation": "Do not adopt; consult only for historical context and prefer maintained successors.",
+      "reentryTriggers": [
+        "A historical reproduction specifically requires nanoGPT"
+      ]
+    },
+    {
+      "id": "dev-browser",
+      "name": "Dev Browser",
+      "batch": "2026-10-20-C",
+      "kind": "Persistent Puppeteer browser automation",
+      "repoUrl": "https://github.com/SawyerHood/dev-browser",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "automation",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REJECT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A persistent browser automation server that can attach to Chrome profiles and preserve login state.",
+      "bestFor": [
+        "Persistent Puppeteer research",
+        "Existing Chrome attachment"
+      ],
+      "weaknesses": [
+        "Windows is unsupported",
+        "VM execution is not a security sandbox",
+        "Overlaps current browser tooling"
+      ],
+      "tags": [
+        "browser",
+        "puppeteer",
+        "automation",
+        "profiles"
+      ],
+      "projectFit": {
+        "automation": "D",
+        "developer-workflow": "D"
+      },
+      "impact": {
+        "workflow": "D",
+        "intelligence": "C",
+        "automation": "B",
+        "quality": "C"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Persistent cookies and authenticated sessions",
+        "Arbitrary browser scripts",
+        "Unsupported current platform"
+      ],
+      "implementation": "Do not install on this Windows project; use the existing browser automation and isolated profiles.",
+      "reentryTriggers": [
+        "A supported non-Windows environment lacks browser automation"
+      ]
+    },
+    {
+      "id": "devdocs",
+      "name": "DevDocs",
+      "batch": "2026-10-20-C",
+      "kind": "Offline developer documentation browser",
+      "repoUrl": "https://github.com/freeCodeCamp/devdocs",
+      "license": "MPL-2.0",
+      "version": "README, metadata, and license reviewed 2026-10-20; project is seeking maintainers",
+      "primaryCategory": "developer-reference",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A fast searchable interface that combines many API documentation sets and supports offline use.",
+      "bestFor": [
+        "Offline API reference",
+        "Fast cross-library search",
+        "Low-distraction documentation"
+      ],
+      "weaknesses": [
+        "Seeking maintainers",
+        "Bundled docs can lag upstream",
+        "Self-hosting and scraping add maintenance"
+      ],
+      "tags": [
+        "documentation",
+        "offline",
+        "search",
+        "developer"
+      ],
+      "projectFit": {
+        "developer-reference": "A",
+        "knowledge-management": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "C",
+        "quality": "B"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Stale documentation can mislead implementation",
+        "Docker latest tags are not reproducible"
+      ],
+      "implementation": "Prefer the hosted or offline client for non-sensitive reference; verify critical details against primary upstream docs.",
+      "reentryTriggers": [
+        "Offline documentation becomes a recurring need",
+        "Required docsets and update cadence are verified"
+      ]
+    },
+    {
+      "id": "awesome-agent-skills",
+      "name": "Awesome Agent Skills",
+      "batch": "2026-10-20-C",
+      "kind": "Curated agent-skill directory",
+      "repoUrl": "https://github.com/VoltAgent/awesome-agent-skills",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20 · pinned f737f2891ebc scanned 2026-10-23",
+      "primaryCategory": "skill-governance",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A large discovery list for agent skills, useful as an index but not as a security or quality endorsement.",
+      "bestFor": [
+        "Skill discovery",
+        "Ecosystem scanning",
+        "Category ideation"
+      ],
+      "weaknesses": [
+        "Links inherit independent licenses and risks",
+        "Volume makes wholesale review impossible",
+        "Curation is not validation"
+      ],
+      "tags": [
+        "skills",
+        "directory",
+        "awesome-list",
+        "agents"
+      ],
+      "projectFit": {
+        "skill-governance": "B",
+        "research-intelligence": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "D",
+        "quality": "C"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Supply-chain and instruction risks live in linked repositories",
+        "Popularity may be mistaken for quality"
+      ],
+      "implementation": "Use only to discover a named candidate; every selected skill must enter the normal license, source, SkillSpector, and synthetic-test gate.",
+      "reentryTriggers": [
+        "A precise missing capability is defined"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "llm101n",
+      "name": "LLM101n",
+      "batch": "2026-10-20-C",
+      "kind": "Archived course repository",
+      "repoUrl": "https://github.com/karpathy/LLM101n",
+      "license": "No detected license",
+      "version": "Archived; README states the course does not yet exist",
+      "primaryCategory": "ml-education",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REJECT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "An archived placeholder for a course that the repository says was never completed.",
+      "bestFor": [
+        "Historical announcement context"
+      ],
+      "weaknesses": [
+        "Archived",
+        "Course does not exist",
+        "No detected license"
+      ],
+      "tags": [
+        "education",
+        "archived",
+        "placeholder"
+      ],
+      "projectFit": {
+        "ml-education": "D"
+      },
+      "impact": {
+        "workflow": "D",
+        "intelligence": "D",
+        "automation": "D",
+        "quality": "D"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Wasted research time",
+        "No usable deliverable"
+      ],
+      "implementation": "Reject for tooling and learning plans; choose maintained course material instead.",
+      "reentryTriggers": [
+        "Repository is unarchived with substantive licensed content"
+      ]
+    },
+    {
+      "id": "career-ops",
+      "name": "Career Ops",
+      "batch": "2026-10-20-C",
+      "kind": "Local-first job-search agent",
+      "repoUrl": "https://github.com/career-ops-hq/career-ops",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "career-operations",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A local-first workflow for job triage, CV and cover-letter work, interviews, and application tracking with human submission control.",
+      "bestFor": [
+        "Structured job evaluation",
+        "Drafting application materials",
+        "Human-controlled application tracking"
+      ],
+      "weaknesses": [
+        "CV and job data are private",
+        "Provider output can be biased or inaccurate",
+        "Browser and email assists expand authority"
+      ],
+      "tags": [
+        "career",
+        "cv",
+        "jobs",
+        "agents",
+        "local-first"
+      ],
+      "projectFit": {
+        "career-operations": "A",
+        "writing-quality": "B",
+        "automation": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Sensitive identity and employment data",
+        "Automated scoring can encode bias",
+        "Application actions require human verification"
+      ],
+      "implementation": "Pilot only in a separate private workspace with a synthetic profile first; keep submission manual and verify every factual claim.",
+      "reentryTriggers": [
+        "Career workflow is a separate approved project",
+        "Synthetic end-to-end test and privacy map pass"
+      ]
+    },
+    {
+      "id": "impeccable",
+      "name": "Impeccable",
+      "batch": "2026-10-20-C",
+      "kind": "Frontend design and critique skill",
+      "repoUrl": "https://github.com/pbakaus/impeccable",
+      "license": "Apache-2.0",
+      "version": "Environment-provided bundle; trialed 2026-10-20 · pinned 5f9d5aafaf51 scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A comprehensive interface critique and improvement skill with commands for hierarchy, accessibility, performance, motion, and polish.",
+      "bestFor": [
+        "Frontend critique",
+        "Design-system hardening",
+        "Accessibility and edge-case review"
+      ],
+      "weaknesses": [
+        "Broad instruction and script surface",
+        "Installation hooks and optional telemetry need controls",
+        "Static scan was critical and incomplete"
+      ],
+      "tags": [
+        "design",
+        "frontend",
+        "skill",
+        "accessibility",
+        "polish"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-workflow": "B",
+        "skill-governance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Scanner reported agent-execution, network, persistence, and reference findings",
+        "Incomplete static inspection is not a safety clearance",
+        "Design changes still require visual regression checks"
+      ],
+      "implementation": "Use only through the restricted environment for a named frontend task with filesystem, browser, design-system, and visual-QA gates. Do not globally install from this pilot.",
+      "reentryTriggers": [
+        "A frontend change needs structured critique",
+        "A manual issue review and complete pinned-bundle scan are available"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "ui-ux-pro-max",
+      "name": "UI UX Pro Max Skill",
+      "batch": "2026-10-23-E",
+      "kind": "UI/UX design intelligence skill",
+      "repoUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "license": "MIT",
+      "version": "Already available locally; official sources reviewed 2026-10-23 · pinned d14efff8ed1f scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A searchable UI/UX knowledge skill covering styles, palettes, type, accessibility, charts, interaction, and stack-specific guidance.",
+      "bestFor": [
+        "Design-system decisions",
+        "Palette and typography selection",
+        "UX and chart guidance"
+      ],
+      "weaknesses": [
+        "Large reference and script surface",
+        "Can conflict with project-specific design rules",
+        "Static scan was critical and incomplete"
+      ],
+      "tags": [
+        "ui",
+        "ux",
+        "design-system",
+        "charts",
+        "skill"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-reference": "A",
+        "skill-governance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "A",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Scanner reported process, shell, network, persistence, and reference findings",
+        "Incomplete static inspection is not a safety clearance",
+        "Generic advice can override project context"
+      ],
+      "implementation": "Do not install or copy it into this project. If the environment-provided skill is used, restrict it to a named UI task within platform, filesystem, design-system, and browser-QA controls.",
+      "reentryTriggers": [
+        "A UI decision needs structured reference data",
+        "Manual issue review and a complete pinned-bundle scan are available"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "motion",
+      "name": "Motion",
+      "batch": "2026-10-20-C",
+      "kind": "Web animation library",
+      "repoUrl": "https://github.com/motiondivision/motion",
+      "license": "MIT",
+      "version": "README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A production-focused animation library for JavaScript, React, and Vue interfaces.",
+      "bestFor": [
+        "Complex interface animation",
+        "Gestures and layout transitions",
+        "Framework animation primitives"
+      ],
+      "weaknesses": [
+        "Unnecessary dependency for subtle static UI",
+        "Motion can harm accessibility and performance",
+        "Current dashboard needs little animation"
+      ],
+      "tags": [
+        "animation",
+        "javascript",
+        "react",
+        "vue",
+        "motion"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-workflow": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "D",
+        "automation": "C",
+        "quality": "A"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Reduced-motion and performance regressions",
+        "Animation can obscure information hierarchy"
+      ],
+      "implementation": "Use only for a motion-heavy product requirement; default to CSS and respect prefers-reduced-motion.",
+      "reentryTriggers": [
+        "A prototype requires gestures or coordinated layout animation",
+        "Performance and reduced-motion acceptance tests exist"
+      ]
+    },
+    {
+      "id": "karpathy-skills",
+      "name": "Andrej Karpathy Skills",
+      "batch": "2026-10-20-C",
+      "kind": "Coding-behavior guideline",
+      "repoUrl": "https://github.com/multica-ai/andrej-karpathy-skills",
+      "license": "No detected license",
+      "version": "CLAUDE.md and metadata reviewed 2026-10-20 · pinned 2c606141936f scanned 2026-10-23",
+      "primaryCategory": "skill-governance",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Concise guidance to think before coding, prefer simplicity, make surgical changes, and verify explicit goals.",
+      "bestFor": [
+        "Simplicity checks",
+        "Scope discipline",
+        "Goal-driven verification"
+      ],
+      "weaknesses": [
+        "No detected license",
+        "Substantially overlaps current 9+ gate",
+        "Not a complete operational skill"
+      ],
+      "tags": [
+        "coding",
+        "guidelines",
+        "simplicity",
+        "verification"
+      ],
+      "projectFit": {
+        "skill-governance": "B",
+        "developer-workflow": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "D",
+        "quality": "B"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Unlicensed copying",
+        "Duplicated instructions may conflict"
+      ],
+      "implementation": "Reference the concepts only; do not copy or install until licensing is explicit. Existing operating gates already cover the useful behaviors.",
+      "reentryTriggers": [
+        "License is clarified",
+        "A current gate demonstrably lacks one of the controls"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "graphify",
+      "name": "Graphify",
+      "batch": "2026-10-20-C",
+      "kind": "Local repository knowledge graph",
+      "repoUrl": "https://github.com/Graphify-Labs/graphify",
+      "license": "Apache-2.0",
+      "version": "v8 README, metadata, and license reviewed 2026-10-20",
+      "primaryCategory": "repo-comprehension",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Builds a local AST-derived repository graph with explained extracted versus inferred edges; optional semantic media paths use configured models.",
+      "bestFor": [
+        "Large-codebase maps",
+        "Traceable code relationships",
+        "Local code-only analysis"
+      ],
+      "weaknesses": [
+        "Vendor benchmarks need independent reproduction",
+        "Docs and media may invoke models",
+        "Generated graph can become stale"
+      ],
+      "tags": [
+        "repository",
+        "graph",
+        "ast",
+        "tree-sitter",
+        "agents"
+      ],
+      "projectFit": {
+        "repo-comprehension": "A",
+        "research-intelligence": "A",
+        "developer-workflow": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "A",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Inferred edges may be mistaken for facts",
+        "Optional semantic pass changes the data boundary",
+        "Cloud claims lack local validation"
+      ],
+      "implementation": "Pilot on a public code-only repository with semantic passes and cloud disabled; compare key-fact recall, build time, output stability, and token use against rg/manual reading.",
+      "reentryTriggers": [
+        "A large unfamiliar repo creates measurable navigation cost",
+        "Public code-only benchmark and expected questions are prepared"
+      ]
+    },
+    {
+      "id": "pinchtab",
+      "name": "PinchTab",
+      "batch": "2026-10-23-D",
+      "kind": "Agent browser control plane",
+      "repoUrl": "https://github.com/pinchtab/pinchtab",
+      "license": "MIT",
+      "version": "README, security guide, and license reviewed 2026-10-23",
+      "primaryCategory": "automation",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A standalone local-first HTTP control plane for agent-driven Chrome automation, multi-instance orchestration, structured extraction, and browser-level audits.",
+      "bestFor": [
+        "Browser QA and visual comparison",
+        "Multi-profile agent navigation",
+        "Token-efficient structured browser extraction"
+      ],
+      "weaknesses": [
+        "Privileged browser-control surface",
+        "Overlaps the current browser harness",
+        "Daemon, profiles, and remote layouts add operational state"
+      ],
+      "tags": [
+        "browser",
+        "automation",
+        "chrome",
+        "agents",
+        "mcp",
+        "audit"
+      ],
+      "projectFit": {
+        "automation": "A",
+        "developer-workflow": "A",
+        "security-assurance": "B",
+        "local-ai-agent": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "A"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Dashboard, API, MCP, and remote clients reach the same privileged control plane",
+        "Authenticated profiles, cookies, downloads, uploads, clipboard, and script evaluation can expose or alter sensitive state when enabled",
+        "Stealth and public-site automation can create policy, legal, or anti-abuse concerns"
+      ],
+      "implementation": "Pilot only if current Playwright/browser controls cannot meet a measured need. Bind to loopback, preserve the generated token, keep sensitive endpoint families and attach disabled, use a disposable Chrome profile and synthetic local site, block public browsing initially, and compare audit coverage, reliability, setup time, and token use against the existing harness.",
+      "reentryTriggers": [
+        "A repeated browser workflow exceeds the current harness",
+        "A synthetic site, isolated profile, threat model, and rollback plan are ready"
+      ]
+    },
+    {
+      "id": "antra",
+      "name": "Antra",
+      "batch": "2026-10-23-D",
+      "kind": "Desktop music library builder",
+      "repoUrl": "https://github.com/anandprtp/Antra",
+      "license": "Elastic License 2.0",
+      "version": "README, feature guide, and license reviewed 2026-10-23",
+      "primaryCategory": "media-library",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Builds a tagged local music library from supported service links, selecting formats and organizing output for personal media servers.",
+      "bestFor": [
+        "Authorized personal music-library organization",
+        "Automatic metadata and artwork tagging",
+        "Navidrome, Jellyfin, or Plex folder preparation"
+      ],
+      "weaknesses": [
+        "Rights and service terms vary by source",
+        "Remote mirrors and P2P expand the data path",
+        "Elastic License restrictions and supporter-key behavior constrain reuse"
+      ],
+      "tags": [
+        "music",
+        "library",
+        "metadata",
+        "downloads",
+        "media-server",
+        "desktop"
+      ],
+      "projectFit": {
+        "media-library": "A",
+        "file-processing": "B",
+        "automation": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Downloading or converting content may violate copyright, account terms, or regional law without authorization",
+        "Remote mirror, streaming, lyrics, artwork, and P2P sources create provenance and network risk",
+        "Metadata matching or transcoding can silently select the wrong recording or degrade quality"
+      ],
+      "implementation": "Use only for media the operator is authorized to download and manage. Start with a disposable library, no privileged work account, one known public-domain or owned test item, captured network destinations, checksum and tag inspection, and manual source/format verification. Do not offer it as a hosted service or project dependency.",
+      "reentryTriggers": [
+        "A lawful personal-media workflow is explicitly requested",
+        "Authorized test content and output-quality checks are prepared"
+      ]
+    },
+    {
+      "id": "pear-desktop",
+      "name": "Pear Desktop",
+      "batch": "2026-10-23-D",
+      "kind": "Unofficial YouTube Music desktop client",
+      "repoUrl": "https://github.com/pear-devs/pear-desktop",
+      "license": "MIT",
+      "version": "3.12.0 package metadata, README, and license reviewed 2026-10-23",
+      "primaryCategory": "media-library",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A cross-platform Electron desktop experience for YouTube Music with themes, plugins, media integration, and offline installer options.",
+      "bestFor": [
+        "Dedicated YouTube Music desktop playback",
+        "Desktop media controls and integrations",
+        "Music-client plugin architecture reference"
+      ],
+      "weaknesses": [
+        "Unofficial client tied to a third-party service",
+        "Electron and plugin dependency surface",
+        "Plugins can manipulate the BrowserWindow and page content"
+      ],
+      "tags": [
+        "music",
+        "youtube",
+        "electron",
+        "desktop",
+        "plugins",
+        "player"
+      ],
+      "projectFit": {
+        "media-library": "A",
+        "ui-visual": "B",
+        "developer-reference": "B"
+      },
+      "impact": {
+        "workflow": "C",
+        "intelligence": "D",
+        "automation": "B",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Authenticated account and playback state live inside an unofficial Electron client",
+        "Plugins and themes can change the application surface with broad access",
+        "Unsigned or unknown-publisher installer warnings and auto-update behavior require provenance checks"
+      ],
+      "implementation": "Treat as an optional end-user application, not a dependency for this research project. Use an official release artifact with checksum/provenance review, a non-work account, no unreviewed plugins or themes, and a reversible user-profile test before broader use.",
+      "reentryTriggers": [
+        "A dedicated YouTube Music desktop experience is desired",
+        "Release provenance and a restricted plugin/profile plan are accepted"
+      ]
+    },
+    {
+      "id": "gsap-skills",
+      "name": "GSAP Skills",
+      "batch": "2026-10-23-E",
+      "kind": "Official GSAP agent-skill collection",
+      "repoUrl": "https://github.com/greensock/gsap-skills",
+      "license": "MIT",
+      "version": "Source reviewed at pinned commit aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "PILOT",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Official GSAP skill collection reviewed as implementation guidance; this public dashboard ships no GSAP runtime.",
+      "bestFor": [
+        "GSAP implementation guidance",
+        "Animation performance checks",
+        "ScrollTrigger and React lifecycle patterns"
+      ],
+      "weaknesses": [
+        "Useful only when GSAP is already justified",
+        "Most scans retained unresolved references",
+        "Can encourage an unnecessary runtime dependency in a CSS-sufficient interface"
+      ],
+      "tags": [
+        "gsap",
+        "animation",
+        "motion",
+        "react",
+        "performance",
+        "skill"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-reference": "A",
+        "skill-governance": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "B",
+        "automation": "C",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Plugin availability and licensing still require per-project confirmation",
+        "Animation-heavy output can harm reduced-motion behavior and performance",
+        "Incomplete static coverage prevents repository-wide approval"
+      ],
+      "implementation": "Reference the skills only when GSAP is independently justified. This release uses the browser Web Animations API and makes no GSAP adoption claim.",
+      "reentryTriggers": [
+        "Run the planned Impeccable audit as a grade-only review without modifying the GSAP pilot",
+        "Repeat the same bounded motion test in a second project before considering global installation"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "material-design-icons",
+      "name": "Material Symbols / Icons",
+      "batch": "2026-10-23-E",
+      "kind": "Icon asset and variable-font library",
+      "repoUrl": "https://github.com/google/material-design-icons",
+      "license": "Apache-2.0",
+      "version": "Source HEAD 10ecc1479061 reviewed 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "Google's Material Symbols variable fonts and legacy Material Icons assets across web and native formats.",
+      "bestFor": [
+        "Consistent common-action iconography",
+        "Self-hosted variable icon fonts",
+        "Named Apache-2.0 SVG assets"
+      ],
+      "weaknesses": [
+        "The classic Material Icons set stopped receiving new icons in 2022",
+        "The full repository is much larger than a product needs",
+        "Google says the listed npm packages are third-party and not vetted by Google"
+      ],
+      "tags": [
+        "icons",
+        "material",
+        "svg",
+        "fonts",
+        "design-system"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-reference": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "D",
+        "automation": "C",
+        "quality": "B"
+      },
+      "riskLevel": "LOW",
+      "risks": [
+        "Loading remote fonts weakens offline portability and can expose request metadata",
+        "Mixing Material icons with the existing visual language can reduce coherence",
+        "Unvetted third-party packages should not inherit Google's trust"
+      ],
+      "implementation": "Use only a small, named, self-hosted subset when the current inline icons lack coverage. Prefer Material Symbols over the frozen classic set, preserve accessible labels, and avoid adding the entire repository or an unreviewed package.",
+      "reentryTriggers": [
+        "A missing icon cannot be expressed by the current set",
+        "A product intentionally adopts Material visual language"
+      ]
+    },
+    {
+      "id": "material-ui",
+      "name": "Material UI",
+      "batch": "2026-10-23-E",
+      "kind": "React component library and design system",
+      "repoUrl": "https://github.com/mui/material-ui",
+      "license": "MIT",
+      "version": "Source HEAD f0a678be0b11 reviewed 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A mature React component library implementing Material Design with theming, accessibility patterns, examples, and an adjacent advanced-component suite.",
+      "bestFor": [
+        "React applications needing broad accessible primitives",
+        "Enterprise form and navigation consistency",
+        "Teams that intentionally choose Material Design"
+      ],
+      "weaknesses": [
+        "Requires a React architecture",
+        "A default Material appearance can flatten product identity",
+        "Advanced MUI X capabilities have separate packaging and licensing considerations"
+      ],
+      "tags": [
+        "react",
+        "components",
+        "material",
+        "design-system",
+        "accessibility"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-workflow": "B",
+        "developer-reference": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "C",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Migrating this static dashboard to React/MUI would add substantial complexity without a demonstrated need",
+        "Theme overrides and version upgrades can become a maintenance surface",
+        "Bundle size and client runtime need measurement"
+      ],
+      "implementation": "Do not migrate this dashboard. Consider MUI only for a new or existing React product with an approved Material direction, then benchmark bundle size, keyboard behavior, theming effort, and upgrade cost on a representative screen.",
+      "reentryTriggers": [
+        "A React product needs a comprehensive component system",
+        "Material Design is an explicit product requirement"
+      ]
+    },
+    {
+      "id": "awesome-design-md",
+      "name": "Awesome DESIGN.md",
+      "batch": "2026-10-23-E",
+      "kind": "Design-system reference collection for coding agents",
+      "repoUrl": "https://github.com/VoltAgent/awesome-design-md",
+      "license": "MIT; third-party visual identities remain separate concerns",
+      "version": "Source HEAD 3b605329240c reviewed 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A curated set of DESIGN.md files and previews derived from public product design systems for agent-readable visual direction.",
+      "bestFor": [
+        "Studying design-token documentation",
+        "Comparing visual-system vocabulary",
+        "Bootstrapping an original project-specific DESIGN.md"
+      ],
+      "weaknesses": [
+        "Examples reproduce recognizable third-party design languages",
+        "A markdown brief does not prove implementation quality",
+        "Copying a branded system can create derivative, generic, or misleading output"
+      ],
+      "tags": [
+        "design-md",
+        "design-system",
+        "tokens",
+        "reference",
+        "agents"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-reference": "A",
+        "skill-governance": "C"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "A",
+        "automation": "C",
+        "quality": "B"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Trade dress, trademark, and brand-confusion risk if a named system is copied closely",
+        "Extracted public CSS values may not capture accessibility or interaction rationale",
+        "External previews and source sites can drift"
+      ],
+      "implementation": "Use as comparative research only. Extract abstract principles, document provenance, and write an original project DESIGN.md; do not ask an agent to imitate a named brand or copy an entire supplied file without review.",
+      "reentryTriggers": [
+        "A new project needs a DESIGN.md vocabulary",
+        "A design-system comparison needs concrete public examples"
+      ]
+    },
+    {
+      "id": "react-bits",
+      "name": "React Bits",
+      "batch": "2026-10-23-E",
+      "kind": "Animated React component registry",
+      "repoUrl": "https://github.com/DavidHDev/react-bits",
+      "license": "MIT + Commons Clause",
+      "version": "Source HEAD e12c22192ac7 reviewed 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A large copy-oriented registry of animated React and Next.js components, backgrounds, effects, and agent-accessible installation paths.",
+      "bestFor": [
+        "One-off expressive React sections",
+        "Rapid motion prototyping",
+        "Copying a selected component into an owned codebase"
+      ],
+      "weaknesses": [
+        "Not applicable to the current vanilla dashboard without a React migration",
+        "Effects can dominate information-heavy interfaces",
+        "The Commons Clause is more restrictive than plain MIT"
+      ],
+      "tags": [
+        "react",
+        "animation",
+        "components",
+        "registry",
+        "mcp",
+        "visual-effects"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-workflow": "B",
+        "generative-media": "B"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "C",
+        "automation": "B",
+        "quality": "A"
+      },
+      "riskLevel": "MEDIUM",
+      "risks": [
+        "Registry/MCP installation expands the supply-chain surface",
+        "Animation can harm performance, accessibility, and executive readability",
+        "License restrictions require review for products that resemble a component-library service"
+      ],
+      "implementation": "Do not connect its MCP or migrate this dashboard. For a React project, copy one pinned component manually, record its transitive dependencies and license, add reduced-motion and keyboard checks, and benchmark it before adoption.",
+      "reentryTriggers": [
+        "A React project needs a distinctive bounded interaction",
+        "The Commons Clause and component dependencies are acceptable"
+      ]
+    },
+    {
+      "id": "open-duet",
+      "name": "Open Duet",
+      "batch": "2026-10-23-G",
+      "kind": "Self-hosted AI coworker workspace",
+      "repoUrl": "https://github.com/Anil-matcha/open-duet",
+      "license": "Apache-2.0",
+      "version": "Pinned 69a65e4a7dc52477b05f8544606ccfcc1f258cb6; project-local controlled pilot 2026-10-23",
+      "primaryCategory": "local-ai-agent",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "HOLD",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A self-hosted workspace for named AI coworkers with instructions, memory, routines, approvals, multiple model engines, durable conversations, and optional isolated computers.",
+      "bestFor": [
+        "Running recurring repository-intake and evidence-maintenance routines",
+        "Keeping role-specific research agents, memory, approvals, and run history in one local workspace",
+        "Testing engine fallback and durable agent workflows without committing to one model provider"
+      ],
+      "weaknesses": [
+        "The desktop, server, Docker-computer, and installer paths are explicitly experimental",
+        "It overlaps substantially with the current Codex workflow and adds a backend, database, agent runtime, credential store, and operational upkeep",
+        "It is single-owner rather than a multi-user organization workspace, and connectors and mature team delegation remain limited",
+        "The pinned frontend production tree has unresolved critical and high advisories, and its source-checkout UI did not build on this Windows pilot host"
+      ],
+      "tags": [
+        "agents",
+        "automation",
+        "memory",
+        "routines",
+        "approvals",
+        "self-hosted",
+        "codex",
+        "docker"
+      ],
+      "projectFit": {
+        "local-ai-agent": "A",
+        "automation": "A",
+        "developer-workflow": "B",
+        "research-intelligence": "B",
+        "security-assurance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "The pinned frontend production dependency tree reports one critical and two high vulnerable packages; adoption is blocked until it is updated and rescanned",
+        "Host tool execution can run as the signed-in user; Docker computers are optional and experimental rather than a universal safety boundary",
+        "The system stores conversations, memory, credentials, schedules, approvals, and run history, creating a sensitive local control plane",
+        "Unsigned installers, early development, limited clean-machine verification, and no automatic update path increase maintenance and supply-chain burden",
+        "Routines run only while the backend is available, do not automatically retry failed or interrupted runs, and webhook deliveries are not de-duplicated",
+        "Single-owner authentication and paired devices are not suitable for an untrusted multi-user deployment"
+      ],
+      "implementation": "Keep on HOLD and do not connect private repositories or install globally. First update Next.js to a non-vulnerable release, prove an offline-reproducible Windows UI build, correct or gate the Windows path/ACP/symlink failures, and repeat the identical intake with a scoped real engine. Preserve cost, latency, output adjudication, approvals, cleanup, and a comparison with the current Codex workflow before considering E2.",
+      "reentryTriggers": [
+        "Repository intake or evidence maintenance becomes repetitive enough to justify a persistent local agent workspace",
+        "A disposable machine or isolated user profile is available for the pilot",
+        "The current Codex workflow can be compared against one identical timed research task",
+        "Credential, network, storage, backup, and deletion controls have named owners"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "harness2",
+      "name": "Harness²",
+      "batch": "2026-10-23-F",
+      "kind": "Recursive agent-harness evaluation framework",
+      "repoUrl": "https://github.com/google-research/harness2",
+      "license": "Apache-2.0 main project; benchmark and third-party components have separate terms",
+      "version": "Official README, setup guide, pyproject, and license reviewed 2026-10-23",
+      "primaryCategory": "developer-workflow",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "REFERENCE",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A research framework that recursively proposes, probes, and composes changes to the prompts, guardrails, memory, tools, skills, scripts, plugins, and orchestration around an agent.",
+      "bestFor": [
+        "Comparing agent-harness variants on benchmark tasks",
+        "Preserving evidence-supported lessons across evaluations",
+        "Research on prompt, tool, memory, and orchestration improvements"
+      ],
+      "weaknesses": [
+        "Official benchmark runs target Linux rather than this Windows file-based dashboard",
+        "Setup requires Python, uv, Node, cloud credentials, and benchmark-specific dependencies",
+        "Its research benchmarks do not directly measure this dashboard's newcomer usability"
+      ],
+      "tags": [
+        "agents",
+        "evaluation",
+        "benchmark",
+        "harness",
+        "codex",
+        "research"
+      ],
+      "projectFit": {
+        "developer-workflow": "B",
+        "skill-governance": "B",
+        "automation": "C"
+      },
+      "impact": {
+        "workflow": "B",
+        "intelligence": "A",
+        "automation": "A",
+        "quality": "B"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "The documented Codex executor runs with its sandbox disabled and unrestricted network access",
+        "Model-backed runs require credentials and can create material token and cloud cost",
+        "Recursive optimization can overfit one task unless the evaluation set and acceptance rules are fixed",
+        "Benchmark setup clones dependencies and downloads task data"
+      ],
+      "implementation": "Use the Propose, Probe, Compose structure manually for this project. Do not install or run Harness² on this Windows workspace. Reconsider only in an isolated Linux environment with synthetic tasks, budget caps, network restrictions, scoped credentials, a pinned revision, and an independent holdout evaluation.",
+      "reentryTriggers": [
+        "A repeated agent workflow has a measurable benchmark and enough volume to justify harness optimization",
+        "An isolated Linux runner with scoped credentials and cost controls is available",
+        "A holdout set can test generalization beyond the task used for recursive refinement"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    },
+    {
+      "id": "hallmark",
+      "name": "Hallmark",
+      "batch": "2026-10-23-E",
+      "kind": "Anti-generic frontend design and linting skill",
+      "repoUrl": "https://github.com/Nutlope/hallmark",
+      "license": "MIT; referenced photographs retain individual licenses",
+      "version": "Source and license reviewed at 7ec868225c6c on 2026-10-23 · pinned 7ec868225c6c scanned 2026-10-23",
+      "primaryCategory": "ui-visual",
+      "evidenceLevel": "E0",
+      "findingStatus": "SOURCE_REVIEWED",
+      "decision": "CONDITIONAL",
+      "observedGrade": null,
+      "gradeBasis": "Public source review only; no included runtime, static-scan, or benchmark artifact supports promotion beyond E0.",
+      "summary": "A design skill with theme selection, staged page construction, preservation checks, responsive browser linting, and a fresh-context review workflow.",
+      "bestFor": [
+        "Detecting repetitive agent-generated design patterns",
+        "Preserving links and handlers during redesign",
+        "Multi-width visual linting and before/after review"
+      ],
+      "weaknesses": [
+        "Large overlapping instruction and script surface",
+        "Browser and image workflows add dependencies and network behavior",
+        "A strong house method can conflict with an existing product system"
+      ],
+      "tags": [
+        "design",
+        "frontend",
+        "lint",
+        "browser-qa",
+        "redesign",
+        "skill"
+      ],
+      "projectFit": {
+        "ui-visual": "A",
+        "developer-workflow": "A",
+        "skill-governance": "B"
+      },
+      "impact": {
+        "workflow": "A",
+        "intelligence": "B",
+        "automation": "A",
+        "quality": "A"
+      },
+      "riskLevel": "HIGH",
+      "risks": [
+        "Static analysis is critical and incomplete, including process, network, external-action, and SSRF-pattern findings",
+        "Its optional global install and hook path could affect unrelated projects",
+        "Automated redesign can preserve visible structure while changing behavior unless independently tested"
+      ],
+      "implementation": "Do not install globally or copy it into this project. First adjudicate the script-level findings and unresolved references; only then run a project-local synthetic page trial with hooks, image generation, remote photos, and network access disabled, followed by independent browser QA and rollback.",
+      "reentryTriggers": [
+        "A synthetic trial can isolate its value from existing design skills",
+        "The named scripts and findings have been manually reviewed"
+      ],
+      "publicEvidenceNote": "Prior internal evaluation context was excluded from this public candidate and does not raise the public evidence level."
+    }
+  ]
+}

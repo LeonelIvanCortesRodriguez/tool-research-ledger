@@ -1,0 +1,21 @@
+{
+  "name": "tool-research-ledger",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Evidence-aware open-source tool decision workspace",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "dev": "node scripts/serve.mjs",
+    "test": "node scripts/verify.mjs",
+    "test:mutation": "node scripts/mutation-test.mjs",
+    "test:prose": "node scripts/humanizer-check.mjs",
+    "test:browser": "node scripts/browser-qa.mjs",
+    "scan:privacy": "node scripts/privacy-scan.mjs",
+    "build": "node scripts/build.mjs",
+    "verify:static": "node scripts/verify.mjs",
+    "verify": "npm test && npm run test:mutation && npm run test:prose && npm run test:browser && npm run scan:privacy && npm run build"
+  },
+  "devDependencies": { "playwright-core": "1.62.1" },
+  "engines": { "node": ">=20" }
+}
