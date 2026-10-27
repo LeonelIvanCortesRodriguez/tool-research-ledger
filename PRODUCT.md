@@ -4,45 +4,73 @@
 
 product
 
+## Product promise
+
+Describe a job and see which open-source tools fit it, what has been checked about each one, and what you are allowed to do with it next.
+
 ## Users
 
-Technical directors and project owners evaluating open-source tools for a defined job. They need to see coverage, permission to act, evidence depth, and the next safe test without reading every repository record.
+Technical directors and project owners choosing an open-source tool for a defined job, and hiring managers judging how Leonel makes evidence-based decisions. Both are short on time. The director wants a shortlist with its weak points showing; the hiring manager wants to see the reasoning, not a list of stars.
 
-## Product Purpose
+## Problem
 
-Turn a job into a bounded shortlist, then show where the broader capability portfolio is strong or under-evidenced. A reader should know whether to implement, pilot, reference, conditionally use, or hold an option and what proof would change that decision.
+Repository lists rank tools by popularity. They do not say whether a tool fits a particular job, what anyone has actually checked, or what could still stop adoption. Teams then install on the strength of a README and discover the risk later.
 
-## Five-second question
+## The decision path
 
-Where can this portfolio act now, where is proof thin, and what should be evaluated next?
+`project need → filtered candidates → evidence → decision`
 
-## First decision
+1. **Project need.** Plain-language search or one of eight common jobs.
+2. **Filtered candidates.** Matching tools from the 13 capability families, with comparison between similar options.
+3. **Evidence.** The level reached (E0 to E5), what produced it, and what proof the next level needs.
+4. **Decision.** The permitted next action, its basis, its controls, and the next test.
 
-Choose a job or inspect a capability family, then open its evidence before adopting a tool.
+## Decision vocabulary
 
-## Verified evidence
+Fit, evidence, decision, and risk answer four separate questions and must never merge into one score.
 
-The catalog, counts, family membership, decisions, E0 ceiling, and 99-repository reconciliation come from `data/catalog.json`. Application verification is separate from evidence for third-party tools. Every published third-party entry is source-reviewed E0 until retained public-safe trials justify promotion.
+| Channel | Question it answers | Values |
+| --- | --- | --- |
+| Fit | How closely does the tool map to the job? | Editorial assessment |
+| Evidence | What has been checked? | E0 source reviewed · E1 smoke task · E2 controlled benchmark · E3 representative corpus · E4 independent validation · E5 monitored production |
+| Decision | What may we do now? | IMPLEMENT · PILOT · CONDITIONAL · REFERENCE · WATCH · HOLD · REJECT |
+| Risk | What can still stop adoption? | LOW · MEDIUM · HIGH · CRITICAL |
 
-## Limitations and prohibited claims
+## Evidence status
 
-Fit and project relevance are editorial assessments, not benchmark scores. A source review, security scan, stars, or installation does not prove operational benefit. No third-party tool is certified safe by this ledger. Private trials cannot raise public evidence. Batch I records are research candidates, not operational endorsements.
+- **Implemented and tested:** search, guided jobs, capability map, filters and sorting, comparison, evidence detail, shareable URL state, and catalog validation (unique IDs and URLs, 99-repository reconciliation, matching JSON and JS). `npm run verify` covers static checks, mutation, prose, browser QA, privacy, and build.
+- **Source-reviewed:** all 99 third-party entries are E0. Current spread: 29 PILOT, 23 CONDITIONAL, 22 REFERENCE, 10 HOLD, 8 REJECT, 7 WATCH, 0 IMPLEMENT.
+- **Planned:** project trials that preserve task, version, input, result, checks, and limitations. Only a retained trial can move an entry to E1 or above. No public entry has been promoted yet, and the presentation must show promotion as a path, not an achievement.
+- **Unsupported, never claim:** benchmark scores, safety certification, operational benefit of any listed tool.
 
-## Brand Personality
+## Leonel's contribution
 
-Precise, candid, and decision-oriented. The interface should feel like a compact research instrument, with labels that a director can interpret without learning the implementation.
+Leonel defined the product goal, set the research and acceptance criteria, curated the repository summaries, and made the final decisions on each record. Coding agents helped implement the interface, tests, evidence rules, and release package.
+
+## Five-second test
+
+A reader should leave the first screen knowing: "It is a searchable decision ledger for open-source tools. It separates what fits from what is proven. Everything in it is source-reviewed only, and I can try it live."
+
+## Brand personality
+
+Precise, candid, decision-oriented. A research instrument with a librarian's honesty: it tells you what it knows, how it knows it, and what it does not know yet.
 
 ## Anti-references
 
-Avoid a generic dashboard of equal KPI cards, rainbow category colors, dense badge rows, promotional tool rankings, and diagrams that make recommendation and evidence look interchangeable. The owner-supplied harness diagram informs actor/handoff/feedback structure only; its mascots and small labels are not visual references.
+- "Awesome list" pages: badge walls, star counts, emoji category headers.
+- Rankings or leaderboards that imply a measured winner.
+- Rainbow category colors and equal KPI cards.
+- Diagrams in which a recommendation and its evidence look interchangeable.
+- A dashboard screenshot as the hero. The interactive ledger is the proof; stills only support it.
 
-## Design Principles
+## Design principles
 
-1. Start with the job; reveal portfolio breadth only where it changes a decision.
-2. Keep recommendation, proof, and risk in distinct visual and verbal channels.
-3. Derive every count and summary from the canonical catalog.
-4. Show the next bounded action and its evidence requirement.
+1. **Start with the job.** Breadth appears only where it changes a decision.
+2. **Four channels, four visual languages.** Decision, evidence, and risk differ in shape, label, and weight, never in color alone.
+3. **Show the ceiling.** The fact that every entry is E0 is a headline, not fine print.
+4. **Count from the catalog.** Every number on every surface derives from `data/catalog.json`.
+5. **Name the next proof.** Each decision ends with what would change it.
 
-## Accessibility & Inclusion
+## Accessibility & inclusion
 
-Target WCAG AA for text and controls, keyboard use, named diagrams with a text equivalent, visible focus, 44px targets where practical, reduced motion, and usable widths from 390px to 1440px. No status depends on color alone.
+WCAG 2.2 AA for text and controls in both themes, full keyboard use, visible focus, 44px targets where practical, named diagrams with text equivalents, reduced motion, and usable widths from 390px to 1440px. No status depends on color alone.
