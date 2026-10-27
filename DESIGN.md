@@ -13,19 +13,20 @@ Color strategy: **restrained** in the product (cool neutrals, berry for action a
 
 ## Color tokens
 
-OKLCH. The light and dark tables were tuned separately. Measured contrast in brackets.
+OKLCH. The light and dark tables were tuned separately. `scripts/contrast-check.mjs` reads this table and tests every named pair in both themes; `npm run test:contrast` fails on any pair below its minimum, and the retained output is `docs/CONTRAST_CHECK.txt`.
 
 | Role | Light | Dark | Meaning |
 | --- | --- | --- | --- |
 | `--bg` | `0.982 0.003 258` | `0.155 0.009 258` | Page |
 | `--surface` | `1 0 0` | `0.19 0.011 258` | Record slip |
-| `--ink` | `0.19 0.016 258` [17.5:1] | `0.95 0.006 258` [16.9:1] | Text, filled evidence steps |
+| `--ink` | `0.19 0.016 258` | `0.95 0.006 258` | Text, filled evidence steps |
 | `--ink-2` | `0.36 0.018 258` | `0.80 0.010 258` | Secondary text |
-| `--muted` | `0.48 0.014 258` [6.2:1] | `0.69 0.012 258` [6.7:1] | Metadata only |
-| `--line` | `0.86 0.008 258` | `0.32 0.015 258` | Hairline dividers (decorative) |
-| `--line-strong` | `0.64 0.013 258` [3.4:1] | `0.52 0.018 258` [3.4:1] | Input borders, empty ladder steps, glyph outlines |
-| `--accent` | `0.42 0.115 343` [9.0:1] | `0.72 0.12 343` [7.0:1] | Primary action, current selection, focus |
-| `--stop` | `0.43 0.105 28` [8.5:1] | `0.74 0.13 28` [7.6:1] | Anything that can stop adoption: HOLD, REJECT, HIGH, CRITICAL |
+| `--muted` | `0.48 0.014 258` | `0.69 0.012 258` | Metadata only |
+| `--line` | `0.86 0.008 258` | `0.32 0.015 258` | Hairline dividers (decorative, no contrast duty) |
+| `--line-strong` | `0.64 0.013 258` | `0.52 0.018 258` | Input borders, empty ladder steps, glyph outlines |
+| `--accent` | `0.42 0.115 343` | `0.72 0.12 343` | Primary action, current selection, focus |
+| `--on-accent` | `1 0 0` | `0.155 0.009 258` | Text on an accent-filled button |
+| `--stop` | `0.43 0.105 28` | `0.74 0.13 28` | Anything that can stop adoption: HOLD, REJECT, HIGH, CRITICAL |
 
 `--line-strong` changes from `0.69` to `0.64` (light) and from `0.45` to `0.52` (dark) so that glyph outlines and empty ladder steps reach the 3:1 non-text minimum.
 

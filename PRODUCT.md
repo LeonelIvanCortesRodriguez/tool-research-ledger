@@ -4,6 +4,12 @@
 
 product
 
+## Surface registers
+
+The default register above governs the ledger application (`index.html`, `app.js`, `styles.css`). Work on that surface loads Impeccable's product reference (`reference/product.md`).
+
+The README hero, GitHub social preview, demonstration recordings, and any portfolio landing page are brand surfaces. Work on those loads the brand reference (`reference/brand.md`), and brand permissions (committed or drenched color, display type, art direction) apply only there. Brand surfaces still keep every claim and evidence boundary in this file.
+
 ## Product promise
 
 Describe a job and see which open-source tools fit it, what has been checked about each one, and what you are allowed to do with it next.

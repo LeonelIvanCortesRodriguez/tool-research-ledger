@@ -9,12 +9,13 @@
     "dev": "node scripts/serve.mjs",
     "test": "node scripts/verify.mjs",
     "test:mutation": "node scripts/mutation-test.mjs",
+    "test:contrast": "node scripts/contrast-check.mjs",
     "test:prose": "node scripts/humanizer-check.mjs",
     "test:browser": "node scripts/browser-qa.mjs",
     "scan:privacy": "node scripts/privacy-scan.mjs",
     "build": "node scripts/build.mjs",
     "verify:static": "node scripts/verify.mjs",
-    "verify": "npm test && npm run test:mutation && npm run test:prose && npm run test:browser && npm run scan:privacy && npm run build"
+    "verify": "npm test && npm run test:mutation && npm run test:contrast && npm run test:prose && npm run test:browser && npm run scan:privacy && npm run build"
   },
   "devDependencies": { "playwright-core": "1.62.1" },
   "engines": { "node": ">=20" }
