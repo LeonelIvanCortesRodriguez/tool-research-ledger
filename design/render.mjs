@@ -62,7 +62,7 @@ function record() {
   <div class="channel"><span class="ch-name">Decision</span><div class="ch-body ch-decision">${glyph(lead.decision)}<b>${escape(lead.decision)}</b><span>${escape(plainFrom("decisionPlain", lead.decision))}</span></div></div>
   <div class="channel"><span class="ch-name">Evidence</span><div class="ch-body">${ladder(lead.evidenceLevel, true)}<b>${escape(lead.evidenceLevel)}</b><span>${escape(plainFrom("evidencePlain", lead.evidenceLevel))}</span></div></div>
   <div class="channel"><span class="ch-name">Risk</span><div class="ch-body ch-risk">${riskBars(lead.riskLevel)}<b>${escape(lead.riskLevel)}</b><span>${escape(lead.risks[0])}</span></div></div>
-  <div class="channel"><span class="ch-name">Fit</span><div class="ch-body"><span class="fit">Best for ${escape(lead.bestFor.slice(0, 2).join(" and ").toLowerCase())}</span></div></div>
+  <div class="channel"><span class="ch-name">Fit</span><div class="ch-body"><span class="fit">Best for: ${escape(lead.bestFor[0])}</span></div></div>
   <p class="next"><b>Next proof:</b> ${escape(plainFrom("nextEvidencePlain", lead.evidenceLevel))}</p></div>`;
 }
 const slipCss = `
@@ -95,7 +95,7 @@ h1 { margin: 26px 0 18px; font-size: 52px; line-height: 1.04; letter-spacing: -0
 .slip { margin-top: 18px; }
 `, `<div class="canvas"><div class="id">${mark(46)}<span class="wordmark">Tool Research Ledger</span></div>
 <div><h1>Find a tool for the job, and see how much proof stands behind it.</h1>
-<p class="lede">${catalog.tools.length} open-source tools across ${catalog.capabilityGroups.length} job families. Fit, evidence, decision, and risk stay in separate channels.</p>
+<p class="lede">For technical leads choosing open-source tools: ${catalog.tools.length} tools across ${catalog.capabilityGroups.length} job families. Fit, evidence, decision, and risk stay in separate channels.</p>
 <p class="path">Project need <span>→</span> candidates <span>→</span> evidence <span>→</span> decision</p>
 <p class="ceiling"><b>Every entry is E0, source reviewed.</b> All ${e0} of ${catalog.tools.length}. A retained project trial is the only way up; none has moved yet.</p></div>
 ${record()}</div>`, theme);

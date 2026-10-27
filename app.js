@@ -22,7 +22,7 @@
     REJECT: "Not suitable for this project"
   };
   const evidencePlain = {
-    E0: "Documentation reviewed",
+    E0: "Source reviewed",
     E1: "Runs on a small test",
     E2: "Checked against real input",
     E3: "Checked across representative cases",

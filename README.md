@@ -1,11 +1,11 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/brand/hero-dark.png">
-  <img src="docs/brand/hero-light.png" width="1280" alt="Tool Research Ledger. Find a tool for the job, and see how much proof stands behind it. 99 open-source tools across 13 job families. A record card for OCRmyPDF, the lead option for document intelligence, shows four separate channels: decision PILOT with a half-filled circle, run a controlled pilot; evidence E0 on a six-step ladder with one step filled, documentation reviewed; risk MEDIUM with two of four bars filled; and fit for searchable PDF output. The next proof is one bounded task with its output, checks, limitations, and rollback.">
+  <img src="docs/brand/hero-light.png" width="1280" alt="Tool Research Ledger. Find a tool for the job, and see how much proof stands behind it. 99 open-source tools across 13 job families. A record card for OCRmyPDF, the lead option for document intelligence, shows four separate channels: decision PILOT with a half-filled circle, run a controlled pilot; evidence E0 on a six-step ladder with one step filled, source reviewed; risk MEDIUM with two of four bars filled; and fit best for searchable PDF output. The next proof is one bounded task with its output, checks, limitations, and rollback.">
 </picture>
 
 **[Open the live ledger](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** · [Run it locally](#run-and-verify) · [Evidence model](docs/EVIDENCE_MODEL.md)
 
-Describe a job and see which open-source tools fit it, what has been checked about each one, and what you are allowed to do with it next. Every one of the 99 entries is source-reviewed only (E0), and the interface says so on its first screen.
+For technical leads choosing open-source tools: describe a job and see which tools fit it, what has been checked about each one, and what you are allowed to do with it next. Every one of the 99 entries is source-reviewed only (E0), and the interface says so on its first screen.
 
 ## The problem
 
@@ -33,7 +33,7 @@ Fit, evidence, decision, and risk answer four different questions, and they neve
 
 | Channel | Question | How it is shown |
 | --- | --- | --- |
-| Fit | How closely does the tool map to the job? | Plain sentence; no graphic, so it can't pass for a measurement |
+| Fit | How closely does the tool map to the job? | An editorial letter (A to D) with the job it suits; a judgment, never shown as a measurement or merged into a score |
 | Evidence | What has been checked? | Six ascending steps, filled to the level reached, with the E-code and a plain label |
 | Decision | What may we do now? | A shape plus a verb: ● IMPLEMENT, ◐ PILOT, ⊖ CONDITIONAL, ○ REFERENCE, dashed ○ WATCH, ■ HOLD, ✕ REJECT |
 | Risk | What can still stop adoption? | One to four bars plus the word; HIGH and CRITICAL in stop red |

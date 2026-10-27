@@ -54,7 +54,7 @@ Glyphs are 14px inline SVG with `aria-hidden="true"`; the label carries the mean
 
 **Risk: severity bars.** Four bars of rising height; LOW fills one, MEDIUM two, HIGH three, CRITICAL four. HIGH and CRITICAL fill in `--stop`, the others in ink. The word always appears beside the bars.
 
-**Fit:** plain text, the editorial sentence. No graphic, so it can't pass for a measurement.
+**Fit:** an editorial letter (A to D) beside the job it suits, shown as text only. It is a judgment, never drawn as a bar or merged into a score.
 
 Weight follows importance: decision is the heaviest element on a record (16px semibold with glyph), evidence second, risk third, fit as body text.
 
