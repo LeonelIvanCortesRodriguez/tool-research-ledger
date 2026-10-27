@@ -1,0 +1,4 @@
+format: gate2-candidate-inventory-v1
+tool-research-ledger|ba31159537a2c795e925620342371c8a68080354
+local-ai-workcell|4e36b44806663af2f1143da22622728716b2c0fd
+finanzas-familiares-demo|1c0761e05acc93dd3499fcd7e9c6bb9134275ebb
