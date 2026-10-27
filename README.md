@@ -3,7 +3,7 @@
   <img src="docs/brand/hero-light.png" width="1280" alt="Tool Research Ledger. Find a tool for the job, and see how much proof stands behind it. For technical leads choosing open-source tools: 99 tools across 13 job families. A record card for OCRmyPDF, the lead option for document intelligence, shows four separate channels: decision PILOT with a half-filled circle, run a controlled pilot; evidence E0 on a six-step ladder with one step filled, source reviewed; risk MEDIUM with two of four bars filled; and fit best for searchable PDF output. The next proof is one bounded task with its output, checks, limitations, and rollback.">
 </picture>
 
-**[Open the live ledger](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** · [Run it locally](#run-and-verify) · [Evidence model](docs/EVIDENCE_MODEL.md)
+**[Open the live ledger](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** · [Run it locally](#run-and-verify) · [Evidence model](docs/EVIDENCE_MODEL.md) · [Español](README.es.md)
 
 For technical leads choosing open-source tools: describe a job and see which tools fit it, what has been checked about each one, and what you are allowed to do with it next. Every one of the 99 entries is source-reviewed only (E0), and the interface says so on its first screen.
 
@@ -62,14 +62,14 @@ Only two colors carry meaning: berry marks your action and selection, and stop r
 
 ## Leonel's role and decisions
 
-**Problem chosen.** Make tool adoption a decision with visible evidence, not a reaction to popularity.
+**Problem chosen.** Make each tool adoption a decision backed by evidence anyone can inspect.
 
 **Role.** Leonel defined the product goal, set the research and acceptance criteria, curated the repository summaries, and made the final decision on each record. Coding agents helped implement the interface, tests, evidence rules, and release package.
 
 **Decisions that shape it**
 
 - *No composite score.* A single number hides why an option is strong and makes weak evidence look precise.
-- *Evidence is a ceiling, not a grade.* Influence on a design, installation, or a static scan does not raise a level; only retained proof does.
+- *Evidence is a ceiling.* Only retained proof raises a level. Influence on a design, an installation, or a static scan leaves it where it is.
 - *Decision is permission.* Each label says what may be done now. A tool can fit well and still be REFERENCE or HOLD.
 - *Shape before color.* Every status reads without color.
 - *Count from the catalog.* Every number on the page and in these images is derived from `data/catalog.json` at render time.
