@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Choose open-source tools by the job, the evidence, and the next safe action. No AI vocabulary required.">
-    <title>Tool Research Ledger | Guided decision workspace</title>
+    <meta name="description" content="Describe a job and see which open-source tools fit it, what has been checked about each one, and what you are allowed to do with it next.">
+    <title>Tool Research Ledger</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%237a2f5c'/%3E%3Cpath d='M12 15h24M12 24h18M12 33h8v-5h6' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -13,7 +14,7 @@
     <header class="app-header">
       <div class="header-inner">
         <a class="brand" href="#start" aria-label="Tool Research Ledger home">
-          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11"/><path d="M12 15h24M12 24h18M12 33h8v-5h6"/></svg>
           <span><strong>Tool Research Ledger</strong><small>Choose with evidence</small></span>
         </a>
         <nav aria-label="Primary navigation">
@@ -34,10 +35,9 @@
       <section class="start-section" id="start" aria-labelledby="pageTitle">
         <div class="start-grid page-shell">
           <div class="start-main">
-            <p class="orientation">A research catalog for real project decisions</p>
-            <h1 id="pageTitle">What do you need to get done?</h1>
-            <p class="lead">Describe the job in everyday words. The ledger will show a starting point, alternatives, risks, and the proof behind each option.</p>
-            <div class="portfolio-pulse" id="portfolioPulse" role="group" aria-label="Research portfolio at a glance"></div>
+            <h1 id="pageTitle">Find a tool for the job, and see how much proof stands behind it.</h1>
+            <p class="lead">Describe a job and see which open-source tools fit it, what has been checked about each one, and what you are allowed to do with it next.</p>
+            <p class="portfolio-pulse" id="portfolioPulse"></p>
 
             <form class="job-search" id="jobSearchForm" role="search">
               <label for="jobSearch">Describe the job</label>
@@ -49,23 +49,12 @@
             </form>
 
             <div class="task-picker" aria-labelledby="taskPickerTitle">
-              <div class="picker-heading"><h2 id="taskPickerTitle">Or choose a common job</h2><span>8 starting points</span></div>
+              <div class="picker-heading"><h2 id="taskPickerTitle">Or start from a common job</h2></div>
               <div class="task-grid" id="taskGrid"></div>
             </div>
           </div>
 
-          <aside class="how-panel" aria-labelledby="howTitle">
-            <div class="how-heading">
-              <h2 id="howTitle">How this helps</h2>
-              <span class="research-state">Catalog ready</span>
-            </div>
-            <ol>
-              <li><span>1</span><div><strong>Start with your job</strong><p>No model names or AI vocabulary needed.</p></div></li>
-              <li><span>2</span><div><strong>See the proof separately</strong><p>Fit, evidence, risk, and permission never collapse into one score.</p></div></li>
-              <li><span>3</span><div><strong>Leave with a next action</strong><p>Pilot, compare, hold, or use within a defined boundary.</p></div></li>
-            </ol>
-            <div class="catalog-facts" id="catalogFacts"></div>
-          </aside>
+          <figure class="path-figure" id="catalogFacts" aria-label="How a choice is made: project need, filtered candidates, evidence, decision"></figure>
         </div>
       </section>
 

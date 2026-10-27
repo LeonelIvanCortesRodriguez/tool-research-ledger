@@ -14,6 +14,7 @@
     "test:browser": "node scripts/browser-qa.mjs",
     "scan:privacy": "node scripts/privacy-scan.mjs",
     "build": "node scripts/build.mjs",
+    "render": "node design/render.mjs",
     "verify:static": "node scripts/verify.mjs",
     "verify": "npm test && npm run test:mutation && npm run test:contrast && npm run test:prose && npm run test:browser && npm run scan:privacy && npm run build"
   },

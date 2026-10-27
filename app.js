@@ -100,24 +100,23 @@
   }
 
   function renderFacts() {
-    $("#catalogFacts").innerHTML = `
-      <div><strong>${catalog.tools.length}</strong><span>options</span></div>
-      <div><strong>${catalog.capabilityGroups.length}</strong><span>job families</span></div>
-      <div><strong>E0</strong><span>public ceiling</span></div>`;
+    const e0 = catalog.tools.filter((tool) => tool.evidenceLevel === "E0").length;
+    const step = (label, body) => `<li class="path-step"><span class="path-label">${label}</span>${body}</li>`;
+    const ladder = catalog.evidenceLevels.map((level, index) => `<i class="${index === 0 ? "filled" : ""}"></i>`).join("");
+    $("#catalogFacts").innerHTML = `<figcaption class="path-title">How a choice is made here</figcaption><ol class="path-steps">
+      ${step("1 · Project need", `<strong>Describe the job</strong><span>or pick one of ${tasks.length} common jobs</span>`)}
+      ${step("2 · Filtered candidates", `<strong>${catalog.tools.length} to 3</strong><span>matching tools from ${catalog.capabilityGroups.length} families, with alternatives to compare</span>`)}
+      ${step("3 · Evidence", `<span class="path-ladder" aria-hidden="true">${ladder}</span><strong>E0 of E5</strong><span>what was checked, and what the next level needs</span>`)}
+      ${step("4 · Decision", `${decisionMark("PILOT")}<span>the permitted next action, its controls, and the next test</span>`)}
+    </ol><p class="path-ceiling">All ${e0} of ${catalog.tools.length} entries are E0: source reviewed. A project trial that keeps its task, version, input, result, checks, and limits moves an entry up. None has moved yet.</p>`;
   }
 
   function renderPortfolioPulse() {
     const familyCount = catalog.capabilityGroups.length;
     const thinCount = catalog.capabilityGroups.filter((group) => group.toolIds.length <= 2).length;
-    const e0Count = catalog.tools.filter((tool) => tool.evidenceLevel === "E0").length;
     const pilotCount = catalog.tools.filter((tool) => tool.decision === "PILOT").length;
     const elevatedCount = catalog.tools.filter((tool) => ["HIGH", "CRITICAL"].includes(tool.riskLevel)).length;
-    const thinShare = Math.round(thinCount / familyCount * 100);
-    const e0Share = Math.round(e0Count / catalog.tools.length * 100);
-    $("#portfolioPulse").innerHTML = `
-      <div class="pulse-track"><span><strong>Coverage</strong><small>${thinCount} of ${familyCount} families thin</small></span><span class="pulse-bar" aria-hidden="true"><i style="width:${thinShare}%"></i></span></div>
-      <div class="pulse-track"><span><strong>Proof</strong><small>${e0Count} of ${catalog.tools.length} at E0</small></span><span class="pulse-bar proof" aria-hidden="true"><i style="width:${e0Share}%"></i></span></div>
-      <div class="pulse-action"><strong>${pilotCount} PILOT decisions</strong><small>${elevatedCount} elevated-risk records · <a href="#capability-map">inspect the map</a></small></div>`;
+    $("#portfolioPulse").innerHTML = `<span><strong>${catalog.tools.length}</strong> tools</span><span><strong>${familyCount}</strong> job families, ${thinCount} thin</span><span><strong>${pilotCount}</strong> marked PILOT</span><span><strong>${elevatedCount}</strong> with high or critical risk</span><a href="#capability-map">See the capability map</a>`;
   }
 
   function renderCapabilityMap() {
@@ -135,7 +134,7 @@
       const concentration = elevated === 0 ? "None elevated" : `${elevated} of ${members.length} elevated`;
       return `<li class="map-row">
         <div class="map-family"><button type="button" class="map-family-link" data-map-group="${escapeHtml(group.id)}">${escapeHtml(group.label)}<span aria-hidden="true">↗</span></button><p>${members.length} ${members.length === 1 ? "option" : "options"}${members.length <= 2 ? " · thin coverage" : ""}</p></div>
-        <div class="map-lead"><strong>${escapeHtml(lead.name)}</strong><div class="map-states"><span class="map-decision" data-decision="${escapeHtml(lead.decision)}">${escapeHtml(lead.decision)}</span><span class="map-evidence" data-level="${escapeHtml(lead.evidenceLevel)}">${escapeHtml(lead.evidenceLevel)} · ${escapeHtml(evidencePlain[lead.evidenceLevel] || "Proof recorded")}</span></div></div>
+        <div class="map-lead"><strong>${escapeHtml(lead.name)}</strong><div class="map-states">${decisionMark(lead.decision)}<span class="map-evidence" data-level="${escapeHtml(lead.evidenceLevel)}">${escapeHtml(lead.evidenceLevel)} · ${escapeHtml(evidencePlain[lead.evidenceLevel] || "Proof recorded")}</span></div></div>
         <div class="map-risk"><strong class="map-risk-count" data-risk="${elevated ? "elevated" : "none"}">${escapeHtml(concentration)}</strong><p><span>Next:</span> ${escapeHtml(next)}</p></div>
       </li>`;
     }).join("");
@@ -159,6 +158,25 @@
     if (options.scroll !== false) $("#workspace").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   }
 
+  const decisionGlyph = {
+    IMPLEMENT: '<circle cx="8" cy="8" r="6" class="g-fill"/>',
+    PILOT: '<circle cx="8" cy="8" r="6" class="g-line"/><path d="M8 2a6 6 0 0 0 0 12z" class="g-fill"/>',
+    CONDITIONAL: '<circle cx="8" cy="8" r="6" class="g-line"/><path d="M3.5 8h9" class="g-line"/>',
+    REFERENCE: '<circle cx="8" cy="8" r="6" class="g-line"/>',
+    WATCH: '<circle cx="8" cy="8" r="6" class="g-line g-dash"/>',
+    HOLD: '<rect x="2.5" y="2.5" width="11" height="11" class="g-stop-fill"/>',
+    REJECT: '<path d="M3 3l10 10M13 3L3 13" class="g-stop-line"/>'
+  };
+  const riskSteps = { LOW: 1, MEDIUM: 2, HIGH: 3, CRITICAL: 4 };
+  function decisionMark(decision) {
+    const key = decisionGlyph[decision] ? decision : "WATCH";
+    return `<span class="decision-badge" data-decision="${escapeHtml(key)}"><svg class="glyph" viewBox="0 0 16 16" aria-hidden="true">${decisionGlyph[key]}</svg>${escapeHtml(key)}</span>`;
+  }
+  function riskMark(level, suffix = "") {
+    const key = riskSteps[level] ? level : "MEDIUM";
+    const bars = [1, 2, 3, 4].map((step) => `<rect x="${step * 4 - 3}" y="${14 - step * 3}" width="3" height="${step * 3}" class="${step <= riskSteps[key] ? "filled" : ""}"/>`).join("");
+    return `<span class="risk-badge ${key.toLowerCase()}" data-risk="${key}"><svg class="glyph risk-bars" viewBox="0 0 16 16" aria-hidden="true">${bars}</svg>${escapeHtml(level || "UNKNOWN")}${escapeHtml(suffix)}</span>`;
+  }
   function decisionClass(tool) { return String(tool.decision || "WATCH").toLowerCase(); }
   function adoption(tool) { return tool.assurance?.adoption || {}; }
   function runtime(tool) { return tool.assurance?.runtimeTrial; }
@@ -199,7 +217,7 @@
     return `<article class="recommendation-card lead-brief decision-${decisionClass(tool)}" data-tool="${tool.id}">
       <div class="lead-command">
         <div><span class="rec-rank">Lead for this job</span><h3>${escapeHtml(tool.name)}</h3><p>${escapeHtml(tool.summary)}</p></div>
-        <div class="permission-block"><span>Permitted action</span><strong>${escapeHtml(decisionPlain[tool.decision] || "Review required")}</strong><small>${escapeHtml(decisionBasis(tool))}</small></div>
+        <div class="permission-block"><span>Permitted action</span>${decisionMark(tool.decision)}<strong>${escapeHtml(decisionPlain[tool.decision] || "Review required")}</strong><small>${escapeHtml(decisionBasis(tool))}</small></div>
       </div>
       <div class="lead-evidence">
         <div class="proof-stamp">${evidenceMark(tool.evidenceLevel, { large: true })}</div>
@@ -220,7 +238,7 @@
   function alternativeRecommendation(tool, index) {
     const selected = state.selected.has(tool.id);
     return `<article class="recommendation-card alternative decision-${decisionClass(tool)}" data-tool="${tool.id}">
-      <div class="alternative-top"><span class="alternative-index">0${index}</span><div><h3>${escapeHtml(tool.name)}</h3><p>${escapeHtml(first(tool.bestFor, tool.summary))}</p></div><span class="decision-badge" data-decision="${tool.decision}">${escapeHtml(tool.decision)}</span></div>
+      <div class="alternative-top"><span class="alternative-index">0${index}</span><div><h3>${escapeHtml(tool.name)}</h3><p>${escapeHtml(first(tool.bestFor, tool.summary))}</p></div>${decisionMark(tool.decision)}</div>
       <div class="alternative-proof">${evidenceMark(tool.evidenceLevel)}<span>${escapeHtml(decisionBasis(tool))}</span></div>
       <p class="alternative-delta"><strong>Why it is not the lead:</strong> ${escapeHtml(first(tool.risks, first(tool.weaknesses)))}</p>
       <p class="alternative-next"><strong>Move it forward:</strong> ${escapeHtml(nextProof(tool))}</p>
@@ -281,7 +299,7 @@
     const currentIndex = evidenceOrder[tool.evidenceLevel] ?? 0;
     const runway = catalog.evidenceLevels.map((level, index) => `<li class="${index < currentIndex ? "complete" : index === currentIndex ? "current" : "future"}" data-evidence-level="${level.id}">${evidenceMark(level.id, { label: false })}<strong>${escapeHtml(level.proof || evidencePlain[level.id])}</strong>${index < currentIndex ? "<small>Completed</small>" : index === currentIndex ? "<small>Current ceiling</small>" : "<small>Not yet earned</small>"}</li>`).join("");
     return `<p class="detail-summary">${escapeHtml(tool.summary)}</p>
-      <div class="detail-meta">${evidenceMark(tool.evidenceLevel)}<span class="decision-badge" data-decision="${tool.decision}">${escapeHtml(tool.decision)}</span><span class="risk-badge ${String(tool.riskLevel || "medium").toLowerCase()}">${escapeHtml(tool.riskLevel || "UNKNOWN")} risk</span></div>
+      <div class="detail-meta">${evidenceMark(tool.evidenceLevel)}${decisionMark(tool.decision)}${riskMark(tool.riskLevel, " risk")}</div>
       <section class="detail-section decision-explainer"><h3>What this decision permits</h3><p><strong>${escapeHtml(decisionPlain[tool.decision] || "Review required")}</strong></p><p>${escapeHtml(adoption(tool).rationale || tool.gradeBasis || "No adoption rationale was recorded.")}</p><small>${escapeHtml(decisionBasis(tool))}</small></section>
       <section class="detail-section"><h3>Evidence runway</h3><ol class="evidence-runway">${runway}</ol><p class="promotion-callout"><strong>Next promotion requires:</strong> ${escapeHtml(nextProof(tool))}</p></section>
       <section class="detail-section"><h3>Good fit when</h3><ul>${array(tool.bestFor).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
@@ -322,10 +340,10 @@
     if (tools.length < 2) return;
     $("#compareBody").innerHTML = tools.map((tool) => `<article class="compare-column"><h3>${escapeHtml(tool.name)}</h3><p>${escapeHtml(tool.summary)}</p><dl>
       <div><dt>Evidence</dt><dd>${evidenceMark(tool.evidenceLevel)}</dd></div>
-      <div><dt>Decision</dt><dd>${escapeHtml(decisionPlain[tool.decision] || tool.decision)}</dd></div>
+      <div><dt>Decision</dt><dd>${decisionMark(tool.decision)} ${escapeHtml(decisionPlain[tool.decision] || tool.decision)}</dd></div>
       <div><dt>Main strength</dt><dd>${escapeHtml(first(tool.bestFor))}</dd></div>
       <div><dt>Main weakness</dt><dd>${escapeHtml(first(tool.weaknesses))}</dd></div>
-      <div><dt>Risk</dt><dd>${escapeHtml(tool.riskLevel || "Unknown")}: ${escapeHtml(first(tool.risks))}</dd></div>
+      <div><dt>Risk</dt><dd>${riskMark(tool.riskLevel)} ${escapeHtml(first(tool.risks))}</dd></div>
       <div><dt>Next action</dt><dd>${escapeHtml(tool.implementation || "Define a bounded test.")}</dd></div>
     </dl></article>`).join("");
     openDialog($("#compareDialog"));
@@ -374,8 +392,8 @@
       <td data-label="Tool"><strong>${escapeHtml(tool.name)}</strong><span>${escapeHtml(tool.kind)}</span></td>
       <td data-label="Best documented use">${escapeHtml(tool.summary)}</td>
       <td data-label="Evidence">${evidenceMark(tool.evidenceLevel, { label: false })}</td>
-      <td data-label="Decision"><span class="decision-badge" data-decision="${tool.decision}">${escapeHtml(tool.decision)}</span></td>
-      <td data-label="Risk"><span class="risk-badge ${String(tool.riskLevel || "medium").toLowerCase()}">${escapeHtml(tool.riskLevel || "UNKNOWN")}</span></td>
+      <td data-label="Decision">${decisionMark(tool.decision)}</td>
+      <td data-label="Risk">${riskMark(tool.riskLevel)}</td>
       <td data-label="Details"><button class="row-open" type="button" data-open-tool="${tool.id}">Open evidence</button></td>
     </tr>`).join("");
     $("#ledgerEmpty").hidden = filtered.length > 0;

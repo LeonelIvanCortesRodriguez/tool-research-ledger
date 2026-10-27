@@ -4,3 +4,4 @@ release/
 Thumbs.db
 *.log
 test-results/
+design/build/

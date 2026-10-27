@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const release = path.join(root, "release");
 fs.mkdirSync(release, { recursive: true });
-const excluded = new Set([".git", "node_modules", "release", "test-results"]);
+const excluded = new Set([".git", "node_modules", "release", "test-results", "build"]);
 const files = [];
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {

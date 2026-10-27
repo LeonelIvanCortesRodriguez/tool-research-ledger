@@ -25,7 +25,7 @@ OKLCH. The light and dark tables were tuned separately. `scripts/contrast-check.
 | `--line` | `0.86 0.008 258` | `0.32 0.015 258` | Hairline dividers (decorative, no contrast duty) |
 | `--line-strong` | `0.64 0.013 258` | `0.52 0.018 258` | Input borders, empty ladder steps, glyph outlines |
 | `--accent` | `0.42 0.115 343` | `0.72 0.12 343` | Primary action, current selection, focus |
-| `--on-accent` | `1 0 0` | `0.155 0.009 258` | Text on an accent-filled button |
+| `--on-accent` | `1 0 0` | `0.15 0.009 258` | Text on an accent-filled button |
 | `--stop` | `0.43 0.105 28` | `0.74 0.13 28` | Anything that can stop adoption: HOLD, REJECT, HIGH, CRITICAL |
 
 `--line-strong` changes from `0.69` to `0.64` (light) and from `0.45` to `0.52` (dark) so that glyph outlines and empty ladder steps reach the 3:1 non-text minimum.
@@ -83,16 +83,17 @@ Weight follows importance: decision is the heaviest element on a record (16px se
 
 ## Media treatment
 
-- **README hero:** light and dark PNGs through `<picture>`: wordmark, promise, and the record anatomy figure built from a real catalog entry. No interface screenshot in the hero.
-- **Social preview:** 1280 × 640. Berry field on the left half carrying the mark and wordmark in white; right half shows the ladder and the three decision glyphs with labels on the light surface.
-- **Demonstration:** 15 to 20 second recording of one complete job: type "turn scanned PDFs into reliable data", see the shortlist, compare two tools, open evidence, read the decision basis and next test. GIF for README (under 3MB, 960px), MP4 for Pages.
-- **Product views:** four annotated captures (search result, comparison, evidence detail, capability map). Annotations sit outside the capture and name the point ("same job, two tools, different permission").
+- **README hero:** `docs/brand/hero-light.png` and `hero-dark.png` through `<picture>`, rendered at 1280 × 700 CSS pixels and 1.5× density, about 180KB each: wordmark, promise, the decision path in one line, the E0 ceiling, and the record anatomy of the real OCRmyPDF entry with its four channels.
+- **Social preview:** `docs/brand/social-preview.png`, 1280 × 640: the berry field on the left with mark, wordmark, and "Choose the tool. See the proof."; on the right the E0 ladder and six decision glyphs with their catalog counts.
+- **Demonstration:** `docs/brand/demo.gif` (960px, about 330KB) and `demo.mp4`: seven captioned frames of the live ledger for one job, from typing the query to the evidence detail. The caption bar is added for the recording only. The README wraps the GIF in `<picture>` with a `prefers-reduced-motion` source that shows the first frame.
+- **Product views:** four annotated captures at 1:1 beside numbered notes: shortlist, comparison, evidence detail, capability map.
+- `design/render.mjs` generates all of them from `data/catalog.json` and the live interface; counts are never typed.
 
 ## Motion
 
-- Existing Web Animations only: filter changes reorder with a 180ms ease-out-quart; the evidence ladder fills step by step once on open (40ms stagger).
-- `prefers-reduced-motion` removes movement; all states are drawn immediately.
-- Nothing is hidden waiting for an animation to run.
+- `motion.js` uses the Web Animations API for two state changes only: shortlist cards rise 12px into place (240ms, 45ms stagger, ease-out curve), and dialogs open in 200ms and close in 140ms.
+- When `prefers-reduced-motion` is set, no animation runs and every state is drawn immediately; `data-motion="reduced"` records this and browser QA asserts it.
+- Nothing else moves. The evidence ladder, decision glyphs, and risk bars are static.
 
 ## Do
 
