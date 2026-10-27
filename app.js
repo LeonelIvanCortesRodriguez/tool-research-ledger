@@ -193,7 +193,8 @@
     </span>`;
   }
   function decisionBasis(tool) {
-    const parts = [`Fit ${Math.max(...Object.values(tool.projectFit || {}).map((grade) => fitOrder[grade] ?? 0)) >= 4 ? "A" : "bounded"}`, tool.evidenceLevel];
+    const bestFit = Math.max(0, ...Object.values(tool.projectFit || {}).map((grade) => fitOrder[grade] ?? 0));
+    const parts = [`Fit ${({ 4: "A", 3: "B", 2: "C", 1: "D" })[bestFit] || "unproven"}`, tool.evidenceLevel];
     if (runtime(tool)?.status) parts.push(`runtime ${runtime(tool).status.toLowerCase()}`);
     if (scan(tool)?.status) parts.push(`scan ${scan(tool).status.toLowerCase()}`);
     parts.push(`${String(tool.riskLevel || "unknown").toLowerCase()} risk`);

@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/brand/hero-dark.png">
-  <img src="docs/brand/hero-light.png" width="1280" alt="Tool Research Ledger. Find a tool for the job, and see how much proof stands behind it. 99 open-source tools across 13 job families. A record card for OCRmyPDF, the lead option for document intelligence, shows four separate channels: decision PILOT with a half-filled circle, run a controlled pilot; evidence E0 on a six-step ladder with one step filled, source reviewed; risk MEDIUM with two of four bars filled; and fit best for searchable PDF output. The next proof is one bounded task with its output, checks, limitations, and rollback.">
+  <img src="docs/brand/hero-light.png" width="1280" alt="Tool Research Ledger. Find a tool for the job, and see how much proof stands behind it. For technical leads choosing open-source tools: 99 tools across 13 job families. A record card for OCRmyPDF, the lead option for document intelligence, shows four separate channels: decision PILOT with a half-filled circle, run a controlled pilot; evidence E0 on a six-step ladder with one step filled, source reviewed; risk MEDIUM with two of four bars filled; and fit best for searchable PDF output. The next proof is one bounded task with its output, checks, limitations, and rollback.">
 </picture>
 
 **[Open the live ledger](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** · [Run it locally](#run-and-verify) · [Evidence model](docs/EVIDENCE_MODEL.md)
