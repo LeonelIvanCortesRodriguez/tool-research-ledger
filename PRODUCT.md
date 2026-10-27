@@ -22,11 +22,11 @@ Choose a job or inspect a capability family, then open its evidence before adopt
 
 ## Verified evidence
 
-The catalog, counts, family membership, decisions, and E0 ceiling come from `data/catalog.json`. Application verification is separate from evidence for third-party tools. Every published third-party entry is source-reviewed E0 until retained public-safe trials justify promotion.
+The catalog, counts, family membership, decisions, E0 ceiling, and 99-repository reconciliation come from `data/catalog.json`. Application verification is separate from evidence for third-party tools. Every published third-party entry is source-reviewed E0 until retained public-safe trials justify promotion.
 
 ## Limitations and prohibited claims
 
-Fit and project relevance are editorial assessments, not benchmark scores. A source review, security scan, stars, or installation does not prove operational benefit. No third-party tool is certified safe by this ledger. Private trials cannot raise public evidence. New Berth and SWE-AF records are research candidates, not installed or validated in this project.
+Fit and project relevance are editorial assessments, not benchmark scores. A source review, security scan, stars, or installation does not prove operational benefit. No third-party tool is certified safe by this ledger. Private trials cannot raise public evidence. Batch I records are research candidates, not operational endorsements.
 
 ## Brand Personality
 

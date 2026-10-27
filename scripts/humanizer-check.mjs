@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const proseFiles = ["README.md", "SECURITY.md", "THIRD_PARTY_NOTICES.md", "docs/EVIDENCE_MODEL.md", "docs/METHODOLOGY.md", "docs/SAMPLE_DECISION.md", "docs/LICENSE_REVIEW.md", "index.html", "app.js"];
+const proseFiles = ["README.md", "PRODUCT.md", "SECURITY.md", "THIRD_PARTY_NOTICES.md", "docs/EVIDENCE_MODEL.md", "docs/METHODOLOGY.md", "docs/SAMPLE_DECISION.md", "docs/LICENSE_REVIEW.md", "docs/BATCH_2026-10-26-I.md", "index.html", "app.js"];
 const patterns = [
   [/\bnot (?:just|only|merely)\b/gi, "staged not-X-but-Y contrast"],
   [/\b(?:at its core|what really matters|here(?:'|’)s the thing|let(?:'|’)s (?:dive|explore|break)|let that sink in)\b/gi, "staged AI phrase"],

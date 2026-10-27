@@ -25,6 +25,7 @@ export function validateCatalog(catalog) {
   const categoryIds = new Set((catalog.categories || []).map((item) => item.id));
   if (categoryIds.size !== catalog.categories?.length) errors.push("Category IDs must be unique");
   const toolIds = new Set();
+  const repoUrls = new Set();
   for (const tool of catalog.tools || []) {
     if (!tool.id || toolIds.has(tool.id)) errors.push(`Missing or duplicate tool id: ${tool.id}`);
     toolIds.add(tool.id);
@@ -39,6 +40,17 @@ export function validateCatalog(catalog) {
     if (tool.findingStatus !== "SOURCE_REVIEWED") errors.push(`${tool.id}: E0 requires source-reviewed status`);
     if (!tool.repoUrl) errors.push(`${tool.id}: E0 requires a public repository URL`);
     else if (!/^https:\/\/github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\/?$/.test(tool.repoUrl)) errors.push(`${tool.id}: invalid GitHub URL`);
+    else {
+      const normalizedUrl = tool.repoUrl.toLowerCase().replace(/\/$/, "");
+      if (repoUrls.has(normalizedUrl)) errors.push(`${tool.id}: duplicate repository URL ${tool.repoUrl}`);
+      repoUrls.add(normalizedUrl);
+    }
+  }
+  const coverage = catalog.meta?.repositoryCoverage;
+  if (coverage) {
+    if (coverage.represented !== repoUrls.size) errors.push(`Repository coverage represented=${coverage.represented} but catalog has ${repoUrls.size} unique URLs`);
+    if (coverage.missing !== Math.max(0, coverage.expected - repoUrls.size)) errors.push("Repository coverage missing count is inconsistent");
+    if (coverage.duplicateUrls !== (catalog.tools.length - repoUrls.size)) errors.push("Repository coverage duplicate count is inconsistent");
   }
   for (const group of catalog.capabilityGroups || []) {
     if (!group.toolIds?.length) errors.push(`${group.id}: family has no options`);
