@@ -1,62 +1,120 @@
 <template>
-  <!-- Story video: how a tool earns its grade. video/assemble.mjs fills STORY (timing, facts, words) from the data.
-       One headline per spoken line sits at the top; each scene draws its numbers below it. -->
+  <!-- Story video: video/assemble.mjs fills in STORY (timing, facts from data/ledger-export.json, the voice's
+       waveform). One wide plane holds six scenes; a camera travels between them, and the seventh pulls back over all. -->
   <style>
-    @font-face { font-family: "Schibsted Grotesk"; src: url("assets/SchibstedGrotesk.woff2") format("woff2"); font-weight: 400 900; }
     #root * { margin: 0; padding: 0; box-sizing: border-box; }
-    #root { position: absolute; inset: 0; overflow: hidden; background: #14171d; font-family: "Schibsted Grotesk", sans-serif; color: #f2f4f8; }
-    .layer { position: absolute; inset: 0; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #14181f; font-family: "Schibsted Grotesk", sans-serif; color: #f4f6fa; font-feature-settings: "zero"; }
+    .layer, .wrap { position: absolute; inset: 0; }
     .mono { font-family: "JetBrains Mono", monospace; }
-    .kicker { position: absolute; left: 140px; top: 86px; color: #e58ab3; font-size: 32px; font-weight: 800; letter-spacing: .01em; }
-    .head { position: absolute; left: 140px; top: 140px; width: 1640px; font-size: 88px; font-weight: 800; line-height: 1.06; letter-spacing: -.025em; }
-    .scene { position: absolute; left: 140px; right: 140px; top: 430px; bottom: 120px; }
-    #progress { position: absolute; left: 0; bottom: 0; height: 8px; width: 1920px; background: #e58ab3; transform-origin: 0 50%; }
-    .tiles { display: grid; grid-template-columns: repeat(25, 50px); gap: 12px; }
-    .tile { width: 50px; height: 50px; border-radius: 9px; background: #2b313c; }
-    .tile.E1 { background: #9b4d78; } .tile.E2 { background: #e58ab3; }
-    .legend { display: flex; gap: 48px; margin-top: 40px; color: #a5adbb; font-size: 34px; font-weight: 700; }
-    .legend i { display: inline-block; width: 28px; height: 28px; margin-right: 12px; border-radius: 6px; vertical-align: -3px; background: #2b313c; }
-    .legend .E1 i { background: #9b4d78; } .legend .E2 i { background: #e58ab3; }
-    .rung { display: grid; grid-template-columns: 110px 620px 1fr; align-items: center; height: 82px; border-bottom: 2px solid #262b34; }
-    .rung .code { font-size: 44px; font-weight: 800; }
-    .rung .words { color: #a5adbb; font-size: 32px; font-weight: 700; }
-    .rung .bar { display: flex; align-items: center; gap: 20px; font-size: 36px; font-weight: 800; }
-    .rung .fill { height: 34px; border-radius: 6px; background: #2b313c; transform-origin: 0 50%; }
-    .rung.E1 .fill { background: #9b4d78; } .rung.E2 .fill { background: #e58ab3; }
-    .card { position: absolute; left: 0; top: 0; width: 960px; padding: 36px 40px; border: 3px solid #333a46; border-radius: 22px; background: #1b1f27; }
-    .card h3 { margin-bottom: 20px; color: #a5adbb; font-size: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
-    .row { display: flex; justify-content: space-between; gap: 30px; padding: 12px 0; border-top: 2px solid #2a303a; font-size: 36px; }
-    .row span:first-child { color: #a5adbb; }
-    .row strong { font-weight: 800; }
-    .chips { display: flex; gap: 16px; margin-top: 24px; }
-    .chip { padding: 10px 22px; border: 3px solid #e58ab3; border-radius: 40px; color: #f2f4f8; font-size: 30px; font-weight: 800; }
-    .stamp { position: absolute; left: 1080px; top: 10px; width: 560px; text-align: center; }
-    .stamp .move { font-size: 150px; font-weight: 900; letter-spacing: -.03em; }
-    .stamp .from { color: #5b6372; text-decoration: line-through; text-decoration-thickness: 10px; }
-    .stamp .to { color: #e58ab3; }
-    .stamp p { margin-top: 10px; font-size: 38px; font-weight: 800; }
-    .stamp small { display: block; margin-top: 8px; color: #a5adbb; font-size: 30px; }
-    .expect { display: inline-block; padding: 18px 28px; border: 3px dashed #a5adbb; border-radius: 16px; font-size: 40px; font-weight: 800; }
-    .meter { display: grid; grid-template-columns: 420px 1fr 200px; align-items: center; gap: 30px; margin-top: 40px; font-size: 40px; font-weight: 800; }
-    .meter .track { height: 46px; border-radius: 10px; background: #262b34; overflow: hidden; }
-    .meter .fill { height: 100%; background: #e58ab3; transform-origin: 0 50%; }
-    .meter.other .fill { background: #9b4d78; }
-    .dots { display: flex; gap: 34px; margin-top: 40px; }
-    .dot { width: 110px; height: 110px; border-radius: 50%; border: 8px solid #6fd1a0; background: #6fd1a0; }
-    .dot.miss { background: transparent; border-color: #f08a7a; }
-    .verdict { display: inline-block; margin-top: 40px; padding: 14px 26px; border-left: 10px solid #f08a7a; background: #241b1d; color: #f6b2a7; font-size: 40px; font-weight: 800; }
-    .later { margin-top: 30px; color: #a5adbb; font-size: 36px; font-weight: 700; }
-    .later strong { color: #f2f4f8; }
-    .counters { display: flex; gap: 90px; }
-    .counter { font-size: 150px; font-weight: 900; line-height: 1; letter-spacing: -.03em; }
-    .counter small { display: block; margin-top: 14px; color: #a5adbb; font-size: 38px; font-weight: 700; letter-spacing: 0; }
-    .counter.accent { color: #e58ab3; }
-    .source { position: absolute; left: 0; bottom: 0; color: #a5adbb; font-size: 30px; }
+    .abs { position: absolute; }
+    .muted { color: #a3abb9; }
+    .accent { color: #e05aa0; }
+    .good { color: #5fd3a2; }
+    .bad { color: #ff7a70; }
+
+    #cam { position: absolute; left: 0; top: 0; width: 6720px; height: 2480px; transform-origin: 0 0; }
+    .region { position: absolute; width: 1920px; height: 1080px; }
+    #backdrop { position: absolute; inset: -2400px; background-image: radial-gradient(#252b36 2px, transparent 2px); background-size: 48px 48px; opacity: 0.55; }
+
+    #heads { position: absolute; left: 120px; top: 70px; width: 1680px; height: 120px; }
+    .head { position: absolute; inset: 0; overflow: hidden; }
+    .cue { position: absolute; left: 0; top: 104px; height: 6px; width: 1680px; border-radius: 3px; background: #e05aa0; transform-origin: left center; transform: scaleX(0); }
+    .head span { display: inline-block; font-size: 76px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; white-space: nowrap; text-shadow: 0 4px 24px #14181f; }
+    #progress { position: absolute; left: 120px; right: 120px; bottom: 44px; height: 6px; display: flex; gap: 10px; }
+    #progress i { flex: 1; height: 6px; border-radius: 3px; background: #2b313c; overflow: hidden; position: relative; }
+    #progress i b { position: absolute; inset: 0; background: #e05aa0; transform-origin: left center; transform: scaleX(0); }
+    #veil { position: absolute; inset: 0; background: #14181f; }
+
+    .shot { position: absolute; left: 0; right: 0; top: 380px; text-align: center; }
+    .shot b { display: block; font-size: 150px; font-weight: 900; letter-spacing: -0.045em; line-height: 1; }
+    .shot small { display: block; margin-top: 26px; font-size: 40px; color: #a3abb9; }
+    .tile { position: absolute; width: 64px; height: 64px; border-radius: 12px; background: #232a35; border: 2px solid #38404e; transform-origin: center; }
+    .ask { position: absolute; top: 560px; padding: 22px 46px; border-radius: 999px; background: #e05aa0; color: #14181f; font-size: 72px; font-weight: 900; letter-spacing: -0.03em; }
+
+    .badge { position: absolute; border: 4px solid #e05aa0; border-radius: 28px; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: "JetBrains Mono", monospace; font-weight: 800; background: #1b2029; }
+    .badge .d { display: inline-block; }
+    .badge .next { position: absolute; }
+    .step { position: absolute; bottom: 140px; width: 230px; border-radius: 14px 14px 4px 4px; background: #232a35; border: 3px solid #3a4250; transform-origin: center bottom; }
+    .step-label { position: absolute; width: 230px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 48px; font-weight: 800; }
+    .step-note { position: absolute; width: 330px; text-align: center; font-size: 36px; font-weight: 700; line-height: 1.2; }
+    .arrow-up { position: absolute; width: 0; height: 0; border-left: 46px solid transparent; border-right: 46px solid transparent; border-bottom: 70px solid #e05aa0; }
+    .arrow-shaft { position: absolute; width: 22px; background: #e05aa0; border-radius: 4px; }
+
+    .doc { position: absolute; border-radius: 24px; background: #1c222b; border: 2px solid #343c49; overflow: hidden; }
+    .doc-head { height: 64px; padding: 0 28px; display: flex; align-items: center; gap: 14px; background: #232a35; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; color: #a3abb9; }
+    .doc-body { padding: 18px 28px; font-family: "JetBrains Mono", monospace; font-size: 28px; line-height: 38px; color: #c3cad6; }
+    .doc-line { white-space: pre-wrap; min-height: 38px; border-radius: 6px; }
+    .scanbar { position: absolute; left: 0; right: 0; height: 6px; background: rgba(224, 90, 160, 0.7); box-shadow: 0 0 28px 8px rgba(224, 90, 160, 0.55); }
+    .chip { position: absolute; padding: 14px 26px; border-radius: 16px; font-size: 34px; font-weight: 700; background: #262d38; border: 3px solid #3a4250; white-space: nowrap; }
+    .chip.hot { border-color: #ff7a70; color: #ffb0a8; }
+    .chip.ok { border-color: #5fd3a2; color: #a8f0d0; }
+    .row { position: absolute; left: 32px; right: 32px; height: 76px; border-radius: 14px; background: #262d38; display: flex; align-items: center; gap: 18px; padding: 0 22px; font-size: 30px; }
+    .sev { font-family: "JetBrains Mono", monospace; font-weight: 800; color: #14181f; background: #ff7a70; padding: 4px 12px; border-radius: 8px; font-size: 28px; }
+    .sq { position: absolute; width: 80px; height: 80px; border-radius: 14px; background: #232a35; border: 3px solid #3a4250; }
+    .card { position: absolute; border-radius: 28px; background: #1c222b; border: 2px solid #343c49; }
+    .card h3 { position: absolute; left: 40px; top: 34px; font-size: 46px; font-weight: 800; letter-spacing: -0.02em; }
+    .stamp { position: absolute; padding: 10px 28px; border: 6px solid #ff5a4f; border-radius: 16px; color: #ff5a4f; font-family: "JetBrains Mono", monospace; font-size: 64px; font-weight: 900; letter-spacing: 0.06em; }
+    .verdict { position: absolute; padding: 8px 20px; border-radius: 12px; background: #f2b84b; color: #14181f; font-family: "JetBrains Mono", monospace; font-size: 34px; font-weight: 800; }
+
+    .field { position: absolute; left: 40px; right: 40px; display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: start; font-size: 32px; line-height: 1.3; }
+    .field b { color: #a3abb9; font-weight: 700; }
+    .meter { position: absolute; height: 40px; border-radius: 20px; background: #262d38; }
+    .band { position: absolute; top: 0; bottom: 0; background: rgba(95, 211, 162, 0.35); border-radius: 20px; }
+    .needle { position: absolute; top: -26px; width: 8px; height: 92px; border-radius: 4px; }
+    .mini { position: absolute; width: 30px; height: 30px; border-radius: 7px; background: #232a35; border: 2px solid #38404e; }
+    .name-chip { position: absolute; width: 520px; height: 64px; white-space: nowrap; gap: 12px; font-size: 28px !important; border-radius: 14px; background: #262d38; border: 3px solid #e05aa0; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; font-size: 30px; font-weight: 700; }
+    .name-chip .mono { color: #e05aa0; }
+
+    .track { position: absolute; height: 6px; background: #343c49; border-radius: 3px; }
+    .station { position: absolute; width: 34px; height: 34px; border-radius: 50%; background: #14181f; border: 6px solid #e05aa0; }
+    .station-label { position: absolute; width: 300px; text-align: center; font-size: 34px; font-weight: 700; color: #a3abb9; }
+    .token { position: absolute; width: 440px; height: 190px; border-radius: 26px; background: #232a35; border: 3px solid #e05aa0; }
+    .token b { position: absolute; left: 28px; top: 26px; font-size: 40px; font-weight: 800; }
+    .token small { position: absolute; left: 28px; top: 126px; font-size: 28px; color: #a3abb9; }
+    .wave { position: absolute; display: flex; align-items: center; justify-content: space-between; }
+    .wave i { display: block; border-radius: 6px; background: #e05aa0; }
+    .ck { width: 46px; height: 46px; flex: none; }
+    .ck circle { fill: none; stroke: #5fd3a2; stroke-width: 3; }
+    .ck path { fill: none; stroke: #5fd3a2; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .check-row { position: absolute; display: flex; align-items: center; gap: 18px; font-size: 32px; font-weight: 700; white-space: nowrap; }
+    .button { position: absolute; height: 72px; padding: 0 36px; border-radius: 18px; border: 4px solid #e05aa0; display: flex; align-items: center; font-size: 34px; font-weight: 800; overflow: hidden; }
+    .fit-card { position: absolute; width: 560px; height: 270px; border-radius: 24px; background: #1c222b; border: 3px solid #343c49; padding: 24px 30px; }
+    .fit-card b { display: block; font-size: 40px; font-weight: 800; }
+    .fit-card em { display: block; font-style: normal; margin-top: 6px; font-size: 30px; font-weight: 700; color: #e05aa0; }
+    .fit-card small { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-top: 6px; font-size: 28px; line-height: 1.25; color: #a3abb9; overflow: hidden; }
+    #links { position: absolute; inset: 0; }
+    #links line { stroke: #e05aa0; stroke-width: 5; stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+    #counters { position: absolute; left: 0; right: 0; top: 330px; display: flex; justify-content: center; gap: 120px; }
+    .counter { font-size: 110px; font-weight: 900; letter-spacing: -0.04em; text-align: center; }
+    .counter small { display: block; font-size: 38px; font-weight: 700; color: #a3abb9; letter-spacing: 0; }
+    #title { position: absolute; left: 0; right: 0; top: 600px; display: flex; justify-content: center; gap: 0.24em; font-size: 140px; font-weight: 900; letter-spacing: -0.045em; line-height: 1; }
+    .tw { display: inline-block; overflow: hidden; padding-bottom: 0.1em; }
+    .tw span { display: inline-block; }
+    #card { position: absolute; left: 0; right: 0; top: 790px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; letter-spacing: 0.1em; color: #a3abb9; }
   </style>
 
-  <div id="root" data-composition-id="story" data-width="1920" data-height="1080">
-    <div id="l-scenes" class="layer clip" data-start="0" data-duration="__TOTAL__" data-track-index="1"></div>
-    <div id="l-heads" class="layer clip" data-start="0" data-duration="__TOTAL__" data-track-index="2"><div id="progress"></div></div>
+  <div id="root" data-composition-id="story" data-width="1920" data-height="1080" data-layout-allow-overlap>
+    <div id="l-plane" class="layer clip" data-start="0" data-duration="__TOTAL__" data-track-index="1">
+      <div id="w-plane" class="wrap">
+        <div id="cam" data-layout-allow-overlap data-layout-allow-overflow><div id="backdrop"></div></div>
+      </div>
+    </div>
+    <div id="l-end" class="layer clip" data-start="0" data-duration="__TOTAL__" data-track-index="2">
+      <div id="w-end" class="wrap">
+        <div id="counters"></div>
+        <h1 id="title" data-layout-allow-overflow></h1>
+        <div id="card"></div>
+        <div id="built" style="position:absolute;left:0;right:0;top:850px;text-align:center;font-size:30px;color:#a3abb9"></div>
+      </div>
+    </div>
+    <div id="l-chrome" class="layer clip" data-start="0" data-duration="__TOTAL__" data-track-index="3">
+      <div id="w-chrome" class="wrap">
+        <div id="heads" data-layout-allow-overlap></div>
+        <div id="progress"></div>
+        <div id="veil"></div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -64,113 +122,503 @@
     const F = STORY.facts, T = STORY.text;
     const L = (id) => STORY.lines[id];
     const SC = (name) => STORY.scenes[name];
-    // transitions.dev curves as GSAP eases.
+    const at = (id, f = 0) => L(id).start + f * (L(id).end - L(id).start);
+    const BEAT = STORY.beat;
+
+    // cubic-bezier as a GSAP ease, for transitions.dev's exact curves.
     function bezier(x1, y1, x2, y2) {
       const bx = (u) => 3 * x1 * u * (1 - u) ** 2 + 3 * x2 * u * u * (1 - u) + u ** 3;
       const by = (u) => 3 * y1 * u * (1 - u) ** 2 + 3 * y2 * u * u * (1 - u) + u ** 3;
       return (t) => { let lo = 0, hi = 1, u = t; for (let i = 0; i < 30; i++) { u = (lo + hi) / 2; if (bx(u) < t) lo = u; else hi = u; } return by(u); };
     }
-    const SMOOTH = bezier(0.22, 1, 0.36, 1);
-    const POP = bezier(0.34, 1.45, 0.64, 1);
-    const esc = (value) => String(value).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-    function el(tag, cls, parent, html = "") { const node = document.createElement(tag); if (cls) node.className = cls; if (html) node.innerHTML = html; parent.appendChild(node); return node; }
+    const SMOOTH = bezier(0.22, 1, 0.36, 1);   // transitions.dev --ease-smooth-out
+    const POP = bezier(0.34, 1.45, 0.64, 1);   // transitions.dev --digit-ease
+    const HARD = "expo.out", WHIP = "expo.inOut";
+
+    const UNITLESS = new Set(["fontWeight", "opacity", "zIndex", "lineHeight", "flex"]);
+    function el(tag, cls, parent, css = {}, html = "") {
+      const node = document.createElement(tag);
+      if (cls) node.className = cls;
+      Object.assign(node.style, Object.fromEntries(Object.entries(css).map(([k, v]) => [k, typeof v === "number" && !UNITLESS.has(k) ? v + "px" : v])));
+      if (html) node.innerHTML = html;
+      parent.appendChild(node);
+      return node;
+    }
+    const esc = (text) => String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const checkSvg = '<svg viewBox="0 0 40 40" class="ck"><circle cx="20" cy="20" r="18"/><path d="M12 20.5l5.5 5.5L28.5 14" pathLength="1"/></svg>';
+
+    // Counts a number up inside an element whose first text node holds it (deterministic: driven by the tween's progress).
+    function countUp(node, value, time, duration = 1.0) {
+      const text = [...node.childNodes].find((child) => child.nodeType === 3);
+      if (!text) return;
+      const state = { v: 0 };
+      tl.fromTo(state, { v: 0 }, { v: value, duration, ease: "power2.out", immediateRender: false, onUpdate: () => { text.nodeValue = String(Math.round(state.v)); } }, time);
+    }
+    gsap.defaults({ overwrite: false });
     const tl = gsap.timeline({ paused: true });
-    const scenesLayer = document.getElementById("l-scenes"), heads = document.getElementById("l-heads");
-    const ids = Object.keys(STORY.lines);
-    const nf = (n) => n.toLocaleString(STORY.lang);
-    // Show an element from time a, with a gentle rise.
-    const enter = (node, a, extra = {}) => tl.fromTo(node, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: SMOOTH, immediateRender: false, ...extra }, a);
+    tl.to({}, { duration: STORY.total }, 0);
 
-    // ---- Headlines: one per spoken line, on screen until the next line starts ----
-    ids.forEach((id, index) => {
-      const line = L(id);
-      const node = el("div", "head", heads, esc(line.show));
-      // The first headline is already on screen at 0 s: frame 0 is the thumbnail on most players.
-      if (index === 0) gsap.set(node, { autoAlpha: 1 });
-      else { gsap.set(node, { autoAlpha: 0 }); enter(node, Math.max(0, line.start - 0.25)); }
-      const next = ids[index + 1];
-      const until = next && L(next).scene === line.scene ? L(next).start - 0.3 : SC(line.scene).end - 0.25;
-      if (next) tl.to(node, { autoAlpha: 0, y: -16, duration: 0.25, ease: "power1.in" }, until);
-    });
-    // ---- Scene kickers and containers ----
-    const scene = {};
-    for (const [name, span] of Object.entries(STORY.scenes)) {
-      const kicker = el("div", "kicker", heads, esc(T.kicker[name]));
-      scene[name] = el("div", "scene", scenesLayer);
-      if (span.start === 0) gsap.set([kicker, scene[name]], { autoAlpha: 1 });
-      else { gsap.set([kicker, scene[name]], { autoAlpha: 0 }); tl.to([kicker, scene[name]], { autoAlpha: 1, duration: 0.35 }, span.start + 0.05); }
-      if (span.end < STORY.total) tl.to([kicker, scene[name]], { autoAlpha: 0, duration: 0.3 }, span.end - 0.3);
-    }
-    tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: STORY.total, ease: "none" }, 0);
+    // ---- the plane and its regions ----
+    const cam = document.getElementById("cam");
+    const REGIONS = { world: [0, 0], grade: [2400, 0], scan: [4800, 0], proof: [0, 1400], loop: [2400, 1400], fit: [4800, 1400] };
+    const region = {};
+    for (const [name, [x, y]] of Object.entries(REGIONS)) region[name] = el("div", "region", cam, { left: x, top: y });
+    // The camera puts plane point (px, py) at screen point (960, 560), at scale s.
+    const view = (px, py, s = 1) => ({ x: 960 - px * s, y: 560 - py * s, scale: s });
+    const regionView = (name, dx = 0, dy = 0, s = 1) => view(REGIONS[name][0] + 960 + dx, REGIONS[name][1] + 560 + dy, s);
+    const camTo = (time, v, duration = 0.9, ease = WHIP) => tl.to(cam, { ...v, duration, ease }, time);
+    const drift = (from, to, v0, dx) => tl.to(cam, { x: v0.x - dx, duration: Math.max(0.5, to - from), ease: "none" }, from);
 
-    // ---- Intro: every tool as a tile, coloured by its grade ----
-    {
-      const grid = el("div", "tiles", scene.intro);
-      const order = ["E2", "E1", "E0"].flatMap((level) => Array(F.levels[level]).fill(level));
-      const tiles = order.map((level) => el("div", `tile ${level}`, grid));
-      gsap.set(tiles, { autoAlpha: 0, scale: 0.6 });
-      tl.to(tiles, { autoAlpha: 1, scale: 1, duration: 0.35, ease: POP, stagger: 1.6 / tiles.length }, L("i1").start + 0.2);
-      const legend = el("div", "legend", scene.intro, ["E0", "E1", "E2"].map((level) => `<span class="${level}"><i></i>${level} · ${nf(F.levels[level])}</span>`).join(""));
-      enter(legend, L("i2").start);
-    }
-    // ---- Ladder: six grades and how many tools sit on each ----
-    {
-      const most = Math.max(...Object.values(F.levels));
-      ["E0", "E1", "E2", "E3", "E4", "E5"].forEach((level, k) => {
-        const rung = el("div", `rung ${level}`, scene.ladder, `<span class="code mono">${level}</span><span class="words">${esc(T.level[level])}</span><span class="bar"><span class="fill" style="width:${Math.max(8, 760 * F.levels[level] / most)}px"></span>${nf(F.levels[level])}</span>`);
-        const fill = rung.querySelector(".fill");
-        gsap.set(fill, { scaleX: 0 });
-        tl.to(fill, { scaleX: 1, duration: 0.8, ease: SMOOTH }, L("l1").start + 0.1 + k * 0.08);
-        if (level !== "E0") { gsap.set(rung, { opacity: 0.45 }); tl.to(rung, { opacity: 1, duration: 0.4 }, L("l2").start + 0.2 + k * 0.1); }
-      });
-    }
-    // ---- E1: the voice's use record and the approved move ----
-    {
-      const card = el("div", "card", scene.e1, `<h3>${esc(T.useRecord)}</h3>
-        <div class="row"><span>${esc(F.voice.name)}</span><strong>${esc(F.voice.project)}</strong></div>
-        <div class="row"><span>${esc(T.uses)}</span><strong>${nf(F.voice.uses)}</strong></div>
-        <div class="row"><span>${esc(T.worked)}</span><strong>${nf(F.voice.worked)}</strong></div>
-        ${F.voice.problem === "PARTIAL" ? `<div class="row"><span>${esc(T.partly)}</span><strong>${nf(F.voice.uses - F.voice.worked)}</strong></div>` : ""}`);
-      enter(card, L("e1").start + 0.3);
-      const chips = el("div", "chips", card, T.fields.map((field) => `<span class="chip">${esc(field)}</span>`).join(""));
-      gsap.set(chips.children, { autoAlpha: 0 });
-      tl.fromTo(chips.children, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: POP, stagger: 0.35, immediateRender: false }, L("e2").start + 0.4);
-      const stamp = el("div", "stamp", scene.e1, `<div class="move mono"><span class="from">${F.voice.from}</span> <span class="to">${F.voice.to}</span></div><p>${esc(T.approved)}</p><small>${esc(F.voice.date)}</small>`);
-      gsap.set(stamp, { autoAlpha: 0 });
-      tl.fromTo(stamp, { autoAlpha: 0, scale: 1.2 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: POP, immediateRender: false }, L("e3").start + 0.3);
-    }
-    // ---- E2: the expected result first, then two readers against it ----
-    {
-      const expect = el("div", "expect", scene.e2, `${esc(T.expected)}: ${nf(F.ocr.of)} ${esc(T.headlines)}`);
-      enter(expect, L("f1").start + 0.4);
-      for (const [cls, name, got, line] of [["", F.ocr.name, F.ocr.got, "f2"], ["other", F.ocr.other, F.ocr.otherGot, "f3"]]) {
-        const meter = el("div", `meter ${cls}`, scene.e2, `<span>${esc(name)}</span><span class="track"><span class="fill" style="display:block;width:${100 * got / F.ocr.of}%"></span></span><span class="mono">${got}/${F.ocr.of}</span>`);
-        enter(meter, L(line).start + 0.2);
-        const fill = meter.querySelector(".fill");
-        gsap.set(fill, { scaleX: 0 });
-        tl.to(fill, { scaleX: 1, duration: 1.1, ease: SMOOTH }, L(line).start + 0.5);
+    // ---- chrome: headlines and progress ----
+    const heads = document.getElementById("heads");
+    const order = Object.keys(STORY.lines);
+    order.forEach((id, k) => {
+      // Grade codes in the mono face: its dotted zero and serifed one cannot be read as "EO" or "ET".
+      const head = el("div", "head", heads, {}, `<span>${esc(L(id).show).replace(/\bE[0-5]\+?/g, (code) => `<span class="mono">${code}</span>`)}</span>`);
+      head.id = "h-" + id;
+      const span = head.firstChild;
+      if (k === 0) gsap.set(head, { autoAlpha: 1 });
+      else {
+        gsap.set(head, { autoAlpha: 0 });
+        tl.set(head, { autoAlpha: 1 }, Math.max(0.3, L(id).start - 0.15));
+        tl.fromTo(span, { yPercent: 105 }, { yPercent: 0, duration: 0.5, ease: "power4.out", immediateRender: false }, Math.max(0.3, L(id).start - 0.15));
       }
+      const cue = el("div", "cue", head);
+      const cueWidth = Math.min(1680, 40 * L(id).show.length + 60);
+      cue.style.width = cueWidth + "px";
+      tl.fromTo(cue, { scaleX: 0 }, { scaleX: 1, duration: Math.max(0.6, L(id).end - L(id).start), ease: "none", immediateRender: false }, L(id).start);
+      const next = order[k + 1];
+      if (next) {
+        const out = L(next).start - 0.4;
+        tl.to(span, { yPercent: -105, duration: 0.25, ease: "power2.in" }, out);
+        tl.set(head, { autoAlpha: 0 }, out + 0.26);
+      } else {
+        tl.to(span, { autoAlpha: 0, duration: 0.4 }, STORY.total - 3.2);
+      }
+    });
+    const progress = document.getElementById("progress");
+    for (const name of Object.keys(STORY.scenes)) {
+      const bar = el("i", "", progress); const fill = el("b", "", bar);
+      tl.fromTo(fill, { scaleX: 0 }, { scaleX: 1, duration: SC(name).end - SC(name).start, ease: "none", immediateRender: false }, SC(name).start);
     }
-    // ---- A failed check, kept on record ----
+    gsap.set("#veil", { autoAlpha: 0 });
+    // Ambient motion: the dot field drifts slowly behind every scene.
+    tl.fromTo("#backdrop", { x: 0, y: 0 }, { x: -1400, y: -700, duration: STORY.total, ease: "none", immediateRender: false }, 0);
+
+    // Each sentence: its scene slowly zooms in or out by 4 %, around the scene's centre, so no stretch is a still
+    // frame and nothing reaches the frame edge.
+    const SCENE_REGION = { world: "world", grade: "grade", scan: "scan", proof: "proof", loop: "loop", fit: "fit" };
+    order.forEach((id, k) => {
+      const name = SCENE_REGION[L(id).scene];
+      if (!name) return;
+      const next = order[k + 1], until = next ? L(next).start : L(id).end + 1;
+      const [a, b] = k % 2 ? [1.04, 1] : [1, 1.04];
+      tl.fromTo(region[name], { scale: a }, { scale: b, duration: Math.max(0.5, until - L(id).start), ease: "sine.inOut", transformOrigin: "960px 560px", immediateRender: false }, L(id).start);
+    });
+
+    // ================= 1. the world =================
     {
-      el("div", "expect", scene.fail, `${esc(T.expected)}: ${nf(F.scanner.of)} ${esc(T.verdicts)}`);
-      const dots = el("div", "dots", scene.fail, Array.from({ length: F.scanner.of }, (_, k) => `<span class="dot${k < F.scanner.got ? "" : " miss"}"></span>`).join(""));
-      gsap.set(dots.children, { autoAlpha: 0, scale: 0.5 });
-      tl.to(dots.children, { autoAlpha: 1, scale: 1, duration: 0.4, ease: POP, stagger: 0.25 }, L("s1").start + 1.5);
-      const verdict = el("div", "verdict", scene.fail, `${esc(T.matched)} ${F.scanner.got}/${F.scanner.of} · ${esc(T.kept)}`);
-      enter(verdict, L("s1").start + 3.2);
-      const later = el("p", "later", scene.fail, `${esc(T.stays)} <strong>${F.scanner.level}</strong> · ${esc(T.second)}: <strong>${esc(F.scanner.second)}</strong>`);
-      enter(later, L("s2").start + 0.5);
+      const R = region.world;
+      const montage = STORY.montage.map((id, i) => {
+        // A montage burst: the names flash by as a flood on purpose, so they are texture for the readability check.
+        const shot = el("div", "shot", R, {}, `<b>${esc(F.names[id])}</b>`);
+        shot.setAttribute("data-layout-ignore", "");
+        gsap.set(shot, { autoAlpha: i === 0 ? 1 : 0 });
+        return shot;
+      });
+      // Cuts on the beat, accelerating: whole beats, then half beats, then the stop.
+      const lengths = montage.map((_, i) => (i < 6 ? 1 : 0.5) * BEAT);
+      let t = 0;
+      montage.forEach((shot, i) => {
+        if (i) { tl.set(shot, { autoAlpha: 1 }, t); tl.set(montage[i - 1], { autoAlpha: 0 }, t); }
+        tl.fromTo(shot, { scale: 1.12, x: (i % 2 ? 40 : -40) }, { scale: 1, x: 0, duration: lengths[i], ease: "none", immediateRender: i === 0 }, t);
+        t += lengths[i];
+      });
+      const montageEnd = t;
+      tl.set(montage.at(-1), { autoAlpha: 0 }, montageEnd);
+      // Every tool in the export floods in as a tile from the centre on "we collected".
+      const COLS = 17, PITCH = 78, X0 = 304, Y0 = 330;
+      const tiles = F.toolIds.map((id, i) => el("div", "tile", R, { left: X0 + (i % COLS) * PITCH, top: Y0 + Math.floor(i / COLS) * PITCH }));
+      gsap.set(tiles, { autoAlpha: 0, scale: 0 });
+      tl.to(tiles, { autoAlpha: 1, scale: 1, duration: 0.45, ease: HARD, stagger: { each: 0.006, grid: [7, COLS], from: "center" } }, Math.min(montageEnd, at("w3", 0.05)));
+      tl.to(tiles, { backgroundColor: "#e05aa0", borderColor: "#e05aa0", duration: 0.18, yoyo: true, repeat: 1, stagger: { each: 0.01, grid: [7, COLS], from: "edges" } }, at("w3", 0.6));
+      // Three questions slam in on their words.
+      const asks = T.asks.map((word, i) => el("div", "ask", R, { left: [250, 780, 1290][i] }, esc(word)));
+      gsap.set(asks, { autoAlpha: 0 });
+      asks.forEach((ask, i) => {
+        const time = at("w4", [0.05, 0.36, 0.62][i]);
+        tl.fromTo(ask, { autoAlpha: 0, scale: 1.6, rotation: [-6, 4, -3][i] }, { autoAlpha: 1, scale: 1, rotation: [-3, 2, -2][i], duration: 0.28, ease: "power4.out", immediateRender: false }, time);
+        tl.to(tiles, { autoAlpha: 0.35 - i * 0.08, duration: 0.2 }, time);
+      });
+      tl.to(tiles, { rotation: (i) => ((i * 37) % 9 - 4) * 2, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut", stagger: { each: 0.003 } }, at("w4", 0.1));
+      // Camera: pushed in during the montage, a hard pull-out to the whole collection.
+      gsap.set(cam, regionView("world", 0, 0, 1.08));
+      tl.to(cam, { ...regionView("world", 0, 0, 1), duration: 0.8, ease: HARD }, at("w3", 0));
+      drift(at("w3", 0) + 0.8, SC("world").end - 0.4, regionView("world"), 40);
     }
-    // ---- End: the totals, then the name ----
+
+    // ================= 2. the grade =================
     {
-      const counters = el("div", "counters", scene.end, [[F.tools, T.tools, ""], [F.graded, T.graded, "accent"], [F.uses, T.usesWord, ""]].map(([n, label, cls]) => `<div class="counter ${cls}">${nf(n)}<small>${esc(label)}</small></div>`).join(""));
-      gsap.set(counters.children, { autoAlpha: 0 });
-      tl.fromTo(counters.children, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: POP, stagger: 0.3, immediateRender: false }, L("r2").start);
-      const source = el("div", "source", scene.end, esc(T.source));
-      enter(source, L("r3").start);
+      const R = region.grade, s = SC("grade").start;
+      camTo(s - 0.3, regionView("grade"), 0.9);
+      // A badge that proof pushes up a step.
+      const badge = el("div", "badge", R, { left: 830, top: 380, width: 260, height: 200, fontSize: 130 }, `<span class="d">E0</span><span class="d next">E1</span>`);
+      const now = badge.children[0], next = badge.children[1];
+      gsap.set(badge, { autoAlpha: 0 }); gsap.set(next, { autoAlpha: 0 });
+      const shaft = el("div", "arrow-shaft", R, { left: 949, top: 700, height: 160 });
+      const head = el("div", "arrow-up", R, { left: 914, top: 632 });
+      const proofWord = el("div", "abs accent", R, { left: 1010, top: 700, fontSize: 44, fontWeight: 800 }, esc(T.proof));
+      gsap.set([shaft, head, proofWord], { autoAlpha: 0 });
+      tl.fromTo(badge, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.4, ease: POP, immediateRender: false }, at("g1", 0.05));
+      tl.fromTo([shaft, head, proofWord], { autoAlpha: 0, y: 160 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: HARD, stagger: 0.05, immediateRender: false }, at("g1", 0.45));
+      tl.to(badge, { y: -30, duration: 0.15, ease: "power2.out", yoyo: true, repeat: 1 }, at("g1", 0.7));
+      tl.to(now, { autoAlpha: 0, y: -60, filter: "blur(2px)", duration: 0.25 }, at("g1", 0.72));
+      tl.fromTo(next, { autoAlpha: 0, y: 70, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: POP, immediateRender: false }, at("g1", 0.78));
+      // The staircase, one step per beat.
+      tl.to([badge, shaft, head, proofWord], { autoAlpha: 0, y: -40, duration: 0.3, ease: "power2.in" }, at("g2", 0));
+      const STEP_X = (i) => 220 + i * 250, HEIGHTS = [80, 150, 220, 290, 360, 430];
+      const steps = HEIGHTS.map((h, i) => el("div", "step", R, { left: STEP_X(i), height: h }));
+      const labels = HEIGHTS.map((h, i) => el("div", "step-label", R, { left: STEP_X(i), top: 940 - 140 - h - 70 }, "E" + i));
+      gsap.set([...steps, ...labels], { autoAlpha: 0 });
+      steps.forEach((step, i) => {
+        const time = at("g2", 0.1) + i * BEAT * 0.5;
+        tl.fromTo(step, { autoAlpha: 1, scaleY: 0 }, { scaleY: 1, duration: 0.35, ease: HARD, immediateRender: false }, time);
+        tl.fromTo(labels[i], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: SMOOTH, immediateRender: false }, time + 0.15);
+      });
+      // Punch into E0, E1 and E2 as each is explained.
+      const notes = T.steps.map((text, i) => el("div", "step-note", R, { left: STEP_X(i) - 50, top: 940 - 140 - HEIGHTS[i] - 70 - 150 }, esc(text)));
+      gsap.set(notes, { autoAlpha: 0 });
+      ["g3", "g4", "g5"].forEach((id, i) => {
+        const cx = STEP_X(i) + 115 - 960, cy = 940 - 140 - HEIGHTS[i] - 160 - 560;
+        camTo(at(id, 0) - 0.25, regionView("grade", cx * 0.12, cy * 0.2 + 40, 1.06), 0.6, HARD);
+        tl.to(steps[i], { backgroundColor: "#e05aa0", borderColor: "#e05aa0", duration: 0.3 }, at(id, 0.1));
+        tl.fromTo(notes[i], { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: SMOOTH, immediateRender: false }, at(id, 0.15));
+      });
+      camTo(at("g6", 0) - 0.2, regionView("grade"), 0.7, HARD);
+      [3, 4, 5].forEach((i, k) => {
+        tl.fromTo(notes[i], { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: SMOOTH, immediateRender: false }, at("g6", 0.25 + k * 0.22));
+        tl.to(steps[i], { borderColor: "#e05aa0", duration: 0.3 }, at("g6", 0.25 + k * 0.22));
+      });
+      drift(at("g6", 0) + 0.5, SC("grade").end - 0.4, regionView("grade"), 40);
     }
-    tl.to("#root", { autoAlpha: 0, duration: 0.7, ease: "power1.in" }, STORY.total - 0.7);
+
+    // ================= 3. the scan =================
+    {
+      const R = region.scan, s = SC("scan").start;
+      camTo(s - 0.3, regionView("scan"), 0.9);
+      const doc = el("div", "doc", R, { left: 120, top: 250, width: 1040, height: 720 });
+      el("div", "doc-head", doc, {}, "SKILL.md");
+      const body = el("div", "doc-body", doc);
+      const shown = F.scanner.trapFile.slice(0, F.scanner.trapLine + 1).filter((text) => text.trim());
+      const lines = shown.map((text) => el("div", "doc-line", body, {}, esc(text)));
+      const bad = lines[lines.length - 1];
+      const bar = el("div", "scanbar", doc, { top: 64 });
+      gsap.set([doc, bar], { autoAlpha: 0 });
+      tl.fromTo(doc, { autoAlpha: 0, x: -120 }, { autoAlpha: 1, x: 0, duration: 0.6, ease: HARD, immediateRender: false }, at("c1", 0.05));
+      tl.set(bar, { autoAlpha: 1 }, at("c1", 0.4));
+      const sweeps = 3, sweepLen = (L("c2").end - at("c1", 0.4)) / sweeps;
+      for (let k = 0; k < sweeps; k++) tl.fromTo(bar, { y: 0 }, { y: 650, duration: sweepLen, ease: "sine.inOut", immediateRender: false }, at("c1", 0.4) + k * sweepLen);
+      tl.to(bad, { backgroundColor: "rgba(255, 122, 112, 0.22)", color: "#ffd2cc", duration: 0.3 }, at("c2", 0.3));
+      const looks = T.looksFor.map((text, i) => el("div", "chip hot", R, { left: 1220, top: 330 + i * 120 }, esc(text)));
+      gsap.set(looks, { autoAlpha: 0 });
+      looks.forEach((chip, i) => tl.fromTo(chip, { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: 0.35, ease: HARD, immediateRender: false }, at("c2", 0.3 + i * 0.2)));
+      // The report: each finding with severity and line.
+      tl.to(looks, { autoAlpha: 0, x: 60, duration: 0.3, stagger: 0.05 }, at("c3", 0));
+      tl.to(bar, { autoAlpha: 0, duration: 0.2 }, at("c3", 0));
+      const report = el("div", "doc", R, { left: 1160, top: 300, width: 690, height: 420 });
+      el("div", "doc-head", report, {}, esc(T.report));
+      const rows = F.scanner.traps.map((trap, i) => el("div", "row", report, { top: 100 + i * 100 }, `<span class="sev">${esc(trap.finding.severity)}</span><span>${esc(trap.finding.pattern)}</span><span class="mono muted">${esc(trap.finding.at)}</span>`));
+      gsap.set(report, { autoAlpha: 0 }); gsap.set(rows, { autoAlpha: 0 });
+      tl.to(doc, { x: -40, duration: 0.5, ease: HARD }, at("c3", 0.05));
+      tl.fromTo(report, { autoAlpha: 0, y: 100, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: SMOOTH, immediateRender: false }, at("c3", 0.1));
+      rows.forEach((row, i) => tl.fromTo(row, { autoAlpha: 0, x: 40 }, { autoAlpha: 1, x: 0, duration: 0.35, ease: SMOOTH, immediateRender: false }, at("c3", 0.35 + i * 0.2)));
+      const pointer = el("div", "chip", R, { left: 1160, top: 760 }, esc(T.personChecks));
+      gsap.set(pointer, { autoAlpha: 0 });
+      tl.fromTo(pointer, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: SMOOTH, immediateRender: false }, at("c3", 0.75));
+      // Every scan: the ones with an unsafe part turn red.
+      tl.to([doc, report, pointer], { autoAlpha: 0, y: -40, duration: 0.35, ease: "power2.in" }, at("c4", 0));
+      const SQ = 9, blocked = new Set(F.scans.blockedIds);
+      const squares = F.scans.ids.map((id, i) => el("div", "sq", R, { left: 528 + (i % SQ) * 96, top: 330 + Math.floor(i / SQ) * 96 }));
+      gsap.set(squares, { autoAlpha: 0 });
+      tl.fromTo(squares, { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: HARD, stagger: { each: 0.012, from: "start" }, immediateRender: false }, at("c4", 0.05));
+      F.scans.ids.forEach((id, i) => tl.to(squares[i], blocked.has(id) ? { backgroundColor: "#4a2226", borderColor: "#ff7a70", duration: 0.2 } : { backgroundColor: "#1d3a30", borderColor: "#5fd3a2", duration: 0.2 }, at("c4", 0.3) + i * 0.035));
+      const stoppedSquares = F.scans.ids.map((id, i) => (blocked.has(id) ? squares[i] : null)).filter(Boolean);
+      tl.to(stoppedSquares, { scale: 1.12, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 5, stagger: { each: 0.05, from: "start" } }, at("c4", 0.55));
+      const readOnly = el("div", "chip hot", R, { left: 528, top: 840 }, esc(T.readNeverRun));
+      const split = el("div", "chip", R, { left: 528, top: 920 }, esc(T.unsafeChip));
+      gsap.set(split, { autoAlpha: 0 });
+      tl.fromTo(split, { autoAlpha: 0, x: 40 }, { autoAlpha: 1, x: 0, duration: 0.35, ease: SMOOTH, immediateRender: false }, at("c4", 0.85));
+      tl.to(split, { autoAlpha: 0, duration: 0.3 }, at("c5", 0));
+      gsap.set(readOnly, { autoAlpha: 0 });
+      tl.fromTo(readOnly, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: SMOOTH, immediateRender: false }, at("c4", 0.7));
+      tl.to(cam, { ...regionView("scan", 0, 40, 1.08), duration: 1.6, ease: "sine.inOut" }, at("c4", 0.2));
+      // The scanner itself, tested with planted traps.
+      tl.to([...squares, readOnly], { autoAlpha: 0, duration: 0.3, stagger: { each: 0.004 } }, at("c5", 0));
+      camTo(at("c5", 0), regionView("scan"), 0.5, HARD);
+      const trapCards = F.scanner.traps.map((trap, i) => {
+        const card = el("div", "card", R, { left: 260 + i * 720, top: 330, width: 640, height: 420 });
+        el("h3", "", card, {}, esc(T.trapNames[i]));
+        el("div", "abs muted", card, { left: 40, top: 110, fontSize: 30, width: 560 }, esc(T.trapWhat[i]));
+        el("div", "verdict", card, { left: 40, top: 230 }, esc(`${T.scannerSaid} ${trap.got}`));
+        const stamp = el("div", "stamp", card, { right: 30, top: 300 }, esc(T.blocked));
+        gsap.set(stamp, { autoAlpha: 0 });
+        return { card, stamp };
+      });
+      gsap.set(trapCards.map((t) => t.card), { autoAlpha: 0 });
+      trapCards.forEach(({ card, stamp }, i) => {
+        tl.fromTo(card, { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: HARD, immediateRender: false }, at("c5", 0.12 + i * 0.1));
+        tl.fromTo(stamp, { autoAlpha: 0, scale: 1.8, rotation: -14 }, { autoAlpha: 1, scale: 1, rotation: -8, duration: 0.25, ease: "power4.out", immediateRender: false }, at("c5", 0.72 + i * 0.08));
+      });
+      tl.to(cam, { ...regionView("scan", 0, 0, 1.04), duration: 0.12, yoyo: true, repeat: 1 }, at("c5", 0.72));
+      trapCards.forEach(({ card }, i) => tl.to(card, { y: i ? 14 : -14, duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 3 }, at("c5", 0.35)));
+    }
+
+    // ================= 4. the proof =================
+    {
+      const R = region.proof, s = SC("proof").start;
+      camTo(s - 0.3, regionView("proof"), 1.0);
+      // Use, then grade: three boxes joined by lines.
+      // A centred row, so each joining line sits between two chips whatever their widths.
+      const row = el("div", "abs", R, { left: 0, top: 470, width: 1920, display: "flex", justifyContent: "center", alignItems: "center", gap: 36 });
+      const chain = [], joins = [];
+      T.chain.forEach((text, i) => {
+        if (i) joins.push(el("div", "", row, { width: 140, height: 8, background: "#e05aa0", borderRadius: 4, transformOrigin: "left center" }));
+        chain.push(el("div", "chip", row, { position: "relative", fontSize: 52, padding: "22px 40px" }, esc(text)));
+      });
+      gsap.set([...chain, ...joins], { autoAlpha: 0 });
+      chain.forEach((chip, i) => {
+        tl.fromTo(chip, { autoAlpha: 0, scale: 0.7 }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: POP, immediateRender: false }, at("p1", 0.1 + i * 0.28));
+        if (i) tl.fromTo(joins[i - 1], { autoAlpha: 1, scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: HARD, immediateRender: false }, at("p1", i * 0.28));
+      });
+      // The use record, field by field.
+      tl.to([...chain, ...joins], { autoAlpha: 0, y: -40, duration: 0.3 }, at("p2", 0));
+      const rec = F.ffmpeg.record;
+      const card = el("div", "card", R, { left: 260, top: 250, width: 1400, height: 620 });
+      el("h3", "", card, {}, `${esc(T.useOf)} FFmpeg <span class="mono muted" style="font-size:30px">${esc(rec.date)}</span>`);
+      const fields = [[T.fields[0], rec.task.split(",")[0]], [T.fields[1], `${F.ffmpeg.tooQuiet} LUFS: ${T.tooQuietWord}`],
+        [T.fields[2], `${T.normalizedTo} ${(rec.fixed.match(/-\d+ LUFS/) || [""])[0]}`], [T.fields[3], T.evidenceKept]]
+        .map(([k, v], i) => el("div", "field", card, { top: 130 + i * 118 }, `<b>${esc(k)}</b><span>${esc(v)}</span>`));
+      gsap.set(card, { autoAlpha: 0 }); gsap.set(fields, { autoAlpha: 0 });
+      tl.fromTo(card, { autoAlpha: 0, y: 100, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: SMOOTH, immediateRender: false }, at("p2", 0.02));
+      fields.forEach((f, i) => tl.fromTo(f, { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 0.3, ease: SMOOTH, immediateRender: false }, at("p2", 0.1 + i * 0.14)));
+      const marker = el("div", "abs", card, { left: 20, top: 120, width: 1360, height: 100, borderRadius: 14, background: "rgba(224, 90, 160, 0.12)" });
+      gsap.set(marker, { autoAlpha: 0 });
+      tl.set(marker, { autoAlpha: 1 }, at("p2", 0.2));
+      tl.to(marker, { y: 3 * 118, duration: L("p2").end - at("p2", 0.2) + 0.4, ease: "steps(3)" }, at("p2", 0.2));
+      // The loudness meter: too quiet, fixed, and the grade moves.
+      tl.to(card, { autoAlpha: 0, y: -40, duration: 0.3 }, at("p3", 0));
+      const lo = -30, hi = -10, px = (v) => 260 + ((v - lo) / (hi - lo)) * 1400;
+      const meter = el("div", "meter", R, { left: 260, top: 560, width: 1400 });
+      el("div", "band", meter, { left: px(-18) - 260, width: px(-14) - px(-18) });
+      const needle = el("div", "needle", R, { left: px(F.ffmpeg.tooQuiet) - 4, top: 534, background: "#ff7a70" });
+      const readout = el("div", "abs mono bad", R, { left: px(F.ffmpeg.tooQuiet) - 230, top: 420, width: 460, whiteSpace: "nowrap", textAlign: "center", fontSize: 56, fontWeight: 800 }, `${F.ffmpeg.tooQuiet} LUFS · ${esc(T.tooQuietWord)}`);
+      const target = el("div", "abs muted", R, { left: px(-18), top: 640, width: px(-14) - px(-18), textAlign: "center", fontSize: 30, fontWeight: 700 }, esc(T.target));
+      const fixedLevel = F.ffmpeg.fixedLoudness ?? STORY.loudness;
+      const meterLabel = el("div", "abs muted", R, { left: 260, top: 620, fontSize: 32, fontWeight: 700 }, esc(T.loudnessWord));
+      gsap.set(meterLabel, { autoAlpha: 0 });
+      tl.fromTo(meterLabel, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3, immediateRender: false }, at("p3", 0.05));
+      tl.to(meterLabel, { autoAlpha: 0, duration: 0.3 }, at("p4", 0));
+      const fixedReadout = el("div", "abs mono good", R, { left: px(fixedLevel) - 230, top: 420, width: 460, whiteSpace: "nowrap", textAlign: "center", fontSize: 56, fontWeight: 800 }, `${fixedLevel} LUFS · ${esc(T.onTarget)}`);
+      const ffBadge = el("div", "badge", R, { left: 1480, top: 720, width: 200, height: 140, fontSize: 72 }, `<span class="d">E1</span><span class="d next">${esc(F.ffmpeg.raisedTo || "E1")}</span>`);
+      const ffNow = ffBadge.children[0], ffNext = ffBadge.children[1];
+      const ffName = el("div", "abs", R, { left: 1180, top: 760, fontSize: 48, fontWeight: 800 }, "FFmpeg");
+      gsap.set([meter, needle, readout, target, fixedReadout, ffBadge, ffName, ffNext], { autoAlpha: 0 });
+      tl.fromTo([meter, target], { autoAlpha: 0, scaleX: 0.6 }, { autoAlpha: 1, scaleX: 1, duration: 0.45, ease: HARD, immediateRender: false }, at("p3", 0.02));
+      tl.fromTo([needle, readout], { autoAlpha: 0, y: -30 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: POP, immediateRender: false }, at("p3", 0.12));
+      tl.to(needle, { x: px(fixedLevel) - px(F.ffmpeg.tooQuiet), backgroundColor: "#5fd3a2", duration: 0.9, ease: SMOOTH }, at("p3", 0.5));
+      tl.to(readout, { autoAlpha: 0, duration: 0.2 }, at("p3", 0.5));
+      tl.fromTo(fixedReadout, { autoAlpha: 0, y: 24, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: POP, immediateRender: false }, at("p3", 0.62));
+      tl.fromTo([ffName, ffBadge], { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: HARD, immediateRender: false }, at("p3", 0.66));
+      if (F.ffmpeg.raisedTo) {
+        tl.to(ffNow, { autoAlpha: 0, y: -40, filter: "blur(2px)", duration: 0.25 }, at("p3", 0.82));
+        tl.fromTo(ffNext, { autoAlpha: 0, y: 48, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: POP, immediateRender: false }, at("p3", 0.86));
+      }
+      // The library and the working tools.
+      tl.to([meter, needle, target, fixedReadout, ffBadge, ffName], { autoAlpha: 0, y: -40, duration: 0.3 }, at("p4", 0));
+      const lib = new Set(F.library.ids), work = new Set(F.working.ids);
+      const minis = F.toolIds.map((id, i) => el("div", "mini", R, { left: 100 + (i % 17) * 32, top: 300 + Math.floor(i / 17) * 32 }));
+      gsap.set(minis, { autoAlpha: 0 });
+      tl.fromTo(minis, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: HARD, stagger: { each: 0.004, from: "center", grid: [7, 17] }, immediateRender: false }, at("p4", 0.02));
+      F.toolIds.forEach((id, i) => { if (lib.has(id)) tl.to(minis[i], { autoAlpha: 0.22, duration: 0.25 }, at("p4", 0.45) + (i % 17) * 0.008); });
+      const libLabel = el("div", "chip", R, { left: 100, top: 560 }, esc(T.references));
+      gsap.set(libLabel, { autoAlpha: 0 });
+      tl.fromTo(libLabel, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: SMOOTH, immediateRender: false }, at("p4", 0.5));
+      F.toolIds.forEach((id, i) => { if (work.has(id)) tl.to(minis[i], { backgroundColor: "#e05aa0", borderColor: "#e05aa0", duration: 0.25 }, at("p5", 0.02)); });
+      const chips = F.working.ids.map((id, k) => el("div", "name-chip", R, { left: 680 + (k % 2) * 590, top: 260 + Math.floor(k / 2) * 84, width: 570 }, `<span style="overflow:hidden;text-overflow:ellipsis">${esc(F.names[id].replace(/\s*\(.*\)$/, ""))}</span><span class="mono">${esc(STORY.levelOf[id])}</span>`));
+      gsap.set(chips, { autoAlpha: 0 });
+      chips.forEach((chip, k) => tl.fromTo(chip, { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: 0.3, ease: HARD, immediateRender: false }, at("p5", 0.08) + k * 0.12));
+      drift(at("p4", 0), SC("proof").end - 0.4, regionView("proof"), 50);
+    }
+
+    // ================= 5. one tool, start to finish =================
+    {
+      const R = region.loop, s = SC("loop").start;
+      camTo(s - 0.3, regionView("loop"), 1.0);
+      // The real envelope of the sentence being heard.
+      const wave = el("div", "wave", R, { left: 260, top: 330, width: 1400, height: 340 });
+      const bars = STORY.wave.map((v) => el("i", "", wave, { width: 14, height: Math.round(v * 340) }));
+      gsap.set(wave, { autoAlpha: 0 });
+      tl.set(wave, { autoAlpha: 1 }, at("k1", 0));
+      tl.fromTo(bars, { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: HARD, stagger: { each: 0.008, from: "center" }, immediateRender: false }, at("k1", 0));
+      tl.to(bars, { scaleY: 0.5, duration: 0.25, yoyo: true, repeat: 5, ease: "sine.inOut", stagger: { each: 0.015 } }, at("k1", 0.2));
+      // The track: five stations.
+      const X = (i) => 260 + i * 350, TRACK_Y = 820;
+      const track = el("div", "track", R, { left: X(0), top: TRACK_Y, width: X(4) - X(0) });
+      const stations = T.stations.map((_, i) => el("div", "station", R, { left: X(i) - 17, top: TRACK_Y - 14 }));
+      const stationLabels = T.stations.map((text, i) => el("div", "station-label", R, { left: X(i) - 150, top: TRACK_Y + 40 }, esc(text)));
+      gsap.set([track, ...stations, ...stationLabels], { autoAlpha: 0 });
+      const token = el("div", "token", R, { left: 780, top: 560 }, `<b>Kokoro TTS</b><small>${esc(T.voiceMeta)}</small>`);
+      const tBadge = el("div", "badge", token, { right: 22, top: 22, width: 120, height: 84, fontSize: 44, borderWidth: 3 }, `<span class="d">E0</span><span class="d next">${esc(F.voice.approved ? F.voice.approved.to : "E1")}</span>`);
+      const tNow = tBadge.children[0], tNext = tBadge.children[1];
+      gsap.set([token, tNext], { autoAlpha: 0 });
+      tl.to(bars, { scaleY: 0.03, duration: 0.35, ease: "power2.in", stagger: { each: 0.004, from: "edges" } }, at("k1", 0.8));
+      tl.set(wave, { autoAlpha: 0 }, at("k1", 0.8) + 0.6);
+      tl.fromTo(token, { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 1, scale: 1, duration: 0.4, ease: POP, immediateRender: false }, at("k1", 0.95));
+      tl.fromTo([track, ...stations, ...stationLabels], { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: SMOOTH, stagger: 0.04, immediateRender: false }, at("k2", 0));
+      const tokenAt = (i) => ({ x: X(i) - 220 - 780, y: 580 - 560 });
+      const follow = (i, time) => camTo(time, regionView("loop", 0, 60, 1), 0.7, SMOOTH);
+      // Station 0: enters at E0.
+      tl.to(token, { ...tokenAt(0), duration: 0.6, ease: SMOOTH }, at("k2", 0.1));
+      follow(0, at("k2", 0.1));
+      const noProof = el("div", "chip", R, { left: X(0) - 120, top: 360 }, esc(T.noProof));
+      gsap.set(noProof, { autoAlpha: 0 });
+      tl.fromTo(noProof, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: SMOOTH, immediateRender: false }, at("k2", 0.5));
+      // Station 1: scanned.
+      tl.to(noProof, { autoAlpha: 0, duration: 0.2 }, at("k3", 0));
+      tl.to(token, { ...tokenAt(1), duration: 0.6, ease: SMOOTH }, at("k3", 0));
+      follow(1, at("k3", 0));
+      const sweep = el("div", "scanbar", R, { left: X(1) - 200, width: 400, top: 560 });
+      gsap.set(sweep, { autoAlpha: 0 });
+      tl.set(sweep, { autoAlpha: 1 }, at("k3", 0.15));
+      tl.fromTo(sweep, { y: 0 }, { y: 200, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, at("k3", 0.15));
+      tl.set(sweep, { autoAlpha: 0 }, at("k3", 0.15) + 1.45);
+      const checks = T.scanChecks.map((text, i) => el("div", "check-row", R, { left: X(1) - 170, top: 340 + i * 70 }, `${checkSvg}<span>${esc(text)}</span>`));
+      gsap.set(checks, { autoAlpha: 0 });
+      checks.forEach((row, i) => {
+        const time = at("k3", 0.35 + i * 0.3);
+        tl.set(row, { autoAlpha: 1 }, time);
+        tl.fromTo(row.querySelector(".ck"), { autoAlpha: 0, rotation: 80, filter: "blur(10px)", y: 6 }, { autoAlpha: 1, rotation: 0, filter: "blur(0px)", y: 0, duration: 0.5, ease: SMOOTH, immediateRender: false }, time);
+        tl.fromTo(row.querySelector("path"), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, ease: SMOOTH, immediateRender: false }, time + 0.08);
+        tl.fromTo(row.querySelector("span"), { autoAlpha: 0, x: -8 }, { autoAlpha: 1, x: 0, duration: 0.3, ease: SMOOTH, immediateRender: false }, time + 0.1);
+      });
+      // Station 2: used in this narration; the use proposes E1.
+      tl.to(checks, { autoAlpha: 0, duration: 0.25 }, at("k4", 0));
+      tl.to(token, { ...tokenAt(2), duration: 0.6, ease: SMOOTH }, at("k4", 0));
+      follow(2, at("k4", 0));
+      const used = el("div", "chip", R, { left: X(2) - 170, top: 360 }, esc(T.usedIn));
+      const proposes = el("div", "chip", R, { left: X(2) - 130, top: 450, borderColor: "#e05aa0" }, esc(`${T.proposesWord} ${F.voice.approved ? F.voice.approved.to : "E1"}`));
+      gsap.set([used, proposes], { autoAlpha: 0 });
+      tl.fromTo(used, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: SMOOTH, immediateRender: false }, at("k4", 0.25));
+      tl.fromTo(proposes, { autoAlpha: 0, scale: 0.7 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: POP, immediateRender: false }, at("k4", 0.7));
+      // Station 3: a person reviews it.
+      tl.to([used, proposes], { autoAlpha: 0, duration: 0.25 }, at("k5", 0));
+      tl.to(token, { ...tokenAt(3), duration: 0.6, ease: SMOOTH }, at("k5", 0));
+      follow(3, at("k5", 0));
+      const button = el("div", "button", R, { left: X(3) - 190, top: 400 }, `<span>${esc(F.voice.approved ? T.decisionApproved : T.waiting)}</span>`);
+      const who = el("div", "abs muted", R, { left: X(3) - 380, top: 300, width: 760, whiteSpace: "nowrap", textAlign: "center", fontSize: 30, fontWeight: 700 },
+        esc(F.voice.approved ? `${T.approvedBy} ${F.voice.approved.by} · ${F.voice.approved.date}` : F.voice.rejected ? `${T.turnedDownBy} ${F.voice.rejected.by}` : T.waiting));
+      gsap.set([button, who], { autoAlpha: 0 });
+      tl.fromTo(button, { autoAlpha: 0, y: 100, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: SMOOTH, immediateRender: false }, at("k5", 0.15));
+      if (F.voice.approved) {
+        tl.to(button, { backgroundColor: "#e05aa0", color: "#14181f", duration: 0.25, ease: SMOOTH }, at("k5", 0.5));
+      }
+      tl.fromTo(who, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: SMOOTH, immediateRender: false }, at("k5", 0.3));
+      // Station 4: the grade, and what E2 would need.
+      tl.to(button, { autoAlpha: 0, duration: 0.25 }, at("k6", 0));
+      tl.to(who, { autoAlpha: 0, duration: 0.25 }, at("k6", 0.45));
+      tl.to(token, { ...tokenAt(4), duration: 0.6, ease: SMOOTH }, at("k6", 0));
+      if (F.voice.approved) {
+        tl.to(tNow, { autoAlpha: 0, y: -30, filter: "blur(2px)", duration: 0.25 }, at("k5", 0.55));
+        tl.fromTo(tNext, { autoAlpha: 0, y: 36, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: POP, immediateRender: false }, at("k5", 0.6));
+      }
+      const ghost = el("div", "chip", R, { left: X(4) - 480, top: 360, borderStyle: "dashed" }, esc(T.nextNeeds));
+      gsap.set(ghost, { autoAlpha: 0 });
+      tl.fromTo(ghost, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: SMOOTH, immediateRender: false }, at("k6", 0.5));
+      camTo(at("k6", 0.1), regionView("loop", 0, 60, 1), 0.9, SMOOTH);
+    }
+
+    // ================= 6. a new project =================
+    {
+      const R = region.fit, s = SC("fit").start;
+      camTo(s - 0.3, regionView("fit"), 1.0);
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("id", "links"); svg.setAttribute("viewBox", "0 0 1920 1080"); svg.setAttribute("width", "1920"); svg.setAttribute("height", "1080");
+      R.appendChild(svg);
+      const project = el("div", "card", R, { left: 760, top: 470, width: 400, height: 150, borderColor: "#e05aa0", borderWidth: 4, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 46, fontWeight: 800, letterSpacing: "-0.02em" }, esc(T.newProject));
+      const spots = [[150, 230], [1210, 230], [150, 740], [1210, 740]];
+      const cards = F.fit.map((tool, i) => el("div", "fit-card", R, { left: spots[i][0], top: spots[i][1] },
+        `<b>${esc(tool.name.replace(/\s*\(.*\)$/, ""))} <span class="mono" style="font-size:30px;color:#e05aa0">${esc(STORY.levelOf[tool.id])}</span></b><em>${esc(T.roles[tool.id] || tool.role)}</em><small>${esc(T.testWord)} ${esc(tool.test)}</small>`));
+      const lines = spots.map(([x, y]) => {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", 960); line.setAttribute("y1", 545); line.setAttribute("x2", x + 280); line.setAttribute("y2", y + 118); line.setAttribute("pathLength", "1");
+        svg.appendChild(line); return line;
+      });
+      gsap.set([project, ...cards], { autoAlpha: 0 });
+      tl.fromTo(project, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.4, ease: POP, immediateRender: false }, at("n1", 0.02));
+      cards.forEach((card, i) => {
+        const time = at("n1", 0.3 + i * 0.15);
+        tl.fromTo(lines[i], { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.35, ease: HARD, immediateRender: false }, time);
+        tl.fromTo(card, { autoAlpha: 0, scale: 0.85 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: HARD, immediateRender: false }, time + 0.2);
+      });
+      const plus = cards.map((card, i) => el("div", "chip ok", R, { left: spots[i][0] + 380, top: spots[i][1] - 30, fontSize: 30, padding: "8px 18px" }, esc(T.plusUse)));
+      gsap.set(plus, { autoAlpha: 0 });
+      plus.forEach((chip, i) => tl.fromTo(chip, { autoAlpha: 0, y: 20, scale: 0.7 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.3, ease: POP, immediateRender: false }, at("n2", 0.15 + i * 0.12)));
+      tl.to(project, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut" }, at("n2", 0.6));
+      drift(at("n1", 0) + 0.6, at("n3", 0) - 0.3, regionView("fit"), 40);
+      // The learning loop: use, check, fix, new rule, turning; then the counts from the records.
+      tl.to([project, ...cards, ...plus], { autoAlpha: 0, scale: 0.9, duration: 0.35, ease: "power2.in", stagger: 0.03 }, at("n3", 0) - 0.3);
+      tl.to(lines, { strokeDashoffset: 1, duration: 0.3 }, at("n3", 0) - 0.3);
+      camTo(at("n3", 0) - 0.3, regionView("fit"), 0.5, HARD);
+      const ring = el("div", "abs", R, { left: 710, top: 310, width: 500, height: 500, borderRadius: "50%", border: "8px solid #343c49", borderTopColor: "#e05aa0", borderRightColor: "#e05aa0" });
+      const spotsC = [[960, 250], [1270, 560], [960, 870], [650, 560]];
+      const steps = T.cycle.map((text, i) => el("div", "chip", R, { left: spotsC[i][0], top: spotsC[i][1], fontSize: 44, transform: "translate(-50%, -50%)", background: "#1c222b", borderColor: "#e05aa0" }, esc(text)));
+      gsap.set([ring, ...steps], { autoAlpha: 0 });
+      tl.fromTo(ring, { autoAlpha: 0, scale: 0.6, rotation: -90 }, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.6, ease: HARD, immediateRender: false }, at("n3", 0));
+      steps.forEach((chip, i) => tl.fromTo(chip, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: POP, immediateRender: false }, at("n3", 0.1) + i * 0.3));
+      tl.to(ring, { rotation: 360 * 2, duration: L("n4").end - at("n3", 0.1), ease: "none" }, at("n3", 0.6));
+      steps.forEach((chip, i) => tl.to(chip, { backgroundColor: "#e05aa0", color: "#14181f", duration: 0.15, yoyo: true, repeat: 1 }, at("n3", 0.1) + 1.4 + i * 0.4));
+      const found = el("div", "abs", R, { left: 40, top: 380, width: 420, textAlign: "center", fontSize: 110, fontWeight: 900, letterSpacing: "-0.04em" }, `${F.learning.problems}<small style="display:block;font-size:36px;font-weight:700;color:#a3abb9;letter-spacing:0">${esc(T.found)}</small>`);
+      const fixedN = el("div", "abs good", R, { left: 1460, top: 380, width: 420, textAlign: "center", fontSize: 110, fontWeight: 900, letterSpacing: "-0.04em" }, `${F.learning.fixes}<small style="display:block;font-size:36px;font-weight:700;color:#a3abb9;letter-spacing:0">${esc(T.fixedWord)}</small>`);
+      const lesson = el("div", "chip ok", R, { left: 960, top: 900, transform: "translateX(-50%)", fontSize: 36 }, esc(T.lesson));
+      gsap.set([found, fixedN, lesson], { autoAlpha: 0 });
+      countUp(found, F.learning.problems, at("n4", 0.2), 1.4);
+      countUp(fixedN, F.learning.fixes, at("n4", 0.32), 1.4);
+      tl.fromTo(found, { autoAlpha: 0, y: 30, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: POP, immediateRender: false }, at("n4", 0.2));
+      tl.fromTo(fixedN, { autoAlpha: 0, y: 30, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: POP, immediateRender: false }, at("n4", 0.32));
+      tl.fromTo(lesson, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: SMOOTH, immediateRender: false }, at("n4", 0.7));
+    }
+
+    // ================= 7. the result =================
+    {
+      const r = SC("result").start;
+      // Text leaves the plane before the camera pulls back, so nothing reads smaller than the type floor.
+      tl.to(cam.querySelectorAll(".region *:not(.tile):not(.mini):not(.sq):not(.station):not(.track)"), { autoAlpha: 0, duration: 0.3 }, r - 0.6);
+      tl.to(region.world.querySelectorAll(".tile"), { autoAlpha: 1, backgroundColor: (i) => STORY.tileColor[i], borderColor: (i) => STORY.tileColor[i], rotation: 0, duration: 0.3 }, r - 0.2);
+      tl.to(cam, { ...view(3360, 1240, 0.27), duration: 1.6, ease: WHIP }, r + 0.1);
+      tl.to(cam, { ...view(3360, 1240, 0.25), duration: STORY.total - r - 1.8, ease: "none" }, r + 1.7);
+      const counters = document.getElementById("counters");
+      const values = [[F.tools, T.tools], [F.totals.uses, T.uses], [F.totals.decisions, T.decisions]];
+      const nodes = values.map(([n, label]) => el("div", "counter", counters, {}, `${n}<small>${esc(label)}</small>`));
+      tl.to(cam, { autoAlpha: 0.18, duration: 0.5 }, at("r1", 0));
+      gsap.set(nodes, { autoAlpha: 0 });
+      nodes.forEach((node, k) => tl.fromTo(node, { autoAlpha: 0, y: 30, filter: "blur(2px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: POP, immediateRender: false }, at("r1", 0.05 + k * 0.22)));
+      nodes.forEach((node, k) => countUp(node, values[k][0], at("r1", 0.05 + k * 0.22), 1.3));
+      tl.to(cam, { autoAlpha: 0.1, duration: 0.6 }, at("r2", 0) - 0.3);
+      tl.to(nodes, { autoAlpha: 0, y: -30, duration: 0.4, stagger: 0.05 }, at("r2", 0) - 0.3);
+      const title = document.getElementById("title");
+      T.title.forEach((word) => el("span", "tw", title, {}, `<span>${esc(word)}</span>`));
+      gsap.set(title.querySelectorAll(".tw span"), { yPercent: 110 });
+      gsap.set(["#title", "#card"], { autoAlpha: 0 });
+      tl.set("#title", { autoAlpha: 1 }, at("r2", 0) - 0.1);
+      tl.to(title.querySelectorAll(".tw span"), { yPercent: 0, duration: 0.7, ease: "power4.out", stagger: 0.1 }, at("r2", 0));
+      tl.fromTo("#card", { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: SMOOTH, immediateRender: false }, at("r2", 0.6));
+      document.getElementById("card").textContent = T.card;
+      const built = document.getElementById("built");
+      built.textContent = T.builtLine;
+      gsap.set(built, { autoAlpha: 0 });
+      tl.fromTo(built, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, immediateRender: false }, at("r2", 0.9));
+      tl.to("#veil", { autoAlpha: 1, duration: 0.8, ease: "power1.in" }, STORY.total - 0.8);
+    }
 
     window.__timelines = window.__timelines || {};
     window.__timelines["story"] = tl;

@@ -1,4 +1,4 @@
-// Story video: rebuild everything from data/catalog.json in one go.
+// Story video: rebuild everything from data/ledger-export.json in one go.
 // Usage: node video/build.mjs [en|es] [--render]
 //   1. story.mjs writes the facts and the narration
 //   2. say.py records the narration with the local Kokoro voice (offline)

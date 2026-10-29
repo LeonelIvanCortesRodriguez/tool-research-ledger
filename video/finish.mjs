@@ -37,7 +37,7 @@ const all = fs.existsSync(scriptFile) ? JSON.parse(fs.readFileSync(scriptFile, "
 const minutes = `${Math.floor(timing.total / 60)}:${String(Math.round(timing.total % 60)).padStart(2, "0")}`;
 all[lang] = {
   video: `docs/video/story-${lang}.mp4`, poster: `docs/video/story-poster-${lang}.jpg`, total: timing.total,
-  caption: lang === "es" ? `${minutes} con subtítulos: cómo una herramienta gana E1 y E2 aquí, con cifras reales de los datos.` : `${minutes} with captions: how a tool earns E1 and E2 here, with real numbers from the data.`,
+  caption: lang === "es" ? `${minutes} con subtítulos: de una herramienta nueva a una nota ganada con pruebas, con las cifras de la exportación.` : `${minutes} with captions: from a new tool to a grade earned by proof, with the numbers from the export.`,
   lines: entries.map((line) => ({ start: line.start, text: line.text })), vtt
 };
 fs.writeFileSync(scriptFile, `window.STORY_SCRIPT = ${JSON.stringify(all, null, 2)};\n`);
