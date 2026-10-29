@@ -77,7 +77,9 @@ export function validatePublicPaths(catalog, root) {
       if (typeof item === "string") {
         const normalized = item.replaceAll("\\", "/");
         if (normalized.startsWith("research/")) errors.push(`${next.join(".")}: internal research path is not public`);
-        if (/^(docs|scripts)\//.test(normalized) && !fs.existsSync(path.join(root, normalized))) errors.push(`${next.join(".")}: missing public path ${normalized}`);
+        // A baseline can be a path followed by a note ("docs/checks/x.md, written first: ..."); the path is checked.
+        const target = normalized.match(/^(?:docs|scripts)\/[^\s,;]+/)?.[0];
+        if (target && !fs.existsSync(path.join(root, target))) errors.push(`${next.join(".")}: missing public path ${target}`);
       }
       walk(item, next);
     }

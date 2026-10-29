@@ -27,7 +27,8 @@ const familyOf = {
   hyperframes: "video-voice", ffmpeg: "video-voice", "kokoro-onnx": "video-voice", manim: "video-voice", voicestudio: "video-voice",
   "remotion-skills": "video-voice", "claude-video": "video-voice", moneyprinterturbo: "video-voice", "ledger-watch": "video-voice"
 };
-const videoVoice = { id: "video-voice", label: "Video and voice", purpose: "Render, narrate, caption and check short videos", toolIds: [], lead: "HyperFrames to render; FFmpeg to mix and measure", useWhen: "A short explainer video needs a voice, captions and a check before it ships.", leadToolId: "hyperframes" };
+// On a re-run the family already exists; its members are kept so the import can be repeated.
+const videoVoice = { id: "video-voice", label: "Video and voice", purpose: "Render, narrate, caption and check short videos", toolIds: [...(previous.capabilityGroups.find((group) => group.id === "video-voice")?.toolIds || [])], lead: "HyperFrames to render; FFmpeg to mix and measure", useWhen: "A short explainer video needs a voice, captions and a check before it ships.", leadToolId: "hyperframes" };
 const groups = previous.capabilityGroups.filter((group) => group.id !== "video-voice").map((group) => ({ ...group, toolIds: [...group.toolIds] }));
 groups.push(videoVoice);
 const groupById = new Map(groups.map((group) => [group.id, group]));

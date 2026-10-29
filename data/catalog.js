@@ -7767,6 +7767,159 @@ window.CATALOG = {
       "fixes": [
         "ledger:scripts/video/captions.mjs takes the frame 1.5 s into the title line"
       ]
+    },
+    {
+      "toolId": "playwright-core",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Run the updated browser QA at 1440 and 390 px: graded list, grade source, plain words, packs, lessons, task entry points, no private nav items, video switch and captions, Is it safe? in a tool detail, everyday-words search; plus ad hoc screenshots for review by eye.",
+      "inputKind": "real",
+      "baseline": "docs/checks/2026-10-28-tests.md, written before the run: BROWSER_QA_OK at both widths with the listed assertions",
+      "checkedResult": "BROWSER_QA_OK on the first run and in the full verify run",
+      "errors": [
+        "The phone screenshots showed the tool dialog header shrinking so its wrapped title overlapped the body (an old layout bug exposed by longer license lines); the QA assertions did not catch it"
+      ],
+      "fixes": [
+        "styles.css: dialog header flex: 0 0 auto, body flex 1 with min-height 0"
+      ]
+    },
+    {
+      "toolId": "kokoro-onnx",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Record the 16 English (af_heart) and 16 Spanish (ef_dora) narration lines of the grade story video through ledger:tools/voice-pilot/say.py, offline. Result: 32 WAVs, 72.8 s English and 80.1 s Spanish speech; the Spanish lines passed ledger-watch words before recording",
+      "inputKind": null,
+      "baseline": null,
+      "checkedResult": null,
+      "errors": [],
+      "fixes": []
+    },
+    {
+      "toolId": "ledger-watch",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "words on both narrations before recording, frames on both renders after.",
+      "inputKind": "real",
+      "baseline": "docs/checks/2026-10-28-spoken-words.md and 2026-10-28-frames.md, expected written first: Spanish words PASS with no flags; 16 of 16 headlines read in each language",
+      "checkedResult": "SPOKEN WORDS PASS (es), PASS with note (en); ON SCREEN PASS 16 of 16 (en) and 16 of 16 (es)",
+      "errors": [
+        "Spanish frames run exceeded the 10-minute foreground limit and finished in the background",
+        "Builder mistake: the printed exit code came from tail in a pipe, not from watch.mjs"
+      ],
+      "fixes": [
+        "Waited for the background run; recorded the script's own PASS verdict and the pipe mistake in the check file"
+      ]
+    },
+    {
+      "toolId": "paddleocr",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Read one frame per sentence of story-en.mp4 and story-es.mp4 for ledger-watch frames, offline.",
+      "inputKind": "real",
+      "baseline": "The 16 on-screen headlines per language in video/build/en and es/timing.json, each expected 0.9 s after its sentence starts",
+      "checkedResult": "16 of 16 in English and 16 of 16 in Spanish, including the E0/E1/E2 codes",
+      "errors": [],
+      "fixes": []
+    },
+    {
+      "toolId": "hyperframes",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Check and render the new composition (video/story-template.html) for both languages, telemetry off, voice added afterwards with FFmpeg.",
+      "inputKind": "real",
+      "baseline": "hyperframes check passing with no errors",
+      "checkedResult": "Check passed (39/39 contrast checks); renders 90.1 s and 97.4 s; remaining warning film_silent is expected because the voice is muxed after the render",
+      "errors": [
+        "First check failed: font_family_without_font_face for Schibsted Grotesk and Cascadia Code",
+        "Warning audio_file_without_element because voice.wav sat inside the project folder",
+        "HyperFrames writes absolute paths with the account name into .hyperframes/ state files, which the privacy sweep caught (gitignored, never committed)"
+      ],
+      "fixes": [
+        "@font-face inside the composition, JetBrains Mono for mono",
+        "Moved the mixed voice to video/build/voice-en and es.wav",
+        "Deleted video/build/*/.hyperframes before the final sweep"
+      ]
+    },
+    {
+      "toolId": "ffmpeg",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Two-pass loudnorm of the narration to -16 LUFS, mux with the rendered frames, x264 CRF 24 encode, poster frames, and the loudness check.",
+      "inputKind": "real",
+      "baseline": "docs/checks/2026-10-28-loudness.md, written first: both files -16 LUFS within 1 LU, true peak at or below -1.0 dBTP",
+      "checkedResult": "story-en.mp4 -16.2 LUFS, -1.44 dBTP; story-es.mp4 -16.7 LUFS, -1.46 dBTP; both PASS. Spanish was 0.5 LU below the stated estimate, from the linear pass stopping at the peak limit",
+      "errors": [],
+      "fixes": []
+    },
+    {
+      "toolId": "transitions-dev",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Use the smooth-out (0.22, 1, 0.36, 1) and digit (0.34, 1.45, 0.64, 1) curves for the video's entrances. Result: Frames reviewed by eye; headlines settle before the OCR frame at +0.9 s",
+      "inputKind": null,
+      "baseline": null,
+      "checkedResult": null,
+      "errors": [],
+      "fixes": []
+    },
+    {
+      "toolId": "humanizer",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Review both READMEs and the new page copy for AI-writing tells. Result: One tell found and fixed: bold-label lists in both READMEs. Triads kept because each lists real, separate items. The repository's humanizer-check also passes (no dashes, 12 files).",
+      "inputKind": null,
+      "baseline": null,
+      "checkedResult": null,
+      "errors": [],
+      "fixes": []
+    },
+    {
+      "toolId": "ledger-patterns",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Scan the repository with ledger:tools/skillspector/patterns.mjs before finishing.",
+      "inputKind": "real",
+      "baseline": "docs/checks/2026-10-28-privacy.md, written first: no hit in new code; any hit only in quoted data",
+      "checkedResult": "REVIEW with 3 hits of L11 Usage tracking, all the same quoted weakness of a catalogued tool (\"Usage analytics (TapDB) on by default in official builds\") in catalog.js, catalog.json and ledger-export.json. Description, not action; left as is",
+      "errors": [],
+      "fixes": []
+    },
+    {
+      "toolId": "ledger-patterns",
+      "project": "Tool Research Ledger (public)",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Run by the Codex auditor on the lane 1 branch of the public ledger.",
+      "inputKind": "real",
+      "baseline": "handoff/public-ledger/AUDIT_BRIEF.md: privacy and safety part, no executable risk in the branch",
+      "checkedResult": "Four L11 review hits, all the same quoted weakness of another tool; nothing executable (audit round 1)",
+      "errors": [],
+      "fixes": []
+    },
+    {
+      "toolId": "playwright-core",
+      "project": "GitHub profile",
+      "date": "2026-10-28",
+      "outcome": "PASS",
+      "task": "Walked the profile, five repo pages and three live sites as a first-time visitor, read-only, through the Chrome test window's debug port (ledger:scripts/pages/visit-repos.mjs, visit-one.mjs): screenshots and the visible text of each.",
+      "inputKind": null,
+      "baseline": null,
+      "checkedResult": null,
+      "errors": [
+        "The single-page visit script hung after finishing because it kept the debug connection open"
+      ],
+      "fixes": [
+        "Stopped it; the visit itself had finished and saved its files"
+      ]
     }
   ],
   "packs": [
