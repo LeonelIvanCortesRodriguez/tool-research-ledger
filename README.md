@@ -71,7 +71,7 @@ On the [live ledger](https://leonelivancortesrodriguez.github.io/tool-research-l
 
 ## Proof and checks
 
-The data is an export of Leonel's private ledger, cleaned before publication ([`data/ledger-export.json`](data/ledger-export.json)). `node scripts/import-export.mjs` turns it into the catalog the page reads, and `npm test` fails if any grade, decision, safety note or recorded use differs from the export.
+The data is an export of Leonel's source ledger, cleaned before publication ([`data/ledger-export.json`](data/ledger-export.json)). `node scripts/import-export.mjs` turns it into the catalog the page reads, and `npm test` fails if any grade, decision, safety note or recorded use differs from the export.
 
 Every number in the story video is read from the export by [`video/story.mjs`](video/story.mjs). Each check was written down with its expected result, committed, and only then run: [spoken words](docs/checks/2026-10-28-round2-spoken-words.md), [on-screen words](docs/checks/2026-10-28-round2-frames.md), [loudness](docs/checks/2026-10-28-round2-loudness.md), [full test run](docs/checks/2026-10-28-round2-tests.md) and [privacy](docs/checks/2026-10-28-round2-privacy.md). Video files: [English](docs/video/story-en.mp4) ([captions](docs/video/captions-en.vtt)) · [Español](docs/video/story-es.mp4) ([subtítulos](docs/video/captions-es.vtt)).
 

@@ -1,6 +1,6 @@
 # Check: spoken words before the render (ledger-watch `words`)
 
-Date: 2026-10-28. Tool: the owner's ledger-watch, run as a tool (`node <ledger>/scripts/watch/watch.mjs words <narration.json>`).
+Date: 2026-10-28. Tool: Leonel's ledger-watch, run as a tool (`node <ledger>/scripts/watch/watch.mjs words <narration.json>`).
 
 ## Expected (written before the run)
 

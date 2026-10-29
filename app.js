@@ -440,7 +440,7 @@
       <section class="detail-section"><h3>Good fit when</h3><ul>${array(tool.bestFor).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
       <section class="detail-section"><h3>Weaknesses and limits</h3><ul>${array(tool.weaknesses).map((item) => `<li>${escapeHtml(item)}</li>`).join("") || "<li>No weaknesses were recorded.</li>"}</ul></section>
       ${inPacks.length ? `<section class="detail-section"><h3>Part of a pack</h3><ul>${inPacks.map((pack) => `<li><strong>${escapeHtml(pack.title)}:</strong> ${escapeHtml(pack.members.find((member) => member.toolId === tool.id).role)}</li>`).join("")}</ul></section>` : ""}
-      ${tool.repoUrl ? `<a class="repo-link" href="${escapeHtml(tool.repoUrl)}" target="_blank" rel="noreferrer">Open repository</a>` : `<p class="muted-note">${tool.origin === "built-here" ? "Built in Leonel's private ledger; its code is not published here." : "No public repository: this is a design recorded in the ledger."}</p>`}`;
+      ${tool.repoUrl ? `<a class="repo-link" href="${escapeHtml(tool.repoUrl)}" target="_blank" rel="noreferrer">Open repository</a>` : `<p class="muted-note">${tool.origin === "built-here" ? "Built in Leonel's source ledger; its code is not published here." : "No public repository: this is a design recorded in the ledger."}</p>`}`;
   }
 
   function openTool(id) {

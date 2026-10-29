@@ -61,7 +61,7 @@ const catalog = {
     source: exp.schema,
     gradeSource: "Grades come from Leonel's recorded use of each tool in named projects. A person approves every grade change before it is exported.",
     belowE1: "E0 means the tool was only read about: its documentation and license, with no recorded use here yet.",
-    privacy: "Exported from a private ledger and cleaned before publication. Private documents, credentials, raw OCR text and transaction rows are excluded.",
+    privacy: "Exported from Leonel's source ledger, cleaned before publication. Nonpublic source documents, credentials, raw OCR text and transaction rows are excluded.",
     reports: previous.meta.reports
   },
   grading: { ...previous.grading, decisionScale: exp.decisionScale },

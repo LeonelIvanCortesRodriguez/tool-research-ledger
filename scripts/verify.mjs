@@ -10,7 +10,7 @@ for (const file of required) if (!fs.existsSync(path.join(root, file))) throw ne
 
 const catalog = loadCatalog(root);
 assertCatalog(catalog);
-// The catalog is built from the owner's export (scripts/import-export.mjs); grades and decisions must match it exactly.
+// The catalog is built from Leonel's export (scripts/import-export.mjs); grades and decisions must match it exactly.
 const exported = JSON.parse(fs.readFileSync(path.join(root, "data", "ledger-export.json"), "utf8"));
 if (catalog.tools.length !== exported.tools.length) throw new Error(`Expected ${exported.tools.length} tools from the export, found ${catalog.tools.length}`);
 const fromExport = new Map(exported.tools.map((tool) => [tool.id, tool]));

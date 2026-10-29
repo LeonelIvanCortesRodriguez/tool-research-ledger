@@ -71,7 +71,7 @@ En el [registro en vivo](https://leonelivancortesrodriguez.github.io/tool-resear
 
 ## Pruebas y comprobaciones
 
-Los datos son una exportación del registro privado de Leonel, limpiada antes de publicarse ([`data/ledger-export.json`](data/ledger-export.json)). `node scripts/import-export.mjs` la convierte en el catálogo que lee la página, y `npm test` falla si alguna nota, decisión, nota de seguridad o uso registrado difiere de la exportación.
+Los datos son una exportación del registro de origen de Leonel, depurado antes de publicarse ([`data/ledger-export.json`](data/ledger-export.json)). `node scripts/import-export.mjs` la convierte en el catálogo que lee la página, y `npm test` falla si alguna nota, decisión, nota de seguridad o uso registrado difiere de la exportación.
 
 Cada número del video sale de la exportación, leído por [`video/story.mjs`](video/story.mjs). La narración en español solo dice palabras en español; los nombres en inglés quedan en pantalla. Cada comprobación se escribió con su resultado esperado, se guardó en git y solo después se ejecutó: [palabras habladas](docs/checks/2026-10-28-round2-spoken-words.md), [palabras en pantalla](docs/checks/2026-10-28-round2-frames.md), [volumen](docs/checks/2026-10-28-round2-loudness.md), [pruebas completas](docs/checks/2026-10-28-round2-tests.md) y [privacidad](docs/checks/2026-10-28-round2-privacy.md). Archivos del video: [Español](docs/video/story-es.mp4) ([subtítulos](docs/video/captions-es.vtt)) · [English](docs/video/story-en.mp4) ([captions](docs/video/captions-en.vtt)).
 

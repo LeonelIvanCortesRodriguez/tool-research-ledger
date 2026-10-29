@@ -21,16 +21,11 @@ for (const [level, ids] of Object.entries(story.levels)) {
   const count = exp.tools.filter((tool) => tool.evidenceLevel === level).length;
   if (ids.length !== count) throw new Error(`story.levels.${level} lists ${ids.length} tools, the export has ${count}`);
 }
-// The public video names Leonel; the export says "the owner".
-const person = (by) => (by === "the owner" ? "Leonel" : by);
-const approved = story.voice.approved && { ...story.voice.approved, by: person(story.voice.approved.by) };
-const rejected = story.voice.rejected && { ...story.voice.rejected, by: person(story.voice.rejected.by) };
-
 export const facts = {
   builtFrom: { ...story.builtFrom, exported: exp.exported, source: exp.schema },
   tools: story.tools, toolIds: story.toolIds, names: story.names, kinds: story.kinds, levels: story.levels, highest: story.highest,
   scans: story.scans, scanner: story.scanner, ffmpeg: story.ffmpeg, library: story.library, working: story.working,
-  voice: { ...story.voice, approved, rejected }, fit: story.fit, totals: story.totals, learning: story.learning
+  voice: story.voice, fit: story.fit, totals: story.totals, learning: story.learning
 };
 
 // Numbers as words, so the voice reads "ninety-nine" the same way every time.

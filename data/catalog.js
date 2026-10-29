@@ -6,7 +6,7 @@ window.CATALOG = {
     "source": "tool-research-ledger-export/1",
     "gradeSource": "Grades come from Leonel's recorded use of each tool in named projects. A person approves every grade change before it is exported.",
     "belowE1": "E0 means the tool was only read about: its documentation and license, with no recorded use here yet.",
-    "privacy": "Exported from a private ledger and cleaned before publication. Private documents, credentials, raw OCR text and transaction rows are excluded.",
+    "privacy": "Exported from Leonel's source ledger, cleaned before publication. Nonpublic source documents, credentials, raw OCR text and transaction rows are excluded.",
     "reports": [
       {
         "label": "Evidence model",
@@ -6420,7 +6420,7 @@ window.CATALOG = {
         "Hosted services and sign-in for some features",
         "Broad computer access"
       ],
-      "gradeBasis": "Read; one bundled bot package scanned. the owner likes it; a trial needs a desktop install with access to files, browser and apps. Raised from E0 to E1 on 2026-10-28 from recorded use (2026-10-28-leonel-cindy-run2-u1).",
+      "gradeBasis": "Read; one bundled bot package scanned. Leonel likes it; a trial needs a desktop install with access to files, browser and apps. Raised from E0 to E1 on 2026-10-28 from recorded use (2026-10-28-leonel-cindy-run2-u1).",
       "safety": {
         "status": "REVIEW",
         "headline": "Nothing blocks it, but a person should read the scan before a pilot.",
@@ -6652,7 +6652,7 @@ window.CATALOG = {
         "Does not listen to the sound yet (needs a local speech model)",
         "Words check is Spanish only"
       ],
-      "gradeBasis": "Learned from claude-video, rebuilt with FFmpeg and PaddleOCR. Its words check catches the Spanish narration problem the owner heard, on the old text, and passes the new one (ledger:research/WATCH_CHECK_2026-10-28.md).",
+      "gradeBasis": "Learned from claude-video, rebuilt with FFmpeg and PaddleOCR. Its words check catches the Spanish narration problem Leonel heard, on the old text, and passes the new one (ledger:research/WATCH_CHECK_2026-10-28.md).",
       "safety": {
         "status": "REVIEW",
         "headline": "Nothing blocks it, but a person should read the scan before a pilot.",
@@ -7240,7 +7240,7 @@ window.CATALOG = {
       "project": "Tool Research Ledger (private build)",
       "date": "2026-10-28",
       "outcome": "PASS",
-      "task": "Recorded the 17 narration sentences of the story video with the af_bella voice the owner picked by ear, offline, through ledger:tools/voice-pilot/say.py.",
+      "task": "Recorded the 17 narration sentences of the story video with the af_bella voice Leonel picked by ear, offline, through ledger:tools/voice-pilot/say.py.",
       "inputKind": null,
       "baseline": null,
       "checkedResult": null,
@@ -7308,7 +7308,7 @@ window.CATALOG = {
       ],
       "fixes": [
         "ledger:tools/skillspector/gate.mjs",
-        "Builder readings of blocking findings in ledger:tools/skillspector/reviewed-findings.json, cleared only by the owner"
+        "Builder readings of blocking findings in ledger:tools/skillspector/reviewed-findings.json, cleared only by Leonel"
       ]
     },
     {
@@ -7348,7 +7348,7 @@ window.CATALOG = {
       "project": "Tool Research Ledger (private build)",
       "date": "2026-10-28",
       "outcome": "PASS",
-      "task": "Recorded the 30 sentences of draft 3 with af_heart at normal speed, the voice the owner picked by ear from the second set of samples.",
+      "task": "Recorded the 30 sentences of draft 3 with af_heart at normal speed, the voice Leonel picked by ear from the second set of samples.",
       "inputKind": null,
       "baseline": null,
       "checkedResult": null,
@@ -7397,7 +7397,7 @@ window.CATALOG = {
       "project": "Tool Research Ledger (private build)",
       "date": "2026-10-28",
       "outcome": "PASS",
-      "task": "Ran its om qa check (allowed by the owner) on the English draft and on draft 3: single-frame flashes, still stretches, cuts and motion per second.",
+      "task": "Ran its om qa check (allowed by Leonel) on the English draft and on draft 3: single-frame flashes, still stretches, cuts and motion per second.",
       "inputKind": null,
       "baseline": null,
       "checkedResult": null,
@@ -7453,7 +7453,7 @@ window.CATALOG = {
       "project": "Tool Research Ledger (private build)",
       "date": "2026-10-28",
       "outcome": "BLOCKED",
-      "task": "the owner asked Cindy 0.1.119, installed with sign-in skipped and usage statistics off, to list the tools in ledger:data/catalog.json at E1 or higher with no vault notes, without naming a folder.",
+      "task": "Leonel asked Cindy 0.1.119, installed with sign-in skipped and usage statistics off, to list the tools in ledger:data/catalog.json at E1 or higher with no vault notes, without naming a folder.",
       "inputKind": null,
       "baseline": null,
       "checkedResult": null,
@@ -7567,7 +7567,7 @@ window.CATALOG = {
       "project": "Tool Research Ledger (private build)",
       "date": "2026-10-28",
       "outcome": "PASS",
-      "task": "Recorded the 32 Spanish sentences with the ef_dora voice the owner picked, at normal speed, offline.",
+      "task": "Recorded the 32 Spanish sentences with the ef_dora voice Leonel picked, at normal speed, offline.",
       "inputKind": null,
       "baseline": null,
       "checkedResult": null,
@@ -7612,7 +7612,7 @@ window.CATALOG = {
       "baseline": null,
       "checkedResult": null,
       "errors": [
-        "the owner heard the Spanish voice mispronounce English words (the ledger's English name, the FFmpeg spelling)"
+        "Leonel heard the Spanish voice mispronounce English words (the ledger's English name, the FFmpeg spelling)"
       ],
       "fixes": [
         "Spanish narration speaks only Spanish; English names stay on screen"
@@ -7667,7 +7667,7 @@ window.CATALOG = {
       "project": "Tool Research Ledger (private build)",
       "date": "2026-10-28",
       "outcome": "PASS",
-      "task": "Checked the Spanish narration before and after the owner's fix, and the frames of story-es.mp4.",
+      "task": "Checked the Spanish narration before and after Leonel's fix, and the frames of story-es.mp4.",
       "inputKind": "real",
       "baseline": "ledger:research/WATCH_CHECK_2026-10-28.md expected table: the old narration flags Tool, Research, Ledger and em only; the new one passes; 32 of 32 headlines read",
       "checkedResult": "Run 1 FAIL (three Spanish words flagged; one headline read with spaces lost); run 2 after one fix each: all three cases matched",
