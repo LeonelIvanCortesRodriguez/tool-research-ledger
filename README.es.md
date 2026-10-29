@@ -1,10 +1,12 @@
 <a href="https://leonelivancortesrodriguez.github.io/tool-research-ledger/"><img src="docs/images/readme-hero.png" width="960" alt="La página en vivo de Tool Research Ledger, en inglés. Un titular grande pregunta qué herramientas de IA hicieron trabajo real y cuáles son seguras de probar. Debajo hay un buscador para describir una tarea con palabras de todos los días y una lista de tareas comunes. A la derecha, un panel explica de dónde salen las notas y muestra seis niveles, de solo leída a vigilada en uso diario, con cuántas herramientas hay en cada uno."></a>
 
+<img src="docs/brand/demo.gif" width="960" alt="Recorrido animado: escribir read text from scanned receipts en Describe the job, revisar la lista de tres herramientas, abrir la herramienta principal, comprobar su nota y la sección Is it safe?, y ver su escala de notas y el siguiente paso.">
+
 # Tool Research Ledger
 
 Un registro público de 125 herramientas de inteligencia artificial de código abierto, cada una calificada solo por lo que ha hecho en los proyectos de Leonel. Es para quien elige una herramienta de IA y quiere pruebas en vez de popularidad, y para quien quiere ver cómo Leonel toma esa decisión.
 
-**[Abrir el registro en vivo](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** (en inglés) · [Ver la historia (3:09, con subtítulos)](docs/video/story-es.mp4) · [English](README.md)
+**[Abrir el registro en vivo](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** (en inglés) · [Ver la historia (3:09, con subtítulos)](https://leonelivancortesrodriguez.github.io/tool-research-ledger/#story) · [English](README.md)
 
 ## El problema
 
@@ -36,6 +38,8 @@ En el sitio, cada herramienta tiene una sección "Is it safe?" (¿Es segura?) qu
 <img src="docs/images/readme-safety.png" width="960" alt="La sección Is it safe? de la página en vivo, en inglés. Cinco cifras en fila: 9 bloqueadas, solo lectura; 8 piden una lectura antes de probarlas; 1 escaneo aprobado; 33 escaneadas con un informe escrito; 74 sin escanear. Debajo, una lista de herramientas, cada una marcada como bloqueada o como pendiente de lectura.">
 
 ## Una herramienta, de principio a fin
+
+<a href="https://leonelivancortesrodriguez.github.io/tool-research-ledger/#story"><img src="docs/video/story-poster-es.jpg" width="960" alt="Cartel del video en español: Tool Research Ledger, 125 herramientas de inteligencia artificial de código abierto, con subtítulos disponibles en el reproductor del sitio."></a>
 
 La voz que narra el video es Kokoro TTS, un modelo de texto a voz que funciona sin conexión en la computadora de Leonel. Este es su camino por el registro, el mismo que sigue cada herramienta:
 
@@ -73,7 +77,7 @@ En el [registro en vivo](https://leonelivancortesrodriguez.github.io/tool-resear
 
 Los datos son una exportación del registro de origen de Leonel, depurado antes de publicarse ([`data/ledger-export.json`](data/ledger-export.json)). `node scripts/import-export.mjs` la convierte en el catálogo que lee la página, y `npm test` falla si alguna nota, decisión, nota de seguridad o uso registrado difiere de la exportación.
 
-Cada número del video sale de la exportación, leído por [`video/story.mjs`](video/story.mjs). La narración en español solo dice palabras en español; los nombres en inglés quedan en pantalla. Cada comprobación se escribió con su resultado esperado, se guardó en git y solo después se ejecutó: [palabras habladas](docs/checks/2026-10-28-round2-spoken-words.md), [palabras en pantalla](docs/checks/2026-10-28-round2-frames.md), [volumen](docs/checks/2026-10-28-round2-loudness.md), [pruebas completas](docs/checks/2026-10-28-round2-tests.md) y [privacidad](docs/checks/2026-10-28-round2-privacy.md). Archivos del video: [Español](docs/video/story-es.mp4) ([subtítulos](docs/video/captions-es.vtt)) · [English](docs/video/story-en.mp4) ([captions](docs/video/captions-en.vtt)).
+Cada número del video sale de la exportación, leído por [`video/story.mjs`](video/story.mjs). La narración en español solo dice palabras en español; los nombres en inglés quedan en pantalla. Cada comprobación se escribió con su resultado esperado, se guardó en git y solo después se ejecutó: [palabras habladas](docs/checks/2026-10-28-round2-spoken-words.md), [palabras en pantalla](docs/checks/2026-10-28-round2-frames.md), [volumen](docs/checks/2026-10-28-round2-loudness.md), [pruebas completas](docs/checks/2026-10-28-round2-tests.md) y [privacidad](docs/checks/2026-10-28-round2-privacy.md). Descargas: [MP4 en español](docs/video/story-es.mp4) ([subtítulos VTT](docs/video/captions-es.vtt)) · [MP4 en inglés](docs/video/story-en.mp4) ([subtítulos VTT](docs/video/captions-en.vtt)).
 
 ## El papel de Leonel
 

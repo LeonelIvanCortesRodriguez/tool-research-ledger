@@ -6667,7 +6667,7 @@
   "uses": [
     {
       "toolId": "skillspector",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-23",
       "outcome": "PASS",
       "task": "Statically scan every candidate skill repository before any install.",
@@ -6683,7 +6683,7 @@
     },
     {
       "toolId": "spec-kit",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-20",
       "outcome": "PASS",
       "task": "Specify the evidence model and acceptance criteria before changing the dashboard.",
@@ -6699,7 +6699,7 @@
     },
     {
       "toolId": "impeccable",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-23",
       "outcome": "PASS",
       "task": "Grade the control dashboard, the GSAP beta and the guided workspace.",
@@ -6717,7 +6717,7 @@
     },
     {
       "toolId": "gsap-skills",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-23",
       "outcome": "PARTIAL",
       "task": "Build a motion beta with ScrollTrigger and a reduced-motion path.",
@@ -6735,7 +6735,7 @@
     },
     {
       "toolId": "no-ai-slop",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-23",
       "outcome": "PASS",
       "task": "Edit a dashboard decision explanation without changing any claim.",
@@ -6747,7 +6747,7 @@
     },
     {
       "toolId": "open-duet",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-23",
       "outcome": "PARTIAL",
       "task": "Pilot orchestration of a small research decision.",
@@ -6762,7 +6762,7 @@
     },
     {
       "toolId": "design-taste-frontend",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-23",
       "outcome": "REFERENCE",
       "task": "Anti-generic visual direction for the redesign.",
@@ -6774,7 +6774,7 @@
     },
     {
       "toolId": "emil-skills",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-23",
       "outcome": "REFERENCE",
       "task": "Purposeful state motion and tactile controls.",
@@ -6786,7 +6786,7 @@
     },
     {
       "toolId": "playwright-core",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-23",
       "outcome": "PASS",
       "task": "Browser QA for the control, beta and guided workspace.",
@@ -6895,7 +6895,7 @@
     },
     {
       "toolId": "hyperframes",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Re-render the intro after the audit: outlined evidence scale, one method vocabulary, dark ending.",
@@ -6911,7 +6911,7 @@
     },
     {
       "toolId": "gsap-skills",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Drive the intro's paused, seekable timeline with the local GSAP 3.15.0 file.",
@@ -6923,7 +6923,7 @@
     },
     {
       "toolId": "playwright-core",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Home QA at 1440 and 390, light and dark, reduced motion, modal intro and a missing video over HTTP.",
@@ -6943,7 +6943,7 @@
     },
     {
       "toolId": "ffmpeg",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Contact sheets and poster frames for intro review.",
@@ -6955,7 +6955,7 @@
     },
     {
       "toolId": "impeccable",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "REFERENCE",
       "task": "Design reference for two fresh auditor passes over the home page.",
@@ -6967,7 +6967,7 @@
     },
     {
       "toolId": "humanizer",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Rules applied to the home copy by the builder and checked by both auditors.",
@@ -6983,7 +6983,7 @@
     },
     {
       "toolId": "spec-kit",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "REFERENCE",
       "task": "Write the home specification in Spec Kit's structure before code; the Spec Kit CLI was not run.",
@@ -6995,7 +6995,7 @@
     },
     {
       "toolId": "emil-skills",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "REFERENCE",
       "task": "Motion rules for the home: short state changes, interruptible, removed under reduced motion.",
@@ -7041,7 +7041,7 @@
     },
     {
       "toolId": "hyperframes",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Render the 7-second home intro from a local composition.",
@@ -7057,7 +7057,7 @@
     },
     {
       "toolId": "skillspector",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Scan the four core HyperFrames skills before use.",
@@ -7073,7 +7073,7 @@
     },
     {
       "toolId": "ffmpeg",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Inspect the intro render and extract review frames and the poster.",
@@ -7085,7 +7085,7 @@
     },
     {
       "toolId": "khoj",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "REFERENCE",
       "task": "Consider Khoj as search over research notes and the usage map.",
@@ -7097,7 +7097,7 @@
     },
     {
       "toolId": "claude-obsidian",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "REFERENCE",
       "task": "Consider Claude Obsidian as a vault for tool memory.",
@@ -7109,7 +7109,7 @@
     },
     {
       "toolId": "playwright-core",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Browser QA of the review queue against a local server on a temporary copy: live decisions, server guards, file mode, dark 390 px.",
@@ -7127,7 +7127,7 @@
     },
     {
       "toolId": "spec-kit",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "REFERENCE",
       "task": "Gate plan written in Spec Kit's structure with a pass rubric per gate; the Spec Kit CLI was not run.",
@@ -7139,7 +7139,7 @@
     },
     {
       "toolId": "impeccable",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Apply the distill guidance and the product register rules to turn the report-style home into a working screen.",
@@ -7155,7 +7155,7 @@
     },
     {
       "toolId": "playwright-core",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Browser QA for the tool pages and the intake form, including a report filled in on the page, downloaded and dry-run by the real intake script.",
@@ -7173,7 +7173,7 @@
     },
     {
       "toolId": "claude-obsidian",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "REFERENCE",
       "task": "Read its vault schema and its existing SkillSpector reports to decide how the vault is built; installed and ran nothing.",
@@ -7185,7 +7185,7 @@
     },
     {
       "toolId": "playwright-core",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Browser checks that the tool page and Record a use show the vault's Use when and Notes, and that the vault note is added as context.",
@@ -7201,7 +7201,7 @@
     },
     {
       "toolId": "owasp-error-handling",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Checked the error replies of POST /api/decide in ledger:scripts/serve.mjs against the cheat sheet.",
@@ -7219,7 +7219,7 @@
     },
     {
       "toolId": "skillspector",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-27",
       "outcome": "PASS",
       "task": "Scanned eight skills from transitions.dev, Designer Skills, wondelai skills and Taste Skill through the fixed ledger:tools/skillspector/scan-skill.ps1.",
@@ -7237,7 +7237,7 @@
     },
     {
       "toolId": "kokoro-onnx",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Recorded the 17 narration sentences of the story video with the af_bella voice Leonel picked by ear, offline, through ledger:tools/voice-pilot/say.py.",
@@ -7255,7 +7255,7 @@
     },
     {
       "toolId": "transitions-dev",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Scene 5's interface moments use its recipes as reference: success check, panel reveal, number pop-in and text swap, with its durations and curves.",
@@ -7271,7 +7271,7 @@
     },
     {
       "toolId": "hyperframes",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Second composition with the pinned CLI: the 92-second story video with a voice track, telemetry off and no cloud credentials.",
@@ -7295,7 +7295,7 @@
     },
     {
       "toolId": "skillspector",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "FAIL",
       "task": "Scanned two library skills with known content and three planted control skills, and compared each verdict with the verdict written down beforehand.",
@@ -7313,7 +7313,7 @@
     },
     {
       "toolId": "ffmpeg",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Measured the draft story video against its written spec, and its loudness meter on a tone whose loudness is known.",
@@ -7329,7 +7329,7 @@
     },
     {
       "toolId": "tesseract",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "FAIL",
       "task": "Read the headline area of 17 frames of the draft video, one per sentence, and compared the text with the on-screen words in the narration file.",
@@ -7345,7 +7345,7 @@
     },
     {
       "toolId": "kokoro-onnx",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Recorded the 30 sentences of draft 3 with af_heart at normal speed, the voice Leonel picked by ear from the second set of samples.",
@@ -7357,7 +7357,7 @@
     },
     {
       "toolId": "hyperframes",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Rendered draft 3: one wide plane with six scenes and a camera between them, a voice and music track, from a template filled with the data.",
@@ -7377,7 +7377,7 @@
     },
     {
       "toolId": "tesseract",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "FAIL",
       "task": "Read the 30 headlines of the draft 3 render and compared them with the narration file.",
@@ -7394,7 +7394,7 @@
     },
     {
       "toolId": "huashu-motion",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Ran its om qa check (allowed by Leonel) on the English draft and on draft 3: single-frame flashes, still stretches, cuts and motion per second.",
@@ -7408,7 +7408,7 @@
     },
     {
       "toolId": "ffmpeg",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Measured the draft 3 render against the written spec.",
@@ -7420,7 +7420,7 @@
     },
     {
       "toolId": "paddleocr",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Read the 32 headline crops of the story video, the same images Tesseract read, offline with cached PP-OCRv6 medium models.",
@@ -7436,7 +7436,7 @@
     },
     {
       "toolId": "tesseract",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "FAIL",
       "task": "Read the same 32 headline crops as PaddleOCR, unscaled, with --psm 7.",
@@ -7450,7 +7450,7 @@
     },
     {
       "toolId": "cindy",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "BLOCKED",
       "task": "Leonel asked Cindy 0.1.119, installed with sign-in skipped and usage statistics off, to list the tools in ledger:data/catalog.json at E1 or higher with no vault notes, without naming a folder.",
@@ -7466,7 +7466,7 @@
     },
     {
       "toolId": "cindy",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "On a copy of the ledger, list the tools in ledger:data/catalog.json at E1 or higher whose ledger:data/vault.json entry has no notes.",
@@ -7478,7 +7478,7 @@
     },
     {
       "toolId": "paddleocr",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Read the 32 headline crops of the final story render to check each headline is on screen when its sentence plays.",
@@ -7490,7 +7490,7 @@
     },
     {
       "toolId": "hyperframes",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Rendered the final 2 min 54 s story video through npm run video:en, the scripted build from the data files.",
@@ -7508,7 +7508,7 @@
     },
     {
       "toolId": "ffmpeg",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Measured the final English story render (story-en.mp4, SHA-256 starts 82ac5848aa2b72d0) against the written spec.",
@@ -7520,7 +7520,7 @@
     },
     {
       "toolId": "paddleocr",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Read the 32 headline crops of the passing render (SHA-256 starts 314122ead3f152be).",
@@ -7532,7 +7532,7 @@
     },
     {
       "toolId": "ffmpeg",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Measured the passing render (SHA-256 starts 314122ead3f152be) against the written spec.",
@@ -7544,7 +7544,7 @@
     },
     {
       "toolId": "graphify",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Clustered and drew the ledger's own data as a graph (157 nodes, 106 links) and mapped the ledger's code from tree-sitter (521 nodes, 815 links), with no AI provider.",
@@ -7564,7 +7564,7 @@
     },
     {
       "toolId": "kokoro-onnx",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Recorded the 32 Spanish sentences with the ef_dora voice Leonel picked, at normal speed, offline.",
@@ -7576,7 +7576,7 @@
     },
     {
       "toolId": "paddleocr",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Read the 32 Spanish headline crops of story-es.mp4 (SHA-256 starts e2127480134609a8).",
@@ -7588,7 +7588,7 @@
     },
     {
       "toolId": "hyperframes",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Rendered the Spanish and English story videos from the same composition with npm run video:es and video:en.",
@@ -7604,7 +7604,7 @@
     },
     {
       "toolId": "kokoro-onnx",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PARTIAL",
       "task": "Re-recorded the Spanish narration with no English spoken: the closing line names the ledger in Spanish, and FFmpeg is spelled with Spanish letter names.",
@@ -7620,7 +7620,7 @@
     },
     {
       "toolId": "skillspector",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Scanned the upstream skills of Remotion skills, claude-video and MoneyPrinterTurbo offline, then ran the ledger gate.",
@@ -7632,7 +7632,7 @@
     },
     {
       "toolId": "ledger-intake",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Took https://github.com/Newuxtreme/watch-video-skill from link to a waiting draft in one command; accepted it on a copy of the data and restored.",
@@ -7648,7 +7648,7 @@
     },
     {
       "toolId": "ledger-patterns",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Ran our 14 scan rules on 7 cases with verdicts written first: three scanner decoys, Remotion skills, claude-video, MoneyPrinterTurbo, huashu-motion.",
@@ -7664,7 +7664,7 @@
     },
     {
       "toolId": "ledger-watch",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Checked the Spanish narration before and after Leonel's fix, and the frames of story-es.mp4.",
@@ -7682,7 +7682,7 @@
     },
     {
       "toolId": "paddleocr",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Read 32 full frames of story-es.mp4 for ledger-watch.",
@@ -7698,7 +7698,7 @@
     },
     {
       "toolId": "skillspector",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Scanned watch-video-skill through the intake command and our three skills.",
@@ -7710,7 +7710,7 @@
     },
     {
       "toolId": "playwright-core",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Screenshots of the eight first-visit pages with page errors collected.",
@@ -7726,7 +7726,7 @@
     },
     {
       "toolId": "ledger-intake",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Correction: the earlier test-intake PASS (report 2026-10-28-claude-gate5-build) stopped reproducing once the validator began checking ledger:data/scan-notes.js; the auditor found it. Accept now rebuilds the scan notes and keeps the draft's scan with the tool; the test also checks the new tool's safety note.",
@@ -7742,7 +7742,7 @@
     },
     {
       "toolId": "ledger-patterns",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Gave each rule a plain reason; the tool page reads the flagged line from the scanned copy and shows our reason, so huashu-motion's block says it tells you to hand your browser's saved logins to another program.",
@@ -7754,7 +7754,7 @@
     },
     {
       "toolId": "ffmpeg",
-      "project": "Tool Research Ledger (private build)",
+      "project": "Tool Research Ledger (source build)",
       "date": "2026-10-28",
       "outcome": "PASS",
       "task": "Took the poster frames from the settled title card of each story video.",
