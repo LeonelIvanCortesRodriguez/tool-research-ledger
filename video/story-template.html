@@ -2,6 +2,7 @@
   <!-- Story video: video/assemble.mjs fills in STORY (timing, facts from data/ledger-export.json, the voice's
        waveform). One wide plane holds six scenes; a camera travels between them, and the seventh pulls back over all. -->
   <style>
+    @font-face { font-family: "Schibsted Grotesk"; src: url("assets/SchibstedGrotesk.woff2") format("woff2"); font-weight: 400 900; }
     #root * { margin: 0; padding: 0; box-sizing: border-box; }
     #root { position: absolute; inset: 0; overflow: hidden; background: #14181f; font-family: "Schibsted Grotesk", sans-serif; color: #f4f6fa; font-feature-settings: "zero"; }
     .layer, .wrap { position: absolute; inset: 0; }
@@ -444,7 +445,8 @@
       gsap.set(libLabel, { autoAlpha: 0 });
       tl.fromTo(libLabel, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: SMOOTH, immediateRender: false }, at("p4", 0.5));
       F.toolIds.forEach((id, i) => { if (work.has(id)) tl.to(minis[i], { backgroundColor: "#e05aa0", borderColor: "#e05aa0", duration: 0.25 }, at("p5", 0.02)); });
-      const chips = F.working.ids.map((id, k) => el("div", "name-chip", R, { left: 680 + (k % 2) * 590, top: 260 + Math.floor(k / 2) * 84, width: 570 }, `<span style="overflow:hidden;text-overflow:ellipsis">${esc(F.names[id].replace(/\s*\(.*\)$/, ""))}</span><span class="mono">${esc(STORY.levelOf[id])}</span>`));
+      // Three columns, so every working tool fits above the progress bar.
+      const chips = F.working.ids.map((id, k) => el("div", "name-chip", R, { left: 680 + (k % 3) * 400, top: 260 + Math.floor(k / 3) * 84, width: 380 }, `<span style="overflow:hidden;text-overflow:ellipsis">${esc(F.names[id].replace(/\s*\(.*\)$/, ""))}</span><span class="mono">${esc(STORY.levelOf[id])}</span>`));
       gsap.set(chips, { autoAlpha: 0 });
       chips.forEach((chip, k) => tl.fromTo(chip, { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: 0.3, ease: HARD, immediateRender: false }, at("p5", 0.08) + k * 0.12));
       drift(at("p4", 0), SC("proof").end - 0.4, regionView("proof"), 50);

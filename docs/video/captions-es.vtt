@@ -1,65 +1,129 @@
 WEBVTT
 
 1
-00:00:00.800 --> 00:00:07.296
-Este registro guarda ciento veinticinco herramientas de inteligencia artificial de código abierto.
+00:00:00.600 --> 00:00:05.372
+Cada semana aparecen nuevas herramientas de inteligencia artificial.
 
 2
-00:00:07.296 --> 00:00:13.577
-Cada una tiene una nota, de E cero a E cinco. La nota cuenta pruebas, no popularidad.
+00:00:05.372 --> 00:00:10.891
+Habilidades, modelos, escáneres, agentes. Cada una promete un mejor trabajo.
 
 3
-00:00:13.977 --> 00:00:19.374
-E cero significa que solo leímos sobre ella. Hay ciento tres herramientas ahí.
+00:00:10.891 --> 00:00:13.443
+Reunimos ciento veinticinco.
 
 4
-00:00:19.374 --> 00:00:25.225
-Para subir, una herramienta tiene que hacer trabajo real en un proyecto con nombre.
+00:00:13.443 --> 00:00:20.478
+¿Cuáles funcionan de verdad? ¿Cuáles son seguras? ¿Y cuáles le sirven al proyecto que tienes enfrente?
 
 5
-00:00:25.625 --> 00:00:30.180
-Escucha esta voz. Grabó la narración del video de este registro.
+00:00:20.878 --> 00:00:25.413
+Nuestra respuesta es una nota, y solo las pruebas pueden subirla.
 
 6
-00:00:30.180 --> 00:00:35.079
-Ese uso quedó escrito: la tarea, el resultado y lo que salió mal.
+00:00:25.413 --> 00:00:28.471
+Hay seis niveles, de E cero a E cinco.
 
 7
-00:00:35.079 --> 00:00:41.655
-Una persona leyó el registro y aprobó la subida a E uno. Hay dieciséis herramientas en E uno.
+00:00:28.471 --> 00:00:31.446
+E cero: solo hemos leído sobre ella.
 
 8
-00:00:42.055 --> 00:00:47.361
-E dos pide más. El resultado esperado se escribe antes de usar la herramienta.
+00:00:31.446 --> 00:00:34.772
+E uno: hizo trabajo real en un proyecto.
 
 9
-00:00:47.361 --> 00:00:54.241
-Un lector de texto tuvo que leer treinta y dos titulares de un video. Leyó treinta y dos de treinta y dos.
+00:00:34.772 --> 00:00:38.886
+E dos: se comprobó contra un resultado escrito de antemano.
 
 10
-00:00:54.241 --> 00:00:58.239
-Otro lector, con las mismas imágenes, leyó veintiocho.
+00:00:38.886 --> 00:00:45.536
+Los niveles más altos piden muchos casos de prueba, un segundo revisor y tiempo en producción.
 
 11
-00:00:58.239 --> 00:01:03.543
-Seis herramientas llegaron a E dos. Ninguna está más arriba todavía.
+00:00:45.936 --> 00:00:49.236
+Antes de instalar cualquier cosa, se escanea.
 
 12
-00:01:03.943 --> 00:01:12.095
-Una comprobación también puede fallar. Un escáner de habilidades debía dar cinco veredictos conocidos. Acertó tres de cinco.
+00:00:49.236 --> 00:00:56.487
+El escáner lee los archivos buscando contraseñas robadas, instrucciones ocultas o código descargado de internet.
 
 13
-00:01:12.095 --> 00:01:18.650
-Ese resultado se guarda. El escáner sigue en E uno, y aquí se construyó un segundo escáner.
+00:00:56.487 --> 00:01:01.873
+Cada hallazgo trae su gravedad y su número de línea, para que una persona lo revise.
 
 14
-00:01:19.050 --> 00:01:23.849
-Solo el uso registrado y la aprobación de una persona mueven una nota.
+00:01:01.873 --> 00:01:11.401
+En veinticuatro de cincuenta y uno escaneos, al menos una parte no era segura. Esas partes no se instalan hasta que una persona lee el informe y decide.
 
 15
-00:01:23.849 --> 00:01:30.849
-Ciento veinticinco herramientas. Veintidós hicieron trabajo real. Setenta y cuatro usos registrados.
+00:01:11.401 --> 00:01:24.449
+También probamos el escáner, con trampas que pusimos nosotros. Calificó dos de cinco solo como precaución, así que ahora el registro bloquea cualquier hallazgo de alto riesgo hasta que una persona lo lea.
 
 16
-00:01:30.849 --> 00:01:34.919
-Este es el registro de investigación de herramientas.
+00:01:24.849 --> 00:01:29.406
+Una nota solo cambia cuando la herramienta se usa en un proyecto real.
+
+17
+00:01:29.406 --> 00:01:34.978
+Cada uso queda escrito: la tarea, lo que falló, lo que se arregló y la evidencia.
+
+18
+00:01:34.978 --> 00:01:43.823
+Efe efe eme peg midió el primer borrador de este video y encontró el sonido demasiado bajo. Lo corregimos, y efe efe eme peg subió a E dos.
+
+19
+00:01:43.823 --> 00:01:51.016
+Ciento cuatro herramientas aún no tienen un uso exitoso en el registro. Se quedan como candidatas y referencias.
+
+20
+00:01:51.016 --> 00:01:55.437
+De las veintiuna que sí, dieciocho están en E uno o más.
+
+21
+00:01:55.837 --> 00:02:00.832
+Aquí hay una herramienta, de principio a fin: la voz que estás escuchando.
+
+22
+00:02:00.832 --> 00:02:04.057
+Entró al registro sin pruebas, en E cero.
+
+23
+00:02:04.057 --> 00:02:11.239
+El escaneo no encontró problemas conocidos, y sus archivos de modelo coincidieron con sus huellas publicadas.
+
+24
+00:02:11.239 --> 00:02:16.651
+Luego grabó la primera narración de este video. Ese uso real propuso E uno.
+
+25
+00:02:16.651 --> 00:02:20.025
+Una persona revisó la propuesta y la aprobó.
+
+26
+00:02:20.025 --> 00:02:26.152
+Para llegar a E dos, necesita una comprobación contra un resultado escrito de antemano.
+
+27
+00:02:26.552 --> 00:02:33.648
+Cuando empieza un proyecto nuevo, el registro sugiere las herramientas que encajan, y cómo se probará cada una.
+
+28
+00:02:33.648 --> 00:02:38.820
+Cada uso nuevo suma pruebas, así el siguiente proyecto parte de lo aprendido.
+
+29
+00:02:38.820 --> 00:02:42.173
+El registro también aprende sobre la marcha.
+
+30
+00:02:42.173 --> 00:02:54.964
+Cada problema queda escrito con su arreglo: setenta y siete encontrados, sesenta y seis arreglados. Y una comprobación fallida puede volverse una regla nueva, como la regla de escaneo más estricta.
+
+31
+00:02:55.364 --> 00:03:01.750
+Ciento veinticinco herramientas, ochenta y cinco usos, veintiuna decisiones. Todo registrado.
+
+32
+00:03:01.750 --> 00:03:05.233
+Este es nuestro registro de herramientas.

@@ -1,65 +1,129 @@
 WEBVTT
 
 1
-00:00:00.800 --> 00:00:05.410
-This ledger keeps 125 open-source AI tools.
+00:00:00.600 --> 00:00:03.741
+Every week, new A.I. tools appear.
 
 2
-00:00:05.410 --> 00:00:12.167
-Each one has a grade, from E zero to E five. The grade counts proof, not popularity.
+00:00:03.741 --> 00:00:08.694
+Skills, models, scanners, agents. Each one promises better work.
 
 3
-00:00:12.567 --> 00:00:17.561
-E zero means we only read about it. 103 tools are there.
+00:00:08.694 --> 00:00:11.924
+We collected a hundred and twenty-five of them.
 
 4
-00:00:17.561 --> 00:00:22.326
-To move up, a tool has to do real work in a named project.
+00:00:11.924 --> 00:00:17.806
+So which ones actually work? Which are safe? And which fit the project in front of you?
 
 5
-00:00:22.726 --> 00:00:28.104
-Take the voice you are hearing. It recorded the narration of this ledger's story video.
+00:00:18.206 --> 00:00:21.891
+Our answer is a grade, and only proof can raise it.
 
 6
-00:00:28.104 --> 00:00:32.727
-That use was written down: the task, the result, and what went wrong.
+00:00:21.891 --> 00:00:25.331
+There are six steps, from E zero to E five.
 
 7
-00:00:32.727 --> 00:00:39.168
-A person read the record and approved the move to E one. 16 tools are at E one.
+00:00:25.331 --> 00:00:28.238
+E zero: we have only read about it.
 
 8
-00:00:39.568 --> 00:00:45.340
-E two asks for more. The expected result is written down before the tool runs.
+00:00:28.238 --> 00:00:31.424
+E one: it did real work in a project.
 
 9
-00:00:45.340 --> 00:00:51.688
-A text reader was asked to read 32 headlines from a video. It read 32 of 32.
+00:00:31.424 --> 00:00:35.589
+E two: it was checked against a result we wrote down first.
 
 10
-00:00:51.688 --> 00:00:55.603
-A second reader, on the same images, read 28.
+00:00:35.589 --> 00:00:41.719
+The higher steps need many test cases, a second reviewer, and time in production.
 
 11
-00:00:55.603 --> 00:00:59.717
-6 tools have reached E two. None is higher yet.
+00:00:42.119 --> 00:00:45.177
+Before anything is installed, it is scanned.
 
 12
-00:01:00.117 --> 00:01:07.382
-A check can also fail. A skill scanner was expected to give 5 known verdicts. It got 3 of 5.
+00:00:45.177 --> 00:00:52.365
+The scanner reads the files, looking for stolen passwords, hidden instructions, or code pulled from the internet.
 
 13
-00:01:07.382 --> 00:01:13.683
-That result is kept. The scanner stays at E one, and a second scanner was built here.
+00:00:52.365 --> 00:00:57.332
+Each finding comes with a severity and a line number, so a person can check it.
 
 14
-00:01:14.083 --> 00:01:18.204
-Only recorded use and a person's approval move a grade.
+00:00:57.332 --> 00:01:07.363
+In twenty-four of fifty-one scans, at least one part was not safe. Those parts are not installed unless a person reads the report and decides.
 
 15
-00:01:18.204 --> 00:01:24.488
-125 tools. 22 did real work. 74 uses on record.
+00:01:07.363 --> 00:01:18.294
+We tested the scanner too, with traps we planted. It rated two of five as only a caution, so the ledger now blocks any high-risk finding until a person reads it.
 
 16
-00:01:24.488 --> 00:01:27.582
+00:01:18.694 --> 00:01:22.904
+A grade only moves when a tool is used in a real project.
+
+17
+00:01:22.904 --> 00:01:28.323
+Each use is written down: the task, what broke, what was fixed, and the evidence.
+
+18
+00:01:28.323 --> 00:01:37.437
+F F mpeg measured the first draft of this video and found its sound too quiet. We fixed it, and F F mpeg moved up to E two.
+
+19
+00:01:37.437 --> 00:01:45.260
+A hundred and four tools have no successful use in the ledger yet. They stay on file, as candidates and references.
+
+20
+00:01:45.260 --> 00:01:49.866
+Of the twenty-one that have, eighteen are at E one or higher.
+
+21
+00:01:50.266 --> 00:01:54.320
+Here is one tool, start to finish: the voice you are hearing.
+
+22
+00:01:54.320 --> 00:01:57.795
+It entered the ledger with no proof, at E zero.
+
+23
+00:01:57.795 --> 00:02:03.528
+The scan found no known problems, and its model files matched their published fingerprints.
+
+24
+00:02:03.528 --> 00:02:09.326
+Then it recorded the first narration for this video. That real use proposed E one.
+
+25
+00:02:09.326 --> 00:02:12.576
+A person reviewed the proposal and approved it.
+
+26
+00:02:12.576 --> 00:02:17.840
+To reach E two, it needs a check against a result written down first.
+
+27
+00:02:18.240 --> 00:02:24.784
+When a new project starts, the ledger suggests the tools that fit it, and how each one will be tested there.
+
+28
+00:02:24.784 --> 00:02:29.378
+Every new use adds proof, so the next project starts from what was learned.
+
+29
+00:02:29.378 --> 00:02:32.190
+The ledger also learns as it goes.
+
+30
+00:02:32.190 --> 00:02:42.726
+Every problem is written down with its fix: seventy-seven found, sixty-six fixed. And a failed check can become a new rule, like the stricter scan rule.
+
+31
+00:02:43.126 --> 00:02:49.274
+A hundred and twenty-five tools, eighty-five uses, twenty-one decisions. All on record.
+
+32
+00:02:49.274 --> 00:02:52.368
 This is the Tool Research Ledger.
