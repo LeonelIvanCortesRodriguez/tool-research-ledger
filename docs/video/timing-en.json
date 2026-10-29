@@ -1,0 +1,166 @@
+{
+  "lang": "en",
+  "total": 175.87,
+  "lines": {
+    "w1": {
+      "start": 0.6,
+      "show": "New tools, every week",
+      "text": "Every week, new A.I. tools appear."
+    },
+    "w2": {
+      "start": 3.741,
+      "show": "Each one promises",
+      "text": "Skills, models, scanners, agents. Each one promises better work."
+    },
+    "w3": {
+      "start": 8.694,
+      "show": "125 tools",
+      "text": "We collected a hundred and twenty-five of them."
+    },
+    "w4": {
+      "start": 11.924,
+      "show": "Works? Safe? Fits?",
+      "text": "So which ones actually work? Which are safe? And which fit the project in front of you?"
+    },
+    "g1": {
+      "start": 18.206,
+      "show": "A grade, raised by proof",
+      "text": "Our answer is a grade, and only proof can raise it."
+    },
+    "g2": {
+      "start": 21.891,
+      "show": "Six steps: E0 to E5",
+      "text": "There are six steps, from E zero to E five."
+    },
+    "g3": {
+      "start": 25.331,
+      "show": "E0 · read about it",
+      "text": "E zero: we have only read about it."
+    },
+    "g4": {
+      "start": 28.238,
+      "show": "E1 · did real work",
+      "text": "E one: it did real work in a project."
+    },
+    "g5": {
+      "start": 31.424,
+      "show": "E2 · checked",
+      "text": "E two: it was checked against a result we wrote down first."
+    },
+    "g6": {
+      "start": 35.589,
+      "show": "E3 to E5 · more proof",
+      "text": "The higher steps need many test cases, a second reviewer, and time in production."
+    },
+    "c1": {
+      "start": 42.119,
+      "show": "Scan before install",
+      "text": "Before anything is installed, it is scanned."
+    },
+    "c2": {
+      "start": 45.177,
+      "show": "What a scan looks for",
+      "text": "The scanner reads the files, looking for stolen passwords, hidden instructions, or code pulled from the internet."
+    },
+    "c3": {
+      "start": 52.365,
+      "show": "Every finding, with its line",
+      "text": "Each finding comes with a severity and a line number, so a person can check it."
+    },
+    "c4": {
+      "start": 57.332,
+      "show": "24 of 51 had an unsafe part",
+      "text": "In twenty-four of fifty-one scans, at least one part was not safe. Those parts are not installed unless a person reads the report and decides."
+    },
+    "c5": {
+      "start": 67.363,
+      "show": "The scanner, tested",
+      "text": "We tested the scanner too, with traps we planted. It rated two of five as only a caution, so the ledger now blocks any high-risk finding until a person reads it."
+    },
+    "p1": {
+      "start": 78.694,
+      "show": "Used, then graded",
+      "text": "A grade only moves when a tool is used in a real project."
+    },
+    "p2": {
+      "start": 82.904,
+      "show": "Every use, on record",
+      "text": "Each use is written down: the task, what broke, what was fixed, and the evidence."
+    },
+    "p3": {
+      "start": 88.323,
+      "show": "FFmpeg: up to E2",
+      "text": "F F mpeg measured the first draft of this video and found its sound too quiet. We fixed it, and F F mpeg moved up to E two."
+    },
+    "p4": {
+      "start": 97.437,
+      "show": "104 without a successful use",
+      "text": "A hundred and four tools have no successful use in the ledger yet. They stay on file, as candidates and references."
+    },
+    "p5": {
+      "start": 105.26,
+      "show": "21 working · 18 at E1 or up",
+      "text": "Of the twenty-one that have, eighteen are at E one or higher."
+    },
+    "k1": {
+      "start": 110.266,
+      "show": "One tool: this voice",
+      "text": "Here is one tool, start to finish: the voice you are hearing."
+    },
+    "k2": {
+      "start": 114.32,
+      "show": "Enters at E0",
+      "text": "It entered the ledger with no proof, at E zero."
+    },
+    "k3": {
+      "start": 117.795,
+      "show": "Scanned: safe",
+      "text": "The scan found no known problems, and its model files matched their published fingerprints."
+    },
+    "k4": {
+      "start": 123.528,
+      "show": "Used: proposes E1",
+      "text": "Then it recorded the first narration for this video. That real use proposed E one."
+    },
+    "k5": {
+      "start": 129.326,
+      "show": "Approved: E1",
+      "text": "A person reviewed the proposal and approved it."
+    },
+    "k6": {
+      "start": 132.576,
+      "show": "Next: E2",
+      "text": "To reach E two, it needs a check against a result written down first."
+    },
+    "n1": {
+      "start": 138.24,
+      "show": "A new project",
+      "text": "When a new project starts, the ledger suggests the tools that fit it, and how each one will be tested there."
+    },
+    "n2": {
+      "start": 144.784,
+      "show": "Each use adds proof",
+      "text": "Every new use adds proof, so the next project starts from what was learned."
+    },
+    "n3": {
+      "start": 149.378,
+      "show": "It learns as it goes",
+      "text": "The ledger also learns as it goes."
+    },
+    "n4": {
+      "start": 152.19,
+      "show": "77 found · 66 fixed",
+      "text": "Every problem is written down with its fix: seventy-seven found, sixty-six fixed. And a failed check can become a new rule, like the stricter scan rule."
+    },
+    "r1": {
+      "start": 163.126,
+      "show": "All on record",
+      "text": "A hundred and twenty-five tools, eighty-five uses, twenty-one decisions. All on record."
+    },
+    "r2": {
+      "start": 169.274,
+      "show": "Picked by proof",
+      "text": "This is the Tool Research Ledger."
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "lang": "es",
+  "total": 188.73,
+  "lines": {
+    "w1": {
+      "start": 0.6,
+      "show": "Nuevas herramientas, cada semana",
+      "text": "Cada semana aparecen nuevas herramientas de inteligencia artificial."
+    },
+    "w2": {
+      "start": 5.372,
+      "show": "Todas prometen",
+      "text": "Habilidades, modelos, escáneres, agentes. Cada una promete un mejor trabajo."
+    },
+    "w3": {
+      "start": 10.891,
+      "show": "125 herramientas",
+      "text": "Reunimos ciento veinticinco."
+    },
+    "w4": {
+      "start": 13.443,
+      "show": "¿Funciona? ¿Segura? ¿Sirve?",
+      "text": "¿Cuáles funcionan de verdad? ¿Cuáles son seguras? ¿Y cuáles le sirven al proyecto que tienes enfrente?"
+    },
+    "g1": {
+      "start": 20.878,
+      "show": "Una nota que suben las pruebas",
+      "text": "Nuestra respuesta es una nota, y solo las pruebas pueden subirla."
+    },
+    "g2": {
+      "start": 25.413,
+      "show": "Seis niveles: E0 a E5",
+      "text": "Hay seis niveles, de E cero a E cinco."
+    },
+    "g3": {
+      "start": 28.471,
+      "show": "E0 · leída",
+      "text": "E cero: solo hemos leído sobre ella."
+    },
+    "g4": {
+      "start": 31.446,
+      "show": "E1 · trabajo real",
+      "text": "E uno: hizo trabajo real en un proyecto."
+    },
+    "g5": {
+      "start": 34.772,
+      "show": "E2 · comprobada",
+      "text": "E dos: se comprobó contra un resultado escrito de antemano."
+    },
+    "g6": {
+      "start": 38.886,
+      "show": "E3 a E5 · más pruebas",
+      "text": "Los niveles más altos piden muchos casos de prueba, un segundo revisor y tiempo en producción."
+    },
+    "c1": {
+      "start": 45.936,
+      "show": "Escanear antes de instalar",
+      "text": "Antes de instalar cualquier cosa, se escanea."
+    },
+    "c2": {
+      "start": 49.236,
+      "show": "Qué busca un escaneo",
+      "text": "El escáner lee los archivos buscando contraseñas robadas, instrucciones ocultas o código descargado de internet."
+    },
+    "c3": {
+      "start": 56.487,
+      "show": "Cada hallazgo, con su línea",
+      "text": "Cada hallazgo trae su gravedad y su número de línea, para que una persona lo revise."
+    },
+    "c4": {
+      "start": 61.873,
+      "show": "24 de 51 con una parte insegura",
+      "text": "En veinticuatro de cincuenta y uno escaneos, al menos una parte no era segura. Esas partes no se instalan hasta que una persona lee el informe y decide."
+    },
+    "c5": {
+      "start": 71.401,
+      "show": "El escáner, a prueba",
+      "text": "También probamos el escáner, con trampas que pusimos nosotros. Calificó dos de cinco solo como precaución, así que ahora el registro bloquea cualquier hallazgo de alto riesgo hasta que una persona lo lea."
+    },
+    "p1": {
+      "start": 84.849,
+      "show": "Se usa, luego se califica",
+      "text": "Una nota solo cambia cuando la herramienta se usa en un proyecto real."
+    },
+    "p2": {
+      "start": 89.406,
+      "show": "Cada uso, registrado",
+      "text": "Cada uso queda escrito: la tarea, lo que falló, lo que se arregló y la evidencia."
+    },
+    "p3": {
+      "start": 94.978,
+      "show": "FFmpeg: sube a E2",
+      "text": "Efe efe eme peg midió el primer borrador de este video y encontró el sonido demasiado bajo. Lo corregimos, y efe efe eme peg subió a E dos."
+    },
+    "p4": {
+      "start": 103.823,
+      "show": "104 sin uso exitoso",
+      "text": "Ciento cuatro herramientas aún no tienen un uso exitoso en el registro. Se quedan como candidatas y referencias."
+    },
+    "p5": {
+      "start": 111.016,
+      "show": "21 en uso · 18 en E1 o más",
+      "text": "De las veintiuna que sí, dieciocho están en E uno o más."
+    },
+    "k1": {
+      "start": 115.837,
+      "show": "Una herramienta: esta voz",
+      "text": "Aquí hay una herramienta, de principio a fin: la voz que estás escuchando."
+    },
+    "k2": {
+      "start": 120.832,
+      "show": "Entra en E0",
+      "text": "Entró al registro sin pruebas, en E cero."
+    },
+    "k3": {
+      "start": 124.057,
+      "show": "Escaneada: segura",
+      "text": "El escaneo no encontró problemas conocidos, y sus archivos de modelo coincidieron con sus huellas publicadas."
+    },
+    "k4": {
+      "start": 131.239,
+      "show": "Usada: propone E1",
+      "text": "Luego grabó la primera narración de este video. Ese uso real propuso E uno."
+    },
+    "k5": {
+      "start": 136.651,
+      "show": "Aprobada: E1",
+      "text": "Una persona revisó la propuesta y la aprobó."
+    },
+    "k6": {
+      "start": 140.025,
+      "show": "Siguiente: E2",
+      "text": "Para llegar a E dos, necesita una comprobación contra un resultado escrito de antemano."
+    },
+    "n1": {
+      "start": 146.552,
+      "show": "Un proyecto nuevo",
+      "text": "Cuando empieza un proyecto nuevo, el registro sugiere las herramientas que encajan, y cómo se probará cada una."
+    },
+    "n2": {
+      "start": 153.648,
+      "show": "Cada uso suma pruebas",
+      "text": "Cada uso nuevo suma pruebas, así el siguiente proyecto parte de lo aprendido."
+    },
+    "n3": {
+      "start": 158.82,
+      "show": "Aprende sobre la marcha",
+      "text": "El registro también aprende sobre la marcha."
+    },
+    "n4": {
+      "start": 162.173,
+      "show": "77 encontrados · 66 arreglados",
+      "text": "Cada problema queda escrito con su arreglo: setenta y siete encontrados, sesenta y seis arreglados. Y una comprobación fallida puede volverse una regla nueva, como la regla de escaneo más estricta."
+    },
+    "r1": {
+      "start": 175.364,
+      "show": "Todo registrado",
+      "text": "Ciento veinticinco herramientas, ochenta y cinco usos, veintiuna decisiones. Todo registrado."
+    },
+    "r2": {
+      "start": 181.75,
+      "show": "Elegidas con pruebas",
+      "text": "Este es nuestro registro de herramientas."
+    }
+  }
+}

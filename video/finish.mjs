@@ -1,7 +1,7 @@
 // Story video, step 4: put the -16 LUFS voice under the rendered frames, then write the captions, the poster and
 // data/story-script.js (captions and script for the page, WCAG 2.2 1.2.2).
 // Usage: node video/finish.mjs [en|es]
-// Reads video/build/<lang>/frames.mp4 and timing.json, and video/build/voice-<lang>.wav. Writes docs/video/story-<lang>.mp4,
+// Reads video/build/<lang>/frames.mp4 and timing.json, and video/build/voice-<lang>.wav. Writes docs/video/story-<lang>.mp4, timing-<lang>.json,
 // captions-<lang>.vtt and story-poster-<lang>.jpg.
 import fs from "node:fs";
 import path from "node:path";
@@ -41,5 +41,9 @@ all[lang] = {
   lines: entries.map((line) => ({ start: line.start, text: line.text })), vtt
 };
 fs.writeFileSync(scriptFile, `window.STORY_SCRIPT = ${JSON.stringify(all, null, 2)};\n`);
+// The frame check's input, tracked so an auditor can rerun it against the published MP4:
+// node <ledger>/scripts/watch/watch.mjs frames docs/video/story-<lang>.mp4 docs/video/timing-<lang>.json
+const timingOut = { lang, total: timing.total, lines: Object.fromEntries(Object.entries(timing.lines).map(([id, line]) => [id, { start: line.start, show: line.show, text: line.text }])) };
+fs.writeFileSync(path.join(outDir, `timing-${lang}.json`), `${JSON.stringify(timingOut, null, 2)}\n`);
 const size = (fs.statSync(video).size / 1e6).toFixed(1);
 console.log(`${lang}: docs/video/story-${lang}.mp4 ${size} MB, ${timing.total} s, loudness ${Number(measured.input_i).toFixed(1)} LUFS, true peak ${measured.input_tp} dBTP`);
