@@ -10,3 +10,8 @@ Input: `video/build/narration.es.json` and `video/build/narration.en.json`, writ
 - English: `SPOKEN WORDS PASS (Only Spanish narration is checked (got en-us))`, since the check reads Spanish only.
 
 ## Actual
+
+`node <ledger>/scripts/watch/watch.mjs words video/build/narration.es.json` and `... narration.en.json`, run before recording:
+
+- Spanish: `SPOKEN WORDS PASS`, exit 0, no flagged word. Matches.
+- English: `SPOKEN WORDS PASS (Only Spanish narration is checked (got en-us))`, exit 0. Matches.
