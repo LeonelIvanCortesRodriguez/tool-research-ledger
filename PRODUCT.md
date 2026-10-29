@@ -45,7 +45,7 @@ Fit, evidence, decision, and risk answer four separate questions and must never 
 ## Evidence status
 
 - **Implemented and tested:** search, guided jobs, capability map, filters and sorting, comparison, evidence detail, shareable URL state, and catalog validation (unique IDs and URLs, 99-repository reconciliation, matching JSON and JS). `npm run verify` covers static checks, mutation, prose, browser QA, privacy, and build.
-- **Source-reviewed:** all 99 third-party entries are E0. Current spread: 29 PILOT, 23 CONDITIONAL, 22 REFERENCE, 10 HOLD, 8 REJECT, 7 WATCH, 0 IMPLEMENT.
+- **Graded from recorded use:** 22 of 125 tools are above E0 (16 at E1, 6 at E2); the other 103 are E0, only read about. Grades come from the owner's export and a person approves every change.
 - **Planned:** project trials that preserve task, version, input, result, checks, and limitations. Only a retained trial can move an entry to E1 or above. No public entry has been promoted yet, and the presentation must show promotion as a path, not an achievement.
 - **Unsupported, never claim:** benchmark scores, safety certification, operational benefit of any listed tool.
 
@@ -73,7 +73,7 @@ Precise, candid, decision-oriented. A research instrument with a librarian's hon
 
 1. **Start with the job.** Breadth appears only where it changes a decision.
 2. **Four channels, four visual languages.** Decision, evidence, and risk differ in shape, label, and weight, never in color alone.
-3. **Show the ceiling.** The fact that every entry is E0 is a headline, not fine print.
+3. **Show where grades come from.** Recorded use in named projects, approved by a person, is stated on the first screen, and so is what E0 means.
 4. **Count from the catalog.** Every number on every surface derives from `data/catalog.json`.
 5. **Name the next proof.** Each decision ends with what would change it.
 

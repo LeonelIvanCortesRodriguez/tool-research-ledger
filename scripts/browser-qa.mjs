@@ -38,8 +38,34 @@ async function run(viewport, mobile, screenshot) {
   assert(await page.locator("#ledgerRows tr").count() > 0, `${mobile}: ledger did not render`);
   const evidenceStates = await page.locator("#evidenceScale [data-evidence-level]").evaluateAll((nodes) => [...new Set(nodes.map((node) => node.dataset.evidenceLevel))]);
   assert(JSON.stringify(evidenceStates.sort()) === JSON.stringify(["E0", "E1", "E2", "E3", "E4", "E5"]), `${mobile}: six evidence states not rendered`);
-  const decisions = await page.locator("#decisionFilter option").allTextContents();
+  const decisions = await page.locator("#decisionFilter option").evaluateAll((nodes) => nodes.map((node) => node.value));
   assert(["IMPLEMENT", "PILOT", "CONDITIONAL", "REFERENCE", "WATCH", "HOLD", "REJECT"].every((item) => decisions.includes(item)), `${mobile}: decision states incomplete`);
+  // Real grades: the graded tools, where grades come from, plain words beside codes, safety, packs and lessons.
+  const catalog = await page.evaluate(() => window.CATALOG);
+  const graded = catalog.tools.filter((tool) => tool.evidenceLevel !== "E0").length;
+  assert(await page.locator("#provenList > li").count() === graded, `${mobile}: graded list does not show all ${graded} tools above E0`);
+  assert((await page.locator("#catalogFacts").innerText()).includes("approves every grade change"), `${mobile}: start page does not say where grades come from`);
+  assert((await page.locator("#gradeSource").innerText()).includes("E0 means"), `${mobile}: grade section does not say what E0 means`);
+  assert(await page.locator("#ledgerRows .decision-words").count() > 0 && await page.locator("#ledgerRows .evidence-name").count() > 0, `${mobile}: plain words missing beside codes`);
+  assert(await page.locator("#packList .pack-card").count() === catalog.packs.length, `${mobile}: packs incomplete`);
+  assert(await page.locator("#lessonList .lesson").count() === catalog.lessons.length, `${mobile}: lessons incomplete`);
+  assert(await page.locator("#journeyList a").count() === 4, `${mobile}: task-first entry points missing`);
+  for (const text of ["Decisions", "Add a tool", "For builders"]) assert(!(await page.locator("nav").innerText()).includes(text), `${mobile}: private-only part "${text}" is in the navigation`);
+  const story = await page.evaluate(() => ({ hidden: document.querySelector("#story").hidden, tracks: document.querySelectorAll("#storyVideo track").length, script: document.querySelectorAll("#filmScript li").length }));
+  assert(!story.hidden && story.tracks === 1 && story.script > 0, `${mobile}: story video, captions or script missing`);
+  await page.locator('.film-switch [data-lang="es"]').click();
+  assert(await page.locator("#filmScript").getAttribute("lang") === "es", `${mobile}: Spanish video switch failed`);
+  await page.locator('.film-switch [data-lang="en"]').click();
+  await page.locator("#provenList [data-open-tool]").first().click();
+  assert(await page.locator("#detailBody .safety-section h3").innerText() === "Is it safe?", `${mobile}: tool detail has no "Is it safe?" section`);
+  assert(await page.locator("#detailBody .use-row").count() > 0, `${mobile}: graded tool shows no recorded use`);
+  await page.keyboard.press("Escape");
+  await page.waitForFunction(() => !document.querySelector("#detailDialog").open);
+  // Everyday words reach the OCR tools without the word "OCR".
+  await page.locator("#jobSearch").fill("read text from scanned receipts");
+  await page.locator("#jobSearchForm button").click();
+  await page.waitForSelector(".recommendation-card");
+  assert(await page.locator("#activeContext").innerText() === "Document intelligence", `${mobile}: everyday-words search did not reach document tools`);
   await page.keyboard.press("/");
   assert(await page.locator("#jobSearch").evaluate((node) => node === document.activeElement), `${mobile}: slash shortcut did not focus search`);
   await page.locator("#jobSearch").fill("OCR scanned PDF");

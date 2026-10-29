@@ -27,7 +27,8 @@ walk(root);
 if (fs.existsSync(path.join(root, ".git"))) {
   const { execFileSync } = await import("node:child_process");
   const identity = execFileSync("git", ["log", "-1", "--format=%an <%ae>"], { cwd: root, encoding: "utf8" }).trim();
-  if (identity !== "Leonel <tool-research-ledger@users.noreply.github.com>") findings.push("Git commit identity is not the approved public first-name/noreply identity");
+  // The noreply address linked to the owner's account, so GitHub credits the commits. Older commits used an unlinked one.
+  if (identity !== "Leonel Cortés <347164768+LeonelIvanCortesRodriguez@users.noreply.github.com>") findings.push("Git commit identity is not the approved public noreply identity");
 }
 if (findings.length) throw new Error(`PRIVACY_SCAN_FAIL\n${findings.join("\n")}`);
 console.log("PRIVACY_SCAN_OK no private paths, assigned secrets, credential-like tokens, or private keys detected");

@@ -1,94 +1,44 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/brand/hero-dark.png">
-  <img src="docs/brand/hero-light.png" width="1280" alt="Tool Research Ledger. Encuentra una herramienta para el trabajo y ve cuánta prueba la respalda. Para líderes técnicos que eligen herramientas de código abierto: 99 herramientas en 13 familias de trabajo. Una ficha de OCRmyPDF, la opción principal para inteligencia documental, muestra cuatro canales separados: decisión PILOT con un círculo a medio llenar, hacer un piloto controlado; evidencia E0 en una escalera de seis pasos con uno lleno, fuente revisada; riesgo MEDIUM con dos de cuatro barras llenas; y ajuste, la mejor opción para generar PDF con texto buscable. La siguiente prueba es una tarea acotada con su resultado, verificaciones, limitaciones y plan de reversión.">
-</picture>
+<a href="docs/video/story-es.mp4"><img src="docs/video/story-poster-es.jpg" width="960" alt="Último cuadro del video: 125 herramientas, 22 hicieron trabajo real, 74 usos. Hecho con los datos del registro, 2026-10-28."></a>
 
-**[Abrir el ledger en vivo](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** · [Ejecutarlo localmente](#ejecutar-y-verificar) · [Modelo de evidencia](docs/EVIDENCE_MODEL.md) (en inglés) · [English](README.md)
+**[Abrir el ledger en vivo](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** · [Ver la historia en 97 segundos](docs/video/story-es.mp4) ([subtítulos](docs/video/captions-es.vtt)) · [Ejecutarlo localmente](#ejecutar-y-verificar) · [English](README.md)
 
-Para líderes técnicos que eligen herramientas de código abierto: describes un trabajo y ves qué herramientas sirven para él, qué se ha verificado de cada una y qué puedes hacer con ella a continuación. Las 99 entradas solo tienen revisión de fuente (E0), y la interfaz lo dice desde la primera pantalla.
+¿Qué herramientas de IA de código abierto hicieron trabajo real, y cuáles es seguro probar? El ledger guarda 125 herramientas. 22 tienen una nota por encima de E0 (16 en E1, 6 en E2), ganada con 74 usos registrados en 5 proyectos con nombre. Las otras 103 están en E0: por ahora solo se ha leído sobre ellas.
 
 La interfaz y la documentación técnica están en inglés.
 
-## El problema
+## De dónde salen las notas
 
-Las listas de repositorios ordenan las herramientas por popularidad. No dicen si una herramienta sirve para un trabajo concreto, qué ha verificado alguien en realidad ni qué podría frenar su adopción. Los equipos instalan con base en un README y descubren el riesgo después.
+Una nota sale del uso registrado de una herramienta en un proyecto con nombre: la tarea, el resultado, qué salió mal y cómo se arregló. Una persona aprueba cada cambio de nota antes de exportarlo. Leer la documentación de una herramienta, instalarla o escanearla nunca sube su nota.
 
-## Una decisión de principio a fin
+Los datos son una exportación del ledger privado del dueño, limpiada antes de publicarla ([`data/ledger-export.json`](data/ledger-export.json)). `node scripts/import-export.mjs` la convierte en el catálogo que lee la página, y `npm test` falla si alguna nota, decisión o nota de seguridad difiere de la exportación.
 
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="docs/brand/demo-poster.png">
-  <img src="docs/brand/demo.gif" width="960" alt="Grabación con subtítulos del ledger en vivo: se escribe el trabajo 'convertir PDF escaneados en datos confiables' en el buscador; aparece una lista corta con OCRmyPDF como opción principal, la acción permitida y la prueba que todavía necesita; dos candidatas se comparan lado a lado en decisión, evidencia y riesgo; y el detalle de evidencia muestra E0 como techo actual, con todos los niveles superiores aún sin alcanzar.">
-</picture>
+## Qué permite hacer la página
 
-Un trabajo descrito en lenguaje común se convierte en tres candidatas explicadas. Dos se comparan en los mismos canales, y la evidencia de la principal muestra exactamente qué tendría que conservar una prueba. [Versión MP4](docs/brand/demo.mp4).
+- Encontrar una herramienta para un trabajo. Descríbelo con tus palabras ("leer texto de recibos escaneados", en inglés) o elige uno de ocho trabajos comunes. Recibes hasta tres herramientas, cada una con su nota y lo que puedes hacer con ella.
+- Ver si una herramienta es segura. Cada herramienta tiene una sección "Is it safe?": lo que encontraron los escáneres, en palabras simples. 9 herramientas están bloqueadas hasta que una persona lea cada línea marcada.
+- Tomar el conjunto de herramientas para un tipo de trabajo. Tres paquetes de herramientas que funcionan juntas, y tres habilidades construidas aquí con ideas que enseñaron otras herramientas, con la razón para no instalar la original.
+- Ver qué hizo trabajo real. Las 22 herramientas con nota, los proyectos donde trabajaron y cada uso registrado.
 
-## Cómo se toma una decisión
+## Cómo leer una nota
 
-`necesidad del proyecto → candidatas filtradas → evidencia → decisión`
+| Nota | En palabras simples | Herramientas |
+|---|---|---|
+| E0 | Solo leída | 103 |
+| E1 | Hizo trabajo real en un proyecto con nombre | 16 |
+| E2 | Comprobada con una respuesta escrita antes | 6 |
+| E3 | Comprobada en muchos casos | 0 |
+| E4 | Revisada por otra persona | 0 |
+| E5 | Vigilada en uso diario | 0 |
 
-1. **Necesidad del proyecto.** Escribe el trabajo con tus palabras o elige uno de ocho trabajos comunes.
-2. **Candidatas filtradas.** El ledger reduce 99 herramientas de 13 familias a una opción principal y dos alternativas. Cada alternativa dice por qué no es la principal y qué la haría avanzar. Cualquier par se puede comparar.
-3. **Evidencia.** Cada entrada muestra su nivel en una escalera de seis pasos, qué lo produjo y qué prueba necesita el siguiente nivel.
-4. **Decisión.** La siguiente acción permitida, su fundamento, sus controles y la siguiente prueba.
+Junto a la nota, cada herramienta tiene una decisión: usarla (IMPLEMENT), usarla dentro de límites (CONDITIONAL), en prueba (PILOT), solo lectura, sin instalar (REFERENCE), en observación (WATCH), en pausa (HOLD), no es para nosotros (REJECT). La nota dice cuánta prueba hay; la decisión dice qué puedes hacer ahora.
 
-Ajuste, evidencia, decisión y riesgo responden cuatro preguntas distintas y nunca se combinan en una sola calificación:
+## El video
 
-| Canal | Pregunta | Cómo se muestra |
-| --- | --- | --- |
-| Ajuste | ¿Qué tanto corresponde la herramienta al trabajo? | Una letra editorial (A a D) con el trabajo al que se adapta; es un juicio, nunca se presenta como medición ni se suma a una calificación |
-| Evidencia | ¿Qué se ha verificado? | Seis pasos ascendentes, llenos hasta el nivel alcanzado, con el código E y una etiqueta simple |
-| Decisión | ¿Qué podemos hacer ahora? | Una forma más un verbo: ● IMPLEMENT, ◐ PILOT, ⊖ CONDITIONAL, ○ REFERENCE, ○ punteado WATCH, ■ HOLD, ✕ REJECT |
-| Riesgo | ¿Qué todavía puede frenar la adopción? | De una a cuatro barras más la palabra; HIGH y CRITICAL en rojo de alto |
+97 segundos en español y 90 en inglés, con subtítulos, sobre cómo una herramienta gana E1 y E2 aquí: la voz que lo narra, un lector de texto que leyó 32 de 32 titulares contra una respuesta escrita antes, y una comprobación de un escáner que falló y quedó registrada. La narración en español solo dice palabras en español; los nombres en inglés quedan en pantalla. Cada número se calcula desde `data/catalog.json` con [`video/story.mjs`](video/story.mjs). [Español](docs/video/story-es.mp4) · [English](docs/video/story-en.mp4). Comprobaciones: [palabras habladas](docs/checks/2026-10-28-spoken-words.md), [palabras en pantalla](docs/checks/2026-10-28-frames.md), [volumen](docs/checks/2026-10-28-loudness.md).
 
-Solo dos colores tienen significado: el color baya marca tu acción y tu selección, y el rojo de alto marca todo lo que puede bloquear la adopción.
+## El papel de Leonel
 
-## Resultado y evidencia
-
-| Estado | Qué cubre | Dónde verificarlo |
-| --- | --- | --- |
-| Implementado y probado | Búsqueda, trabajos guiados, mapa de capacidades, filtros y orden, comparación, detalle de evidencia, estado compartible en la URL, cambio de tema, foco con teclado, movimiento reducido | `npm run test:browser` (escritorio y móvil de 390 px) |
-| Implementado y probado | Integridad del catálogo: IDs y URLs de repositorio únicos, la conciliación de 99 repositorios, relaciones válidas, copias JSON y JavaScript idénticas | `npm test`; `npm run test:mutation` demuestra que se rechazan una escala de evidencia rota y una fuente faltante |
-| Fuente revisada | Las 99 entradas de terceros: 29 PILOT, 23 CONDITIONAL, 22 REFERENCE, 10 HOLD, 8 REJECT, 7 WATCH, 0 IMPLEMENT | [`data/catalog.json`](data/catalog.json), [registro del Lote I](docs/BATCH_2026-10-26-I.md) |
-| Planeado | Pruebas de proyecto que conserven la tarea, la versión, la entrada, el resultado, las verificaciones y los límites. Solo una prueba conservada puede subir una entrada a E1 o más | [Modelo de evidencia](docs/EVIDENCE_MODEL.md) |
-| No se afirma | Puntajes de benchmark, certificación de seguridad o beneficio operativo de cualquier herramienta listada | No hay evidencia en este repositorio |
-
-## Vistas del producto
-
-<img src="docs/brand/view-shortlist.png" width="1440" alt="Captura anotada de una lista corta para el trabajo de PDF escaneados: OCRmyPDF como opción principal con acción permitida PILOT, sello de evidencia E0, por qué va primero, el fundamento de la decisión, qué impide todavía tener confianza y qué prueba se necesita; PaddleOCR y Scribe OCR como alternativas, con la razón por la que no son la principal.">
-
-<img src="docs/brand/view-compare.png" width="1440" alt="Captura anotada del diálogo de comparación con OCRmyPDF y PaddleOCR lado a lado: cada una muestra la misma escalera de evidencia E0, un glifo de decisión PILOT, su principal fortaleza y debilidad, sus barras y nivel de riesgo, y su siguiente acción.">
-
-<img src="docs/brand/view-evidence.png" width="1440" alt="Captura anotada del detalle de evidencia de OCRmyPDF: las marcas E0, PILOT y riesgo MEDIUM, lo que permite la decisión y una pista de evidencia donde E0 es el techo actual y E1 a E5 aún no se alcanzan.">
-
-<img src="docs/brand/view-map.png" width="1440" alt="Captura anotada del mapa de capacidades: cada familia de trabajo con su número de opciones, la opción principal, el glifo de decisión, la evidencia E0, el número de riesgos elevados en rojo y el siguiente paso de investigación.">
-
-## El papel de Leonel y sus decisiones
-
-**Problema elegido.** Que cada adopción de herramienta sea una decisión respaldada por evidencia que cualquiera pueda revisar.
-
-**Papel.** Leonel definió el objetivo del producto, fijó los criterios de investigación y aceptación, curó los resúmenes de los repositorios y tomó la decisión final de cada registro. Agentes de programación ayudaron a implementar la interfaz, las pruebas, las reglas de evidencia y el paquete de publicación.
-
-**Decisiones que le dan forma**
-
-- *Sin calificación compuesta.* Un solo número oculta por qué una opción es fuerte y hace que una evidencia débil parezca precisa.
-- *La evidencia es un techo.* Solo una prueba conservada sube un nivel. Influir en un diseño, instalar la herramienta o hacer un análisis estático lo deja donde está.
-- *La decisión es un permiso.* Cada etiqueta dice qué se puede hacer ahora. Una herramienta puede ajustarse bien y aun así quedar en REFERENCE o HOLD.
-- *Forma antes que color.* Cada estado se entiende sin color.
-- *Contar desde el catálogo.* Cada número de la página y de estas imágenes se calcula desde `data/catalog.json` al mostrarse.
-
-**Restricciones.** Sitio estático sin backend ni dependencias en tiempo de ejecución; solo investigación de repositorios públicos; las pruebas privadas y los reportes internos no pueden subir la evidencia pública.
-
-**Resultados observados.** Pasan las verificaciones de integridad, mutación, contraste, redacción, navegador, privacidad y build. El catálogo concilia los 99 repositorios compartidos sin URLs duplicadas.
-
-**Tecnologías.** HTML semántico, CSS con tokens OKLCH, JavaScript de navegador, Web Animations API, scripts de Node.js y Playwright Core para pruebas de desarrollo.
-
-## Arquitectura y controles
-
-`catalog.js` permite abrir el archivo directamente y `catalog.json` da a otras herramientas una copia legible por máquina; el verificador exige que ambos coincidan. El movimiento respeta la preferencia de movimiento reducido del usuario. Consulta [Modelo de evidencia](docs/EVIDENCE_MODEL.md), [Metodología](docs/METHODOLOGY.md) y [Decisión de ejemplo](docs/SAMPLE_DECISION.md). Lee [SECURITY.md](SECURITY.md), los [avisos de terceros](THIRD_PARTY_NOTICES.md) y la [revisión de licencias](docs/LICENSE_REVIEW.md).
-
-## Limitaciones
-
-Las entradas del catálogo apoyan decisiones; no son una certificación de seguridad. Todas las entradas públicas están en E0. El ajuste y la relevancia para un proyecto son evaluaciones editoriales, no puntajes de benchmark. Los enlaces y los datos de los repositorios pueden envejecer, y cada adopción sigue necesitando una revisión legal, de seguridad y operativa propia del proyecto.
+Leonel definió el objetivo del producto, fijó los criterios de investigación y aceptación, usó las herramientas en los proyectos que nombra cada registro y aprobó cada cambio de nota. Agentes de programación ayudaron a construir la interfaz, las pruebas, el proceso del video y el paquete de publicación.
 
 ## Ejecutar y verificar
 
@@ -96,12 +46,16 @@ Requisitos: Node.js 20+ y Chrome, Edge o un Chromium compatible con Playwright.
 
 ```powershell
 npm ci
-npm run start      # http://127.0.0.1:4173; index.html also works directly
-npm run verify     # static, mutation, contrast, prose, browser, privacy, build
+npm run start      # http://127.0.0.1:4173; index.html también funciona directamente
+npm run verify     # estático, mutación, contraste, prosa, navegador, privacidad, paquete
 ```
 
-El build crea un ZIP y un inventario SHA-256 en `release/`, sin historial de Git, dependencias, resultados de pruebas ni archivos temporales de render. `npm run render` regenera las imágenes y el demo del README a partir del catálogo y la interfaz en vivo; necesita FFmpeg.
+Reconstruir el video necesita FFmpeg, una voz Kokoro local, HyperFrames y GSAP; [`video/build.mjs`](video/build.mjs) nombra las variables de entorno que apuntan a ellos. Los resultados de cada comprobación, con lo esperado escrito antes, están en [`docs/checks/`](docs/checks/).
+
+## Limitaciones
+
+Las notas cubren solo los usos registrados en los proyectos del dueño; una herramienta que funcionó ahí puede no servir en el tuyo. Ninguna herramienta está por encima de E2. Las notas de seguridad describen lo que encontraron los escáneres, no una certificación. Cada adopción necesita su propia revisión legal, de seguridad y operativa.
 
 ## Licencia
 
-El código y la documentación originales se publican bajo la [Licencia MIT](LICENSE). Schibsted Grotesk se incluye bajo la SIL Open Font License. Los proyectos de terceros conservan sus propias licencias y marcas.
+El código y la documentación originales se publican bajo la [licencia MIT](LICENSE). Schibsted Grotesk se incluye bajo la SIL Open Font License. Los proyectos de terceros conservan sus propias licencias y marcas.

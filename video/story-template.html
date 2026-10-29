@@ -1,0 +1,178 @@
+<template>
+  <!-- Story video: how a tool earns its grade. video/assemble.mjs fills STORY (timing, facts, words) from the data.
+       One headline per spoken line sits at the top; each scene draws its numbers below it. -->
+  <style>
+    @font-face { font-family: "Schibsted Grotesk"; src: url("assets/SchibstedGrotesk.woff2") format("woff2"); font-weight: 400 900; }
+    #root * { margin: 0; padding: 0; box-sizing: border-box; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #14171d; font-family: "Schibsted Grotesk", sans-serif; color: #f2f4f8; }
+    .layer { position: absolute; inset: 0; }
+    .mono { font-family: "JetBrains Mono", monospace; }
+    .kicker { position: absolute; left: 140px; top: 86px; color: #e58ab3; font-size: 32px; font-weight: 800; letter-spacing: .01em; }
+    .head { position: absolute; left: 140px; top: 140px; width: 1640px; font-size: 88px; font-weight: 800; line-height: 1.06; letter-spacing: -.025em; }
+    .scene { position: absolute; left: 140px; right: 140px; top: 430px; bottom: 120px; }
+    #progress { position: absolute; left: 0; bottom: 0; height: 8px; width: 1920px; background: #e58ab3; transform-origin: 0 50%; }
+    .tiles { display: grid; grid-template-columns: repeat(25, 50px); gap: 12px; }
+    .tile { width: 50px; height: 50px; border-radius: 9px; background: #2b313c; }
+    .tile.E1 { background: #9b4d78; } .tile.E2 { background: #e58ab3; }
+    .legend { display: flex; gap: 48px; margin-top: 40px; color: #a5adbb; font-size: 34px; font-weight: 700; }
+    .legend i { display: inline-block; width: 28px; height: 28px; margin-right: 12px; border-radius: 6px; vertical-align: -3px; background: #2b313c; }
+    .legend .E1 i { background: #9b4d78; } .legend .E2 i { background: #e58ab3; }
+    .rung { display: grid; grid-template-columns: 110px 620px 1fr; align-items: center; height: 82px; border-bottom: 2px solid #262b34; }
+    .rung .code { font-size: 44px; font-weight: 800; }
+    .rung .words { color: #a5adbb; font-size: 32px; font-weight: 700; }
+    .rung .bar { display: flex; align-items: center; gap: 20px; font-size: 36px; font-weight: 800; }
+    .rung .fill { height: 34px; border-radius: 6px; background: #2b313c; transform-origin: 0 50%; }
+    .rung.E1 .fill { background: #9b4d78; } .rung.E2 .fill { background: #e58ab3; }
+    .card { position: absolute; left: 0; top: 0; width: 960px; padding: 36px 40px; border: 3px solid #333a46; border-radius: 22px; background: #1b1f27; }
+    .card h3 { margin-bottom: 20px; color: #a5adbb; font-size: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .row { display: flex; justify-content: space-between; gap: 30px; padding: 12px 0; border-top: 2px solid #2a303a; font-size: 36px; }
+    .row span:first-child { color: #a5adbb; }
+    .row strong { font-weight: 800; }
+    .chips { display: flex; gap: 16px; margin-top: 24px; }
+    .chip { padding: 10px 22px; border: 3px solid #e58ab3; border-radius: 40px; color: #f2f4f8; font-size: 30px; font-weight: 800; }
+    .stamp { position: absolute; left: 1080px; top: 10px; width: 560px; text-align: center; }
+    .stamp .move { font-size: 150px; font-weight: 900; letter-spacing: -.03em; }
+    .stamp .from { color: #5b6372; text-decoration: line-through; text-decoration-thickness: 10px; }
+    .stamp .to { color: #e58ab3; }
+    .stamp p { margin-top: 10px; font-size: 38px; font-weight: 800; }
+    .stamp small { display: block; margin-top: 8px; color: #a5adbb; font-size: 30px; }
+    .expect { display: inline-block; padding: 18px 28px; border: 3px dashed #a5adbb; border-radius: 16px; font-size: 40px; font-weight: 800; }
+    .meter { display: grid; grid-template-columns: 420px 1fr 200px; align-items: center; gap: 30px; margin-top: 40px; font-size: 40px; font-weight: 800; }
+    .meter .track { height: 46px; border-radius: 10px; background: #262b34; overflow: hidden; }
+    .meter .fill { height: 100%; background: #e58ab3; transform-origin: 0 50%; }
+    .meter.other .fill { background: #9b4d78; }
+    .dots { display: flex; gap: 34px; margin-top: 40px; }
+    .dot { width: 110px; height: 110px; border-radius: 50%; border: 8px solid #6fd1a0; background: #6fd1a0; }
+    .dot.miss { background: transparent; border-color: #f08a7a; }
+    .verdict { display: inline-block; margin-top: 40px; padding: 14px 26px; border-left: 10px solid #f08a7a; background: #241b1d; color: #f6b2a7; font-size: 40px; font-weight: 800; }
+    .later { margin-top: 30px; color: #a5adbb; font-size: 36px; font-weight: 700; }
+    .later strong { color: #f2f4f8; }
+    .counters { display: flex; gap: 90px; }
+    .counter { font-size: 150px; font-weight: 900; line-height: 1; letter-spacing: -.03em; }
+    .counter small { display: block; margin-top: 14px; color: #a5adbb; font-size: 38px; font-weight: 700; letter-spacing: 0; }
+    .counter.accent { color: #e58ab3; }
+    .source { position: absolute; left: 0; bottom: 0; color: #a5adbb; font-size: 30px; }
+  </style>
+
+  <div id="root" data-composition-id="story" data-width="1920" data-height="1080">
+    <div id="l-scenes" class="layer clip" data-start="0" data-duration="__TOTAL__" data-track-index="1"></div>
+    <div id="l-heads" class="layer clip" data-start="0" data-duration="__TOTAL__" data-track-index="2"><div id="progress"></div></div>
+  </div>
+
+  <script>
+    const STORY = /*__STORY__*/null;
+    const F = STORY.facts, T = STORY.text;
+    const L = (id) => STORY.lines[id];
+    const SC = (name) => STORY.scenes[name];
+    // transitions.dev curves as GSAP eases.
+    function bezier(x1, y1, x2, y2) {
+      const bx = (u) => 3 * x1 * u * (1 - u) ** 2 + 3 * x2 * u * u * (1 - u) + u ** 3;
+      const by = (u) => 3 * y1 * u * (1 - u) ** 2 + 3 * y2 * u * u * (1 - u) + u ** 3;
+      return (t) => { let lo = 0, hi = 1, u = t; for (let i = 0; i < 30; i++) { u = (lo + hi) / 2; if (bx(u) < t) lo = u; else hi = u; } return by(u); };
+    }
+    const SMOOTH = bezier(0.22, 1, 0.36, 1);
+    const POP = bezier(0.34, 1.45, 0.64, 1);
+    const esc = (value) => String(value).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    function el(tag, cls, parent, html = "") { const node = document.createElement(tag); if (cls) node.className = cls; if (html) node.innerHTML = html; parent.appendChild(node); return node; }
+    const tl = gsap.timeline({ paused: true });
+    const scenesLayer = document.getElementById("l-scenes"), heads = document.getElementById("l-heads");
+    const ids = Object.keys(STORY.lines);
+    const nf = (n) => n.toLocaleString(STORY.lang);
+    // Show an element from time a, with a gentle rise.
+    const enter = (node, a, extra = {}) => tl.fromTo(node, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: SMOOTH, immediateRender: false, ...extra }, a);
+
+    // ---- Headlines: one per spoken line, on screen until the next line starts ----
+    ids.forEach((id, index) => {
+      const line = L(id);
+      const node = el("div", "head", heads, esc(line.show));
+      // The first headline is already on screen at 0 s: frame 0 is the thumbnail on most players.
+      if (index === 0) gsap.set(node, { autoAlpha: 1 });
+      else { gsap.set(node, { autoAlpha: 0 }); enter(node, Math.max(0, line.start - 0.25)); }
+      const next = ids[index + 1];
+      const until = next && L(next).scene === line.scene ? L(next).start - 0.3 : SC(line.scene).end - 0.25;
+      if (next) tl.to(node, { autoAlpha: 0, y: -16, duration: 0.25, ease: "power1.in" }, until);
+    });
+    // ---- Scene kickers and containers ----
+    const scene = {};
+    for (const [name, span] of Object.entries(STORY.scenes)) {
+      const kicker = el("div", "kicker", heads, esc(T.kicker[name]));
+      scene[name] = el("div", "scene", scenesLayer);
+      if (span.start === 0) gsap.set([kicker, scene[name]], { autoAlpha: 1 });
+      else { gsap.set([kicker, scene[name]], { autoAlpha: 0 }); tl.to([kicker, scene[name]], { autoAlpha: 1, duration: 0.35 }, span.start + 0.05); }
+      if (span.end < STORY.total) tl.to([kicker, scene[name]], { autoAlpha: 0, duration: 0.3 }, span.end - 0.3);
+    }
+    tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: STORY.total, ease: "none" }, 0);
+
+    // ---- Intro: every tool as a tile, coloured by its grade ----
+    {
+      const grid = el("div", "tiles", scene.intro);
+      const order = ["E2", "E1", "E0"].flatMap((level) => Array(F.levels[level]).fill(level));
+      const tiles = order.map((level) => el("div", `tile ${level}`, grid));
+      gsap.set(tiles, { autoAlpha: 0, scale: 0.6 });
+      tl.to(tiles, { autoAlpha: 1, scale: 1, duration: 0.35, ease: POP, stagger: 1.6 / tiles.length }, L("i1").start + 0.2);
+      const legend = el("div", "legend", scene.intro, ["E0", "E1", "E2"].map((level) => `<span class="${level}"><i></i>${level} · ${nf(F.levels[level])}</span>`).join(""));
+      enter(legend, L("i2").start);
+    }
+    // ---- Ladder: six grades and how many tools sit on each ----
+    {
+      const most = Math.max(...Object.values(F.levels));
+      ["E0", "E1", "E2", "E3", "E4", "E5"].forEach((level, k) => {
+        const rung = el("div", `rung ${level}`, scene.ladder, `<span class="code mono">${level}</span><span class="words">${esc(T.level[level])}</span><span class="bar"><span class="fill" style="width:${Math.max(8, 760 * F.levels[level] / most)}px"></span>${nf(F.levels[level])}</span>`);
+        const fill = rung.querySelector(".fill");
+        gsap.set(fill, { scaleX: 0 });
+        tl.to(fill, { scaleX: 1, duration: 0.8, ease: SMOOTH }, L("l1").start + 0.1 + k * 0.08);
+        if (level !== "E0") { gsap.set(rung, { opacity: 0.45 }); tl.to(rung, { opacity: 1, duration: 0.4 }, L("l2").start + 0.2 + k * 0.1); }
+      });
+    }
+    // ---- E1: the voice's use record and the approved move ----
+    {
+      const card = el("div", "card", scene.e1, `<h3>${esc(T.useRecord)}</h3>
+        <div class="row"><span>${esc(F.voice.name)}</span><strong>${esc(F.voice.project)}</strong></div>
+        <div class="row"><span>${esc(T.uses)}</span><strong>${nf(F.voice.uses)}</strong></div>
+        <div class="row"><span>${esc(T.worked)}</span><strong>${nf(F.voice.worked)}</strong></div>
+        ${F.voice.problem === "PARTIAL" ? `<div class="row"><span>${esc(T.partly)}</span><strong>${nf(F.voice.uses - F.voice.worked)}</strong></div>` : ""}`);
+      enter(card, L("e1").start + 0.3);
+      const chips = el("div", "chips", card, T.fields.map((field) => `<span class="chip">${esc(field)}</span>`).join(""));
+      gsap.set(chips.children, { autoAlpha: 0 });
+      tl.fromTo(chips.children, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: POP, stagger: 0.35, immediateRender: false }, L("e2").start + 0.4);
+      const stamp = el("div", "stamp", scene.e1, `<div class="move mono"><span class="from">${F.voice.from}</span> <span class="to">${F.voice.to}</span></div><p>${esc(T.approved)}</p><small>${esc(F.voice.date)}</small>`);
+      gsap.set(stamp, { autoAlpha: 0 });
+      tl.fromTo(stamp, { autoAlpha: 0, scale: 1.2 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: POP, immediateRender: false }, L("e3").start + 0.3);
+    }
+    // ---- E2: the expected result first, then two readers against it ----
+    {
+      const expect = el("div", "expect", scene.e2, `${esc(T.expected)}: ${nf(F.ocr.of)} ${esc(T.headlines)}`);
+      enter(expect, L("f1").start + 0.4);
+      for (const [cls, name, got, line] of [["", F.ocr.name, F.ocr.got, "f2"], ["other", F.ocr.other, F.ocr.otherGot, "f3"]]) {
+        const meter = el("div", `meter ${cls}`, scene.e2, `<span>${esc(name)}</span><span class="track"><span class="fill" style="display:block;width:${100 * got / F.ocr.of}%"></span></span><span class="mono">${got}/${F.ocr.of}</span>`);
+        enter(meter, L(line).start + 0.2);
+        const fill = meter.querySelector(".fill");
+        gsap.set(fill, { scaleX: 0 });
+        tl.to(fill, { scaleX: 1, duration: 1.1, ease: SMOOTH }, L(line).start + 0.5);
+      }
+    }
+    // ---- A failed check, kept on record ----
+    {
+      el("div", "expect", scene.fail, `${esc(T.expected)}: ${nf(F.scanner.of)} ${esc(T.verdicts)}`);
+      const dots = el("div", "dots", scene.fail, Array.from({ length: F.scanner.of }, (_, k) => `<span class="dot${k < F.scanner.got ? "" : " miss"}"></span>`).join(""));
+      gsap.set(dots.children, { autoAlpha: 0, scale: 0.5 });
+      tl.to(dots.children, { autoAlpha: 1, scale: 1, duration: 0.4, ease: POP, stagger: 0.25 }, L("s1").start + 1.5);
+      const verdict = el("div", "verdict", scene.fail, `${esc(T.matched)} ${F.scanner.got}/${F.scanner.of} · ${esc(T.kept)}`);
+      enter(verdict, L("s1").start + 3.2);
+      const later = el("p", "later", scene.fail, `${esc(T.stays)} <strong>${F.scanner.level}</strong> · ${esc(T.second)}: <strong>${esc(F.scanner.second)}</strong>`);
+      enter(later, L("s2").start + 0.5);
+    }
+    // ---- End: the totals, then the name ----
+    {
+      const counters = el("div", "counters", scene.end, [[F.tools, T.tools, ""], [F.graded, T.graded, "accent"], [F.uses, T.usesWord, ""]].map(([n, label, cls]) => `<div class="counter ${cls}">${nf(n)}<small>${esc(label)}</small></div>`).join(""));
+      gsap.set(counters.children, { autoAlpha: 0 });
+      tl.fromTo(counters.children, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: POP, stagger: 0.3, immediateRender: false }, L("r2").start);
+      const source = el("div", "source", scene.end, esc(T.source));
+      enter(source, L("r3").start);
+    }
+    tl.to("#root", { autoAlpha: 0, duration: 0.7, ease: "power1.in" }, STORY.total - 0.7);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["story"] = tl;
+  </script>
+</template>

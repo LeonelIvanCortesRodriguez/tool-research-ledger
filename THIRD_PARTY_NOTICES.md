@@ -15,3 +15,7 @@ The license declares no Reserved Font Name, so the unmodified Latin subset may b
 ## Development tools
 
 Development-only browser checks and the README image renderer use **Playwright Core 1.62.1**, licensed under Apache-2.0. It is excluded from the release ZIP. The demo GIF and MP4 are encoded with FFmpeg, which is not bundled. Runtime motion uses the browser Web Animations API; no GSAP runtime or other third-party JavaScript is shipped.
+
+## Story video
+
+The videos in `docs/video/` were rendered with HyperFrames (GSAP inside the composition, not shipped with the page), narrated with Kokoro-82M through kokoro-onnx, and encoded with FFmpeg. None of these tools is included in this repository; `video/build.mjs` points at local installs.
