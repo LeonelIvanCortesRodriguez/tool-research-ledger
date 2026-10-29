@@ -1,12 +1,12 @@
 <a href="https://leonelivancortesrodriguez.github.io/tool-research-ledger/"><img src="docs/images/readme-hero.png" width="960" alt="The live Tool Research Ledger page. A large headline asks which AI tools did real work and which are safe to try. Below it are a search box for describing a job in everyday words and a list of common jobs. On the right, a panel explains where the grades come from and lists six grades, from only read about to watched in daily use, with how many tools sit at each."></a>
 
-<img src="docs/brand/demo.gif" width="960" alt="Animated walkthrough: type read text from scanned receipts into Describe the job, review the three-tool shortlist, open the lead tool, check its grade and Is it safe? section, then view its grade ladder and next step.">
-
 # Tool Research Ledger
 
 A public record of 125 open-source AI tools, each graded only by what it has done in Leonel's own projects. It is for anyone choosing an AI tool who wants proof instead of popularity, and for anyone who wants to see how Leonel makes that choice.
 
 **[Open the live ledger](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** · [Watch the story (2:56, with captions)](https://leonelivancortesrodriguez.github.io/tool-research-ledger/#story) · [Español](README.es.md)
+
+<img src="docs/brand/demo.gif" width="960" alt="Animated walkthrough: type read text from scanned receipts into Describe the job, review the three-tool shortlist, open the lead tool, check its grade and Is it safe? section, then view its grade ladder and next step.">
 
 ## The problem
 

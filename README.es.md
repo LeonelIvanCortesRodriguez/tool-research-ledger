@@ -1,12 +1,12 @@
 <a href="https://leonelivancortesrodriguez.github.io/tool-research-ledger/"><img src="docs/images/readme-hero.png" width="960" alt="La página en vivo de Tool Research Ledger, en inglés. Un titular grande pregunta qué herramientas de IA hicieron trabajo real y cuáles son seguras de probar. Debajo hay un buscador para describir una tarea con palabras de todos los días y una lista de tareas comunes. A la derecha, un panel explica de dónde salen las notas y muestra seis niveles, de solo leída a vigilada en uso diario, con cuántas herramientas hay en cada uno."></a>
 
-<img src="docs/brand/demo.gif" width="960" alt="Recorrido animado: escribir read text from scanned receipts en Describe the job, revisar la lista de tres herramientas, abrir la herramienta principal, comprobar su nota y la sección Is it safe?, y ver su escala de notas y el siguiente paso.">
-
 # Tool Research Ledger
 
 Un registro público de 125 herramientas de inteligencia artificial de código abierto, cada una calificada solo por lo que ha hecho en los proyectos de Leonel. Es para quien elige una herramienta de IA y quiere pruebas en vez de popularidad, y para quien quiere ver cómo Leonel toma esa decisión.
 
 **[Abrir el registro en vivo](https://leonelivancortesrodriguez.github.io/tool-research-ledger/)** (en inglés) · [Ver la historia (3:09, con subtítulos)](https://leonelivancortesrodriguez.github.io/tool-research-ledger/#story) · [English](README.md)
+
+<img src="docs/brand/demo.gif" width="960" alt="Recorrido animado: escribir read text from scanned receipts en Describe the job, revisar la lista de tres herramientas, abrir la herramienta principal, comprobar su nota y la sección Is it safe?, y ver su escala de notas y el siguiente paso.">
 
 ## El problema
 
