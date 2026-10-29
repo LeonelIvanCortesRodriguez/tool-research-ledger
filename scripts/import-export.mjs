@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// Builds data/catalog.json and data/catalog.js from the owner's ledger export.
+// Builds data/catalog.json and data/catalog.js from Leonel's ledger export.
 // Usage: node scripts/import-export.mjs [path/to/ledger-export.json]
 // With a path, the export is first copied to data/ledger-export.json; without one, the kept copy is used.
 // Grades, decisions, safety, uses, packs and lessons come only from the export. From the previous catalog the
@@ -59,7 +59,7 @@ const catalog = {
     title: "Tool Research Ledger",
     updated: exp.exported,
     source: exp.schema,
-    gradeSource: "Grades come from the owner's recorded use of each tool in named projects. A person approves every grade change before it is exported.",
+    gradeSource: "Grades come from Leonel's recorded use of each tool in named projects. A person approves every grade change before it is exported.",
     belowE1: "E0 means the tool was only read about: its documentation and license, with no recorded use here yet.",
     privacy: "Exported from a private ledger and cleaned before publication. Private documents, credentials, raw OCR text and transaction rows are excluded.",
     reports: previous.meta.reports

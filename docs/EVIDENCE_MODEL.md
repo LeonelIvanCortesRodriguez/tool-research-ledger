@@ -2,7 +2,7 @@
 
 Evidence sets the limit on what the ledger may claim. It does not rate how impressive a tool appears.
 
-Grades come from the owner's recorded use of each tool in named projects: the task, the result, the errors and the fixes. A person approves every grade change before it is exported, and `npm test` fails if the catalog differs from the export (`data/ledger-export.json`). In this edition 22 of 125 tools are above E0: 16 at E1 and 6 at E2. E0 means the tool was only read about. The checks shown in the interface test the ledger page and its data; they do not raise any grade.
+Grades come from Leonel's recorded use of each tool in named projects: the task, the result, the errors and the fixes. A person approves every grade change before it is exported, and `npm test` fails if the catalog differs from the export (`data/ledger-export.json`). In this edition 22 of 125 tools are above E0: 16 at E1 and 6 at E2. E0 means the tool was only read about. The checks shown in the interface test the ledger page and its data; they do not raise any grade.
 
 | Level | Meaning | Minimum retained proof |
 |---|---|---|

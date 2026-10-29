@@ -4,7 +4,7 @@ window.CATALOG = {
     "title": "Tool Research Ledger",
     "updated": "2026-10-28",
     "source": "tool-research-ledger-export/1",
-    "gradeSource": "Grades come from the owner's recorded use of each tool in named projects. A person approves every grade change before it is exported.",
+    "gradeSource": "Grades come from Leonel's recorded use of each tool in named projects. A person approves every grade change before it is exported.",
     "belowE1": "E0 means the tool was only read about: its documentation and license, with no recorded use here yet.",
     "privacy": "Exported from a private ledger and cleaned before publication. Private documents, credentials, raw OCR text and transaction rows are excluded.",
     "reports": [

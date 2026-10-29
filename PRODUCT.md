@@ -45,7 +45,7 @@ Fit, evidence, decision, and risk answer four separate questions and must never 
 ## Evidence status
 
 - **Implemented and tested:** search, guided jobs, capability map, filters and sorting, comparison, evidence detail, shareable URL state, and catalog validation (unique IDs and URLs, 99-repository reconciliation, matching JSON and JS). `npm run verify` covers static checks, mutation, prose, browser QA, privacy, and build.
-- **Graded from recorded use:** 22 of 125 tools are above E0 (16 at E1, 6 at E2); the other 103 are E0, only read about. Grades come from the owner's export and a person approves every change.
+- **Graded from recorded use:** 22 of 125 tools are above E0 (16 at E1, 6 at E2); the other 103 are E0, only read about. Grades come from Leonel's export and a person approves every change.
 - **Planned:** project trials that preserve task, version, input, result, checks, and limitations. Only a retained trial can move an entry to E1 or above. No public entry has been promoted yet, and the presentation must show promotion as a path, not an achievement.
 - **Unsupported, never claim:** benchmark scores, safety certification, operational benefit of any listed tool.
 

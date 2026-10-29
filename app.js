@@ -58,11 +58,11 @@
   };
   const outcomePlain = { PASS: "Worked", PARTIAL: "Partly worked", FAIL: "Failed", BLOCKED: "Blocked", REFERENCE: "Read for ideas" };
   const releaseChecks = [
-    { state: "executed", title: "Catalog integrity", note: `Checks ${catalog.tools.length} tools, ${catalog.capabilityGroups.length} job families and ${uses.length} recorded uses, and that every grade, decision and safety note matches the owner's export.`, result: "Automated · current build", proof: "scripts/verify.mjs", href: "scripts/verify.mjs" },
+    { state: "executed", title: "Catalog integrity", note: `Checks ${catalog.tools.length} tools, ${catalog.capabilityGroups.length} job families and ${uses.length} recorded uses, and that every grade, decision and safety note matches Leonel's export.`, result: "Automated · current build", proof: "scripts/verify.mjs", href: "scripts/verify.mjs" },
     { state: "executed", title: "Negative mutation", note: "Breaks the grade scale, removes a source, raises a grade without its basis and points a use at a missing tool; the validator must reject all four.", result: "Automated · expected failures detected", proof: "scripts/mutation-test.mjs", href: "scripts/mutation-test.mjs" },
     { state: "executed", title: "Browser workflow", note: "Exercises search, filters, comparison, details, the safety section, themes, keyboard focus, phone width and reduced motion.", result: "Desktop and mobile", proof: "scripts/browser-qa.mjs", href: "scripts/browser-qa.mjs" },
     { state: "executed", title: "Privacy and package", note: "Scans public files, builds an allowlisted deterministic ZIP, and hashes every delivered source file.", result: "Automated · public files only", proof: "scripts/privacy-scan.mjs", href: "scripts/privacy-scan.mjs" },
-    { state: "reference", title: "Where grades come from", note: catalog.meta.gradeSource, result: "Documented · owner's export", proof: "docs/EVIDENCE_MODEL.md", href: "docs/EVIDENCE_MODEL.md" }
+    { state: "reference", title: "Where grades come from", note: catalog.meta.gradeSource, result: "Documented · Leonel's export", proof: "docs/EVIDENCE_MODEL.md", href: "docs/EVIDENCE_MODEL.md" }
   ];
 
   const tasks = [
@@ -163,7 +163,7 @@
   function renderStart() {
     const graded = count((tool) => tool.evidenceLevel !== "E0");
     const projects = new Set(uses.map((use) => use.project));
-    $("#startLede").textContent = `${catalog.tools.length} open-source AI tools: skills, models, scanners and apps. ${graded} of them have done real work in the owner's projects and carry a grade above E0. The other ${catalog.tools.length - graded} are E0: only read about so far.`;
+    $("#startLede").textContent = `${catalog.tools.length} open-source AI tools: skills, models, scanners and apps. ${graded} of them have done real work in Leonel's projects and carry a grade above E0. The other ${catalog.tools.length - graded} are E0: only read about so far.`;
     $("#portfolioPulse").innerHTML = `<span><strong>${graded}</strong> did real work</span><span><strong>${uses.length}</strong> recorded uses in ${projects.size} projects</span><span><strong>${count((tool) => tool.safety?.status === "BLOCK")}</strong> blocked by a scan</span><a href="#grades">How grades work</a>`;
     const ladder = catalog.evidenceLevels.map((level) => {
       const n = count((tool) => tool.evidenceLevel === level.id);
@@ -196,7 +196,7 @@
         <span class="proven-grade">${evidenceMark(tool.evidenceLevel)}</span>
         <span class="proven-name">${escapeHtml(tool.name)}</span>
         <span class="proven-best">${escapeHtml(first(tool.bestFor, tool.summary))}</span>
-        <span class="proven-uses">${own.length ? `${plural(own.length, "recorded use", "recorded uses")}, ${worked} worked · ${escapeHtml(where.join(", "))}` : "Graded from a controlled benchmark kept in the owner's ledger"}</span>
+        <span class="proven-uses">${own.length ? `${plural(own.length, "recorded use", "recorded uses")}, ${worked} worked · ${escapeHtml(where.join(", "))}` : "Graded from a controlled benchmark kept in Leonel's ledger"}</span>
         <span class="proven-decision">${decisionMark(tool.decision)}</span>
       </button></li>`;
     }).join("");
@@ -410,7 +410,7 @@
     const own = usesOf(tool.id);
     const changes = array(tool.changes).filter((change) => change.field === "evidenceLevel");
     if (!own.length && !changes.length) {
-      return `<section class="detail-section"><h3>Recorded use</h3><p>${tool.evidenceLevel === "E0" ? "No recorded use yet. " + escapeHtml(catalog.meta.belowE1) : "The grade comes from a controlled benchmark kept in the owner's ledger; its basis is below."}</p></section>`;
+      return `<section class="detail-section"><h3>Recorded use</h3><p>${tool.evidenceLevel === "E0" ? "No recorded use yet. " + escapeHtml(catalog.meta.belowE1) : "The grade comes from a controlled benchmark kept in Leonel's ledger; its basis is below."}</p></section>`;
     }
     const rows = own.map((use) => `<li class="use-row">
       <div class="use-top"><strong>${escapeHtml(use.project)}</strong><span class="use-outcome" data-outcome="${escapeHtml(use.outcome)}">${escapeHtml(outcomePlain[use.outcome] || use.outcome)}</span><small>${escapeHtml(formatDate(use.date))}</small></div>
@@ -440,7 +440,7 @@
       <section class="detail-section"><h3>Good fit when</h3><ul>${array(tool.bestFor).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
       <section class="detail-section"><h3>Weaknesses and limits</h3><ul>${array(tool.weaknesses).map((item) => `<li>${escapeHtml(item)}</li>`).join("") || "<li>No weaknesses were recorded.</li>"}</ul></section>
       ${inPacks.length ? `<section class="detail-section"><h3>Part of a pack</h3><ul>${inPacks.map((pack) => `<li><strong>${escapeHtml(pack.title)}:</strong> ${escapeHtml(pack.members.find((member) => member.toolId === tool.id).role)}</li>`).join("")}</ul></section>` : ""}
-      ${tool.repoUrl ? `<a class="repo-link" href="${escapeHtml(tool.repoUrl)}" target="_blank" rel="noreferrer">Open repository</a>` : `<p class="muted-note">${tool.origin === "built-here" ? "Built in the owner's private ledger; its code is not published here." : "No public repository: this is a design recorded in the ledger."}</p>`}`;
+      ${tool.repoUrl ? `<a class="repo-link" href="${escapeHtml(tool.repoUrl)}" target="_blank" rel="noreferrer">Open repository</a>` : `<p class="muted-note">${tool.origin === "built-here" ? "Built in Leonel's private ledger; its code is not published here." : "No public repository: this is a design recorded in the ledger."}</p>`}`;
   }
 
   function openTool(id) {
